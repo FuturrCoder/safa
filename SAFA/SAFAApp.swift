@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct SAFAApp: App {
+    @StateObject private var formData = FormData()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(formData: formData)
         }
     }
 }
