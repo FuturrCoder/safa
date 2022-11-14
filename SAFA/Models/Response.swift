@@ -5,7 +5,7 @@
 //  Created by Mirai DTN on 11/13/22.
 //
 
-import SwiftUI
+/*import SwiftUI
 import Combine
 
 enum ResponseType: Codable {
@@ -43,14 +43,14 @@ protocol Response: Codable {
     var input: InputType { get set }
     
     func responseType() -> ResponseType
-//    mutating func field() -> any View
+    mutating func field() -> any View
 }
 
-//extension Response {
-//    mutating func inputBinding() -> Binding<InputType> {
-//        Binding(get: { self.input }, set: { self.input = $0 })
-//    }
-//}
+extension Response {
+    mutating func inputBinding() -> Binding<InputType> {
+        Binding(get: { self.input }, set: { self.input = $0 })
+    }
+}
 
 struct NumberResponse: Response {
     func responseType() -> ResponseType { .number }
@@ -119,4 +119,4 @@ struct VideoResponse: Response {
             Image(systemName: "plus")
         }
     }
-}
+}*/

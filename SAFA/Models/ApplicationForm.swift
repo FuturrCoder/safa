@@ -21,26 +21,39 @@ struct ApplicationForm: Identifiable, Codable {
     }
 }
 
-struct FormItem: Identifiable {
+struct FormItem: Identifiable, Codable {
     let id: UUID
     let prompt: String
-    let responseType: ResponseType
-    var response: any Response
+//    let responseType: ResponseType
+    var response: Response
     let isOptional: Bool
     /// Whether the question has been answered
     var isAnswered: Bool
     
-    init(id: UUID = UUID(), prompt: String, response: any Response, optional: Bool = false, answered: Bool = true) {
+    init(id: UUID = UUID(), prompt: String, response: Response, isOptional: Bool = false, isAnswered: Bool = true) {
         self.id = id
         self.prompt = prompt
-        self.responseType = response.responseType()
+//        self.responseType = response.responseType()
         self.response = response
-        self.isOptional = optional
-        self.isAnswered = answered
+        self.isOptional = isOptional
+        self.isAnswered = isAnswered
     }
 }
 
-extension FormItem: Codable {
+extension FormItem {
+    enum Response: Codable {
+        case number(Int, ClosedRange<Int>)
+        case date(Date, DateInterval)
+        /// Currently selected, list of options
+        case menu(Int, [String])
+        case shortAnswer(String)
+        case longAnswer(String)
+        case image(URL?)
+        case video(URL?)
+    }
+}
+    
+/*extension FormItem: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case prompt
@@ -69,7 +82,7 @@ extension FormItem: Codable {
         try container.encode(isOptional, forKey: .isOptional)
         try container.encode(isAnswered, forKey: .isAnswered)
     }
-}
+}*/
 
 extension ApplicationForm {
     private static var f: DateFormatter {
@@ -78,22 +91,22 @@ extension ApplicationForm {
         return formatter
     }
     static let samplePersonal: [FormItem] = [
-        FormItem(prompt: "What is your legal name?", response: ShortAnswer()),
-        FormItem(prompt: "What is your preferred nickname?", response: ShortAnswer(), optional: true),
-        FormItem(prompt: "What is your gender?", response: MenuResponse(options: ["Male", "Female", "Other/Non-binary"])),
+        FormItem(prompt: "What is your legal name?", response: .shortAnswer("")),
+        FormItem(prompt: "What is your preferred nickname?", response: .shortAnswer(""), isOptional: true),
+        FormItem(prompt: "What is your gender?", response: .menu(0, ["Male", "Female", "Other/Non-binary"])),
         FormItem(prompt: "What is your date of birth?",
-                 response: DateResponse(range: DateInterval(start: f.date(from: "1900")!, end: Date()))),
-        FormItem(prompt: "Upload a profile photo", response: ImageResponse())
+                 response: .date(f.date(from: "1970")!, DateInterval(start: f.date(from: "1900")!, end: Date()))),
+        FormItem(prompt: "Upload a profile photo", response: .image(nil))
     ]
     static let sampleVideos: [FormItem] = [
-        FormItem(prompt: "Upload a video of your dribbling", response: VideoResponse()),
-        FormItem(prompt: "Upload a video of your penalty kick", response: VideoResponse())
+        FormItem(prompt: "Upload a video of your dribbling", response: .video(nil)),
+        FormItem(prompt: "Upload a video of your penalty kick", response: .video(nil))
     ]
     static let samplePreference: [FormItem] = [
-        FormItem(prompt: "About how many years have you been playing football for?", response: NumberResponse(range: 0...100)),
-        FormItem(prompt: "Why do you want to go to a football academy?", response: LongAnswer()),
-        FormItem(prompt: "What do you look for in a football academy?", response: LongAnswer()),
-        FormItem(prompt: "What is one of your greatest accomplishments?", response: LongAnswer())
+        FormItem(prompt: "About how many years have you been playing football for?", response: .number(0, 0...100)),
+        FormItem(prompt: "Why do you want to go to a football academy?", response: .longAnswer("")),
+        FormItem(prompt: "What do you look for in a football academy?", response: .longAnswer("")),
+        FormItem(prompt: "What is one of your greatest accomplishments?", response: .longAnswer(""))
     ]
     static let sampleData: [ApplicationForm] = [
         ApplicationForm(title: "Personal", icon: "person", items: samplePersonal),
