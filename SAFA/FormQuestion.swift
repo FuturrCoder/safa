@@ -21,6 +21,12 @@ struct FormQuestion: View {
             case .number(let input, let range):
                 TextField("", value: $number, format: .number)
                     .keyboardType(.numberPad)
+                    .onChange(of: number) { newValue in
+                        if !range.contains(newValue) {
+                            number = newValue.clamped(to: range)
+                        }
+                        item.response = .number(number, range)
+                    }
             case .date(let input, let range):
                 DatePicker("", selection: $date, displayedComponents: [.date])
             case .menu(let input, let options):

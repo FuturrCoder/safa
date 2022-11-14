@@ -39,20 +39,23 @@ struct FormItem: Identifiable, Codable {
         self.isAnswered = isAnswered
     }
 }
-
-extension FormItem {
-    enum Response: Codable {
-        case number(Int, ClosedRange<Int>)
-        case date(Date, DateInterval)
-        /// Currently selected, list of options
-        case menu(Int, [String])
-        case shortAnswer(String)
-        case longAnswer(String)
-        case image(URL?)
-        case video(URL?)
-    }
-}
     
+/*
+case .number(let input, let range):
+
+case .date(let input, let range):
+
+case .menu(let input, let options):
+
+case .shortAnswer(let input):
+
+case .longAnswer(let input):
+
+case .image(let input):
+
+case .video(let input):
+*/
+
 /*extension FormItem: Codable {
     enum CodingKeys: String, CodingKey {
         case id
@@ -95,7 +98,7 @@ extension ApplicationForm {
         FormItem(prompt: "What is your preferred nickname?", response: .shortAnswer(""), isOptional: true),
         FormItem(prompt: "What is your gender?", response: .menu(0, ["Male", "Female", "Other/Non-binary"])),
         FormItem(prompt: "What is your date of birth?",
-                 response: .date(f.date(from: "1970")!, DateInterval(start: f.date(from: "1900")!, end: Date()))),
+                 response: .date(f.date(from: "1970")!, f.date(from: "1900")!...Date())),
         FormItem(prompt: "Upload a profile photo", response: .image(nil))
     ]
     static let sampleVideos: [FormItem] = [

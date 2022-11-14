@@ -5,6 +5,88 @@
 //  Created by Mirai DTN on 11/13/22.
 //
 
+import Foundation
+
+enum Response: Codable {
+    case number(Int, ClosedRange<Int>)
+    case date(Date, ClosedRange<Date>)
+    /// Currently selected, list of options
+    case menu(Int, [String])
+    case shortAnswer(String)
+    case longAnswer(String)
+    case image(URL?)
+    case video(URL?)
+    
+    struct ArgumentError: Error {}
+    
+    /*mutating func inputHandler() -> ((inout Response) -> ()) {
+        switch self {
+        case .number(_, let range):
+            return { newValue in
+                guard case let .number(newInput, _) = newValue else { newValue = .number(0, range); return }
+                if !range.contains(newInput) {
+                    newValue.constrain()
+                }
+                if case let .number(i, _) = newValue {
+                    self = .number(i, range)
+                }
+            }
+        case .date(_, let range):
+            return { newValue in
+                guard case let .date(newInput, _) = newValue else { newValue = .date(Date(), range); return }
+                if !range.contains(newInput) {
+                    newValue.constrain()
+                }
+                if case let .date(i, _) = newValue {
+                    self = .date(i, range)
+                }
+            }
+        case .menu(_, let options):
+            return { newValue in
+                guard case let .menu(newInput, _) = newValue else { newValue = .menu(0, options); return }
+                self = .menu(newInput, options)
+            }
+        case .shortAnswer(_):
+            return { newValue in
+                guard case let .shortAnswer(newInput) = newValue else { newValue = .shortAnswer(""); return }
+                self = .shortAnswer(newInput)
+            }
+        case .longAnswer(_):
+            return { newValue in
+                guard case let .longAnswer(newInput) = newValue else { newValue = .longAnswer(""); return }
+                self = .longAnswer(newInput)
+            }
+        case .image(_):
+            return { newValue in
+                guard case let .image(newInput) = newValue else { newValue = .image(nil); return }
+                self = .image(newInput)
+            }
+        case .video(_):
+            return { newValue in
+                guard case let .video(newInput) = newValue else { newValue = .video(nil); return }
+                self = .video(newInput)
+            }
+        }
+    }
+    
+    mutating func constrain() {
+        switch self {
+        case .number(let input, let range):
+            self = .number(input.clamped(to: range), range)
+        case .date(let input, let range):
+            self = .date(input.clamped(to: range), range)
+        default:
+            return
+        }
+    }*/
+}
+
+extension Comparable {
+    func clamped(to range: ClosedRange<Self>) -> Self {
+        return min(max(self, range.lowerBound), range.upperBound)
+    }
+}
+
 /*import SwiftUI
 import Combine
 
