@@ -25,12 +25,12 @@ struct FormItem: Identifiable {
     let id: UUID
     let prompt: String
     let responseType: ResponseType
-    var response: Response
+    var response: any Response
     let isOptional: Bool
     /// Whether the question has been answered
     var isAnswered: Bool
     
-    init(id: UUID = UUID(), prompt: String, response: Response, optional: Bool = false, answered: Bool = true) {
+    init(id: UUID = UUID(), prompt: String, response: any Response, optional: Bool = false, answered: Bool = true) {
         self.id = id
         self.prompt = prompt
         self.responseType = response.responseType()

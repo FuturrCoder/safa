@@ -14,10 +14,7 @@ struct FormView: View {
     var body: some View {
         Form {
             ForEach($form.items) { $item in
-                Section {
-                    Text(item.prompt)
-                    
-                }
+                FormQuestion(item: $item)
             }
 //            Section {
 //                Text("Describe your skill level and experience in a couple of sentences")
