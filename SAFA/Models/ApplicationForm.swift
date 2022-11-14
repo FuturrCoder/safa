@@ -9,41 +9,60 @@ import Foundation
 
 struct ApplicationForm: Identifiable, Codable {
     let id: UUID
+    let title: String
+    let icon: String
     var items: [FormItem]
     
-    init(id: UUID = UUID(), items: [FormItem]) {
+    init(id: UUID = UUID(), title: String, icon: String, items: [FormItem]) {
         self.id = id
+        self.title = title
+        self.icon = icon
         self.items = items
     }
 }
 
-struct FormItem: Identifiable, Codable {
+struct FormItem: Identifiable {
     let id: UUID
     let prompt: String
     var response: Response
-    let optional: Bool
+    let isOptional: Bool
     /// Whether the question has been answered
-    var answered: Bool
+    var isAnswered: Bool
     
     init(id: UUID = UUID(), prompt: String, response: Response, optional: Bool = false, answered: Bool = true) {
         self.id = id
         self.prompt = prompt
         self.response = response
-        self.optional = optional
-        self.answered = answered
+        self.isOptional = optional
+        self.isAnswered = answered
     }
 }
 
-extension FormItem {
-    enum Response: Codable {
-        case number(Int, ClosedRange<Int>)
-        case date(Date, DateInterval)
-        /// Currently selected, list of options
-        case menu(Int, [String])
-        case shortAnswer(String)
-        case longAnswer(String)
-        case image(URL?)
-        case video(URL?)
+extension FormItem: Codable {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case prompt
+        case response
+        case isOptional
+        case isAnswered
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        prompt = try container.decode(String.self, forKey: .prompt)
+        response = try response.decode(container: container, forKey: .response)
+        isOptional = try container.decode(Bool.self, forKey: .isOptional)
+        isAnswered = try container.decode(Bool.self, forKey: .isAnswered)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(prompt, forKey: .prompt)
+        try container.encode(response, forKey: .response)
+        try container.encode(isOptional, forKey: .isOptional)
+        try container.encode(isAnswered, forKey: .isAnswered)
     }
 }
 
@@ -54,26 +73,26 @@ extension ApplicationForm {
         return formatter
     }
     static let samplePersonal: [FormItem] = [
-        FormItem(prompt: "What is your legal name?", response: .shortAnswer("")),
-        FormItem(prompt: "What is your preferred nickname?", response: .shortAnswer(""), optional: true),
-        FormItem(prompt: "What is your gender?", response: .menu(0, ["Male", "Female", "Other/Non-binary"])),
+        FormItem(prompt: "What is your legal name?", response: ShortAnswer()),
+        FormItem(prompt: "What is your preferred nickname?", response: ShortAnswer(), optional: true),
+        FormItem(prompt: "What is your gender?", response: MenuResponse(options: ["Male", "Female", "Other/Non-binary"])),
         FormItem(prompt: "What is your date of birth?",
-                 response: .date(f.date(from: "1970")!, DateInterval(start: f.date(from: "1900")!, end: Date()))),
-        FormItem(prompt: "Upload a profile photo", response: .image(nil))
+                 response: DateResponse(range: DateInterval(start: f.date(from: "1900")!, end: Date()))),
+        FormItem(prompt: "Upload a profile photo", response: ImageResponse())
     ]
     static let sampleVideos: [FormItem] = [
-        FormItem(prompt: "Upload a video of your dribbling", response: .video(nil)),
-        FormItem(prompt: "Upload a video of your penalty kick", response: .video(nil))
+        FormItem(prompt: "Upload a video of your dribbling", response: VideoResponse()),
+        FormItem(prompt: "Upload a video of your penalty kick", response: VideoResponse())
     ]
     static let samplePreference: [FormItem] = [
-        FormItem(prompt: "About how many years have you been playing football for?", response: .number(0, 0...100)),
-        FormItem(prompt: "Why do you want to go to a football academy?", response: .longAnswer("")),
-        FormItem(prompt: "What do you look for in a football academy?", response: .longAnswer("")),
-        FormItem(prompt: "What is one of your greatest accomplishments?", response: .longAnswer(""))
+        FormItem(prompt: "About how many years have you been playing football for?", response: NumberResponse(range: 0...100)),
+        FormItem(prompt: "Why do you want to go to a football academy?", response: LongAnswer()),
+        FormItem(prompt: "What do you look for in a football academy?", response: LongAnswer()),
+        FormItem(prompt: "What is one of your greatest accomplishments?", response: LongAnswer())
     ]
     static let sampleData: [ApplicationForm] = [
-        ApplicationForm(items: samplePersonal),
-        ApplicationForm(items: sampleVideos),
-        ApplicationForm(items: samplePreference)
+        ApplicationForm(title: "Personal", icon: "person", items: samplePersonal),
+        ApplicationForm(title: "Videos", icon: "play.rectangle", items: sampleVideos),
+        ApplicationForm(title: "Skill Level", icon: "soccerball", items: samplePreference)
     ]
 }

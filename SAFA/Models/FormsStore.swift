@@ -8,5 +8,5 @@
 import SwiftUI
 
 class FormsStore: ObservableObject {
-    @Published var forms: [ApplicationForm] = []
+    @Published var forms: [ApplicationForm] = ApplicationForm.sampleData
 }

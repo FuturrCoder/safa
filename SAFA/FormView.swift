@@ -8,28 +8,47 @@
 import SwiftUI
 
 struct FormView: View {
-    @ObservedObject var formData: FormData
+    @Binding var form: ApplicationForm
+//    var test: FormItem.Response = ApplicationForm.samplePersonal[0].response
     
     var body: some View {
         Form {
-            Section {
-                Text("Describe your skill level and experience in a couple of sentences")
-                TextEditor(text: $formData.experience)
+            ForEach($form.items) { $item in
+                Section {
+                    Text(item.prompt)
+                    switch item.response {
+                    case .number(, ClosedRange<Int>)
+                    case date(Date, DateInterval)
+                        /// Currently selected, list of options
+                    case menu(Int, [String])
+                    case shortAnswer(String)
+                    case longAnswer(String)
+                    case image(URL?)
+                    case video(URL?)
+                    }
+                }
             }
-            Section {
-                Text("Describe your financial situation")
-                TextEditor(text: $formData.financial)
-            }
-            Section {
-                Text("Upload a photo of your playing")
-                UploadButton(formData: formData)
-            }
+//            Section {
+//                Text("Describe your skill level and experience in a couple of sentences")
+//                TextEditor(text: $formData.experience)
+//            }
+//            Section {
+//                Text("Describe your financial situation")
+//                TextEditor(text: $formData.financial)
+//            }
+//            Section {
+//                Text("Upload a photo of your playing")
+//                UploadButton(formData: formData)
+//            }
         }
+        .navigationTitle(form.title)
     }
 }
 
 struct FormView_Previews: PreviewProvider {
     static var previews: some View {
-        FormView(formData: FormData())
+        NavigationView {
+            FormView(form: .constant(ApplicationForm.sampleData[0]))
+        }
     }
 }

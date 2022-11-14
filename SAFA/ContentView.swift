@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    var formData: FormData
+    @Binding var forms: [ApplicationForm]
     
     var body: some View {
         TabView() {
-            FormsView(formData: formData)
+            FormsView(forms: $forms)
                 .tabItem { Label("Forms", systemImage: "square.and.pencil") }
                 .tag(1)
             AcademyView()
@@ -27,6 +27,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(formData: FormData())
+        ContentView(forms: .constant(ApplicationForm.sampleData))
     }
 }

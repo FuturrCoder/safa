@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct SAFAApp: App {
-    @StateObject private var formData = FormData()
+    @StateObject private var formsStore = FormsStore()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(formData: formData)
+            ContentView(forms: $formsStore.forms)
         }
     }
 }
