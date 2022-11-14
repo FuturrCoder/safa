@@ -24,6 +24,7 @@ struct ApplicationForm: Identifiable, Codable {
 struct FormItem: Identifiable {
     let id: UUID
     let prompt: String
+    let responseType: ResponseType
     var response: Response
     let isOptional: Bool
     /// Whether the question has been answered
@@ -32,6 +33,7 @@ struct FormItem: Identifiable {
     init(id: UUID = UUID(), prompt: String, response: Response, optional: Bool = false, answered: Bool = true) {
         self.id = id
         self.prompt = prompt
+        self.responseType = response.responseType()
         self.response = response
         self.isOptional = optional
         self.isAnswered = answered
@@ -42,6 +44,7 @@ extension FormItem: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case prompt
+        case responseType
         case response
         case isOptional
         case isAnswered
@@ -51,7 +54,8 @@ extension FormItem: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
         prompt = try container.decode(String.self, forKey: .prompt)
-        response = try response.decode(container: container, forKey: .response)
+        responseType = try container.decode(ResponseType.self, forKey: .responseType)
+        response = try container.decode(responseType.type(), forKey: .response)
         isOptional = try container.decode(Bool.self, forKey: .isOptional)
         isAnswered = try container.decode(Bool.self, forKey: .isAnswered)
     }
@@ -60,6 +64,7 @@ extension FormItem: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(prompt, forKey: .prompt)
+        try container.encode(responseType, forKey: .responseType)
         try container.encode(response, forKey: .response)
         try container.encode(isOptional, forKey: .isOptional)
         try container.encode(isAnswered, forKey: .isAnswered)

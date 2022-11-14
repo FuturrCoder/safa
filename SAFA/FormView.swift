@@ -16,16 +16,7 @@ struct FormView: View {
             ForEach($form.items) { $item in
                 Section {
                     Text(item.prompt)
-                    switch item.response {
-                    case .number(, ClosedRange<Int>)
-                    case date(Date, DateInterval)
-                        /// Currently selected, list of options
-                    case menu(Int, [String])
-                    case shortAnswer(String)
-                    case longAnswer(String)
-                    case image(URL?)
-                    case video(URL?)
-                    }
+                    
                 }
             }
 //            Section {
