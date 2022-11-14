@@ -94,7 +94,7 @@ extension ApplicationForm {
         return formatter
     }
     static let samplePersonal: [FormItem] = [
-        FormItem(prompt: "What is your legal name?", response: .shortAnswer("")),
+        FormItem(prompt: "What is your legal name?", response: .shortAnswer("Mirai Nishioka")),
         FormItem(prompt: "What is your preferred nickname?", response: .shortAnswer(""), isOptional: true),
         FormItem(prompt: "What is your gender?", response: .menu(0, ["Male", "Female", "Other/Non-binary"])),
         FormItem(prompt: "What is your date of birth?",

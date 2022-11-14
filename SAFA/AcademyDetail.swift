@@ -45,7 +45,7 @@ struct AcademyDetail: View {
 
 struct AcademyDetail_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             AcademyDetail(academy: .constant(Academy.sample1))
         }
     }

@@ -28,11 +28,40 @@ struct ContentView: View {
                 AcademiesView(academies: $academies)
                     .tabItem { Label("Academies", systemImage: "building.2") }
                     .tag(2)
-                ProfileView()
+                ProfileView(forms: forms)
                     .tabItem { Label("Profile", systemImage: "person") }
                     .tag(3)
             }
         }
+    }
+}
+
+extension View {
+    func appBar(title: String) -> some View {
+        self
+            .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(Color("ThemeColor"), for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {}) {
+                        Image(systemName: "house")
+                    }
+                    .foregroundColor(.black)
+                }
+                ToolbarItem(placement: .principal) {
+                    Image("Logo White")
+                        .resizable()
+                        .scaledToFit()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {}) {
+                        Image(systemName: "magnifyingglass")
+                    }
+                    .foregroundColor(.black)
+                }
+            }
     }
 }
 

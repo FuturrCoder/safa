@@ -12,23 +12,24 @@ struct FormsView: View {
     @Binding var forms: [ApplicationForm]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
-                ForEach($forms) { $form in
-                    NavigationLink(destination: FormView(form: $form)) {
-                        FormCard(form: form)
+                Section {
+                    ForEach($forms) { $form in
+                        NavigationLink(destination: FormView(form: $form)) {
+                            FormCard(form: form)
+                        }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
+                } header: {
+                    Text("Forms")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.top)
                 }
+                .headerProminence(.increased)
             }
-            .navigationTitle("Forms")
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image("Logo White")
-                        .resizable()
-                        .scaledToFit()
-                }
-            }
+            .appBar(title: "Forms")
         }
         
         // TODO: once filled out, appears on profile

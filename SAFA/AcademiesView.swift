@@ -11,16 +11,24 @@ struct AcademiesView: View {
     @Binding var academies: [Academy]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
-                ForEach($academies) { $academy in
-                    NavigationLink(destination: AcademyDetail(academy: $academy)) {
-                        AcademyCard(academy: academy)
+                Section {
+                    ForEach($academies) { $academy in
+                        NavigationLink(destination: AcademyDetail(academy: $academy)) {
+                            AcademyCard(academy: academy)
+                        }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
+                } header: {
+                    Text("Academies")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.top)
                 }
+                .headerProminence(.increased)
             }
-            .navigationTitle("Academies")
+            .appBar(title: "Academies")
         }
         
         // follow different academies
