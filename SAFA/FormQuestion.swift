@@ -18,7 +18,7 @@ struct FormQuestion: View {
         Section {
             Text(item.prompt)
             switch item.response {
-            case .number(let input, let range):
+            case .number(_, let range):
                 TextField("", value: $number, format: .number)
                     .keyboardType(.numberPad)
                     .onChange(of: number) { newValue in
@@ -27,21 +27,36 @@ struct FormQuestion: View {
                         }
                         item.response = .number(number, range)
                     }
-            case .date(let input, let range):
-                DatePicker("", selection: $date, displayedComponents: [.date])
-            case .menu(let input, let options):
+            case .date(_, let range):
+                DatePicker("", selection: $date, in: range, displayedComponents: [.date])
+                    .onChange(of: date) { newValue in
+                        if !range.contains(newValue) {
+                            date = newValue.clamped(to: range)
+                        }
+                        item.response = .date(date, range)
+                    }
+            case .menu(_, let options):
                 Picker("", selection: $number) {
                     ForEach(0 ..< options.count, id: \.self) { i in
                         Text(options[i])
                     }
                 }
-            case .shortAnswer(let input):
+                .onChange(of: number) { newValue in
+                    item.response = .menu(newValue, options)
+                }
+            case .shortAnswer(_):
                 TextField("", text: $text)
-            case .longAnswer(let input):
+                    .onChange(of: text) { newValue in
+                        item.response = .shortAnswer(newValue)
+                    }
+            case .longAnswer(_):
                 TextEditor(text: $text)
-            case .image(let input):
+                    .onChange(of: text) { newValue in
+                        item.response = .longAnswer(newValue)
+                    }
+            case .image(_):
                 Image(systemName: "plus")
-            case .video(let input):
+            case .video(_):
                 Image(systemName: "plus")
             }
         }

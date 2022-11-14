@@ -21,8 +21,14 @@ struct FormsView: View {
                     .listRowSeparator(.hidden)
                 }
             }
-            
             .navigationTitle("Forms")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Image("Logo White")
+                        .resizable()
+                        .scaledToFit()
+                }
+            }
         }
         
         // TODO: once filled out, appears on profile

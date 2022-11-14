@@ -10,10 +10,11 @@ import SwiftUI
 @main
 struct SAFAApp: App {
     @StateObject private var formsStore = FormsStore()
+    @StateObject private var academiesStore = AcademiesStore()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(forms: $formsStore.forms)
+            ContentView(forms: $formsStore.forms, academies: $academiesStore.academies)
         }
     }
 }
