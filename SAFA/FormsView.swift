@@ -9,6 +9,9 @@ import SwiftUI
 import PhotosUI
 
 struct FormsView: View {
+    // TODO: Make home on menu bar link to this view
+    // TODO: Replace search button in navigation bar
+    
     @Binding var forms: [ApplicationForm]
     
     var body: some View {
@@ -31,8 +34,6 @@ struct FormsView: View {
             }
             .appBar(title: "Forms")
         }
-        
-        // TODO: once filled out, appears on profile
     }
 }
 

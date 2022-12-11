@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ProfileView: View {
+    // TODO: Make personal info data store
+    // TODO: Make personal info fields editable
+    // TODO: Link forms
+    
     let forms: [ApplicationForm]
     
     var body: some View {

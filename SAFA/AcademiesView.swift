@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AcademiesView: View {
+    // TODO: Add search
+    
     @Binding var academies: [Academy]
     
     var body: some View {
@@ -30,9 +32,6 @@ struct AcademiesView: View {
             }
             .appBar(title: "Academies")
         }
-        
-        // follow different academies
-        // each academy has its own profile
     }
 }
 
