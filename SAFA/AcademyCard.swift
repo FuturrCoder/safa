@@ -37,11 +37,26 @@ struct ThumbnailImage: View {
     let icon: String
     
     var body: some View {
-        Image(systemName: icon)
-            .resizable()
-            .scaledToFill()
-            .frame(maxWidth: 60, maxHeight: 60)
-            .clipped()
-            .cornerRadius(10)
+        AsyncImage(url: URL(string: icon)) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 60, maxHeight: 70)
+            } else if phase.error != nil {
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 60, maxHeight: 70)
+            } else {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                        .frame(height: 70)
+                    Spacer()
+                }
+                .frame(width: 60)
+            }
+        }
     }
 }

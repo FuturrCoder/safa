@@ -40,24 +40,3 @@ struct AcademyView_Previews: PreviewProvider {
         AcademiesView(academies: .constant(Academy.sampleData))
     }
 }
-
-//struct AcademyCard: View {
-//    var body: some View {
-//        Button(action: {}) {
-//            HStack {
-//                Image(systemName: "photo")
-//                    .padding()
-//                VStack(alignment: .leading) {
-//                    Text("Academy 1")
-//                        .font(.title2)
-//                    Text("This is a short-ish description of the academy")
-//                        .multilineTextAlignment(.leading)
-//                }
-//            }
-//            .padding()
-//        }
-//        .foregroundColor(.black)
-//        .padding()
-//        .buttonStyle(.bordered)
-//    }
-//}

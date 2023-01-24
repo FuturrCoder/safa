@@ -14,9 +14,6 @@ struct ContentView: View {
     init(forms: Binding<[ApplicationForm]>, academies: Binding<[Academy]>) {
         self._forms = forms
         self._academies = academies
-//        UITabBar.appearance().barTintColor = UIColor(Color("ThemeColor"))
-//        UITabBar.appearance().backgroundColor = UIColor(Color("ThemeColor"))
-//        UITabBar.appearance().unselectedItemTintColor = UIColor(.black)
     }
     
     var body: some View {
@@ -46,8 +43,9 @@ extension View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {}) {
-                        Image(systemName: "house")
+                        Image(systemName: "gearshape")
                     }
+                    .frame(width: 30)
                     .foregroundColor(.black)
                 }
                 ToolbarItem(placement: .principal) {
@@ -57,8 +55,9 @@ extension View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
-                        Image(systemName: "magnifyingglass")
+                        Image(systemName: "bell")
                     }
+                    .frame(width: 30)
                     .foregroundColor(.black)
                 }
             }
