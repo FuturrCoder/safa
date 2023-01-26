@@ -105,12 +105,12 @@
 		63B0F5322921363700E62554 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				63279DE2290D825000814474 /* FormData.swift */,
-				63B0F533292136B600E62554 /* ApplicationForm.swift */,
 				633133F32921B92200CEBB62 /* FormsStore.swift */,
+				63B0F533292136B600E62554 /* ApplicationForm.swift */,
 				633133F72921D93B00CEBB62 /* Response.swift */,
-				63E673EA2922A25C0055E9C7 /* Academy.swift */,
 				63E673EC2922AC8B0055E9C7 /* AcademiesStore.swift */,
+				63E673EA2922A25C0055E9C7 /* Academy.swift */,
+				63279DE2290D825000814474 /* FormData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

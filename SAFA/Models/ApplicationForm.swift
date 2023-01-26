@@ -11,81 +11,141 @@ struct ApplicationForm: Identifiable, Codable {
     let id: UUID
     let title: String
     let icon: String
-    var items: [FormItem]
+    var pages: [FormPage]
+    /// index of current page
+    var current: Int
+    var progress: Float {
+        let answered = pages.reduce(0) { $0 + $1.answered }
+        let unanswered = pages.reduce(0) { $0 + $1.unanswered }
+        return Float(answered) / Float(answered + unanswered)
+    }
+    var test: (Int, Int) {
+        (pages.reduce(0) { $0 + $1.answered }, pages.reduce(0) { $0 + $1.unanswered })
+    }
     
-    init(id: UUID = UUID(), title: String, icon: String, items: [FormItem]) {
+    init(id: UUID = UUID(), title: String, icon: String, pages: [FormPage], current: Int = 0) {
         self.id = id
         self.title = title
         self.icon = icon
-        self.items = items
+        self.pages = pages
+        self.current = current
+    }
+    
+    enum CodingKeys: CodingKey {
+        case title
+        case icon
+        case pages
+        case current
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ApplicationForm.CodingKeys.self)
+        self.id = UUID()
+        self.title = try container.decode(String.self, forKey: ApplicationForm.CodingKeys.title)
+        self.icon = try container.decode(String.self, forKey: ApplicationForm.CodingKeys.icon)
+        self.pages = try container.decode([FormPage].self, forKey: ApplicationForm.CodingKeys.pages)
+        self.current = try container.decode(Int.self, forKey: ApplicationForm.CodingKeys.current)
+        
     }
 }
 
-struct FormItem: Identifiable, Codable {
+struct FormPage: Identifiable, Codable {
+    let id: UUID
+    let description: String
+    var items: [FormItem]
+    var answered: Int {
+        items.reduce(0) { $1.isAnswered ? $0 + 1 : $0 }
+    }
+    /// required but unanswered
+    var unanswered: Int {
+        items.reduce(0) { $1.isRequired && !$1.isAnswered ? $0 + 1 : $0 }
+    }
+    
+    init(id: UUID = UUID(), description: String = "", items: [FormItem]) {
+        self.id = id
+        self.description = description
+        self.items = items
+    }
+    
+    enum CodingKeys: CodingKey {
+        case description
+        case items
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container: KeyedDecodingContainer = try decoder.container(keyedBy: FormPage.CodingKeys.self)
+        self.id = UUID()
+        self.description = try container.decode(String.self, forKey: FormPage.CodingKeys.description)
+        self.items = try container.decode([FormItem].self, forKey: FormPage.CodingKeys.items)
+    }
+}
+
+struct FormItem: Identifiable {
     let id: UUID
     let prompt: String
-//    let responseType: ResponseType
     var response: Response
-    let isOptional: Bool
-    /// Whether the question has been answered
-    var isAnswered: Bool
+    let isRequired: Bool
+    var isAnswered: Bool /// Whether the question has been answered
     
-    init(id: UUID = UUID(), prompt: String, response: Response, isOptional: Bool = false, isAnswered: Bool = true) {
+    init(id: UUID = UUID(), prompt: String, response: Response, required: Bool = true, isAnswered: Bool = false) {
         self.id = id
         self.prompt = prompt
-//        self.responseType = response.responseType()
         self.response = response
-        self.isOptional = isOptional
+        self.isRequired = required
         self.isAnswered = isAnswered
     }
 }
-    
-/*
-case .number(let input, let range):
 
-case .date(let input, let range):
-
-case .menu(let input, let options):
-
-case .shortAnswer(let input):
-
-case .longAnswer(let input):
-
-case .image(let input):
-
-case .video(let input):
-*/
-
-/*extension FormItem: Codable {
+extension FormItem: Codable {
     enum CodingKeys: String, CodingKey {
-        case id
         case prompt
-        case responseType
-        case response
-        case isOptional
+        case required
         case isAnswered
+        case response
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(UUID.self, forKey: .id)
+        id = UUID()
         prompt = try container.decode(String.self, forKey: .prompt)
-        responseType = try container.decode(ResponseType.self, forKey: .responseType)
-        response = try container.decode(responseType.type(), forKey: .response)
-        isOptional = try container.decode(Bool.self, forKey: .isOptional)
+        isRequired = try container.decode(Bool.self, forKey: .required)
         isAnswered = try container.decode(Bool.self, forKey: .isAnswered)
+        let responseContainer = try container.nestedContainer(keyedBy: ResponseKeys.self, forKey: .response)
+        if responseContainer.allKeys.count != 1 {
+            let context = DecodingError.Context(
+                codingPath: responseContainer.codingPath,
+                debugDescription: "Invalid number of keys found, expected one.")
+            throw DecodingError.dataCorrupted(context)
+        }
+        
+        switch responseContainer.allKeys.first.unsafelyUnwrapped {
+        case .int:
+            response = try IntResponse(from: responseContainer)
+        case .date:
+            response = try DateResponse(from: responseContainer)
+        case .menu:
+            response = try MenuResponse(from: responseContainer)
+        case .shortAnswer:
+            response = try ShortAnswer(from: responseContainer)
+        case .longAnswer:
+            response = try LongAnswer(from: responseContainer)
+        case .image:
+            response = try ImageResponse(from: responseContainer)
+        case .video:
+            response = try VideoResponse(from: responseContainer)
+        case .file:
+            response = try FileResponse(from: responseContainer)
+        }
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(prompt, forKey: .prompt)
-        try container.encode(responseType, forKey: .responseType)
-        try container.encode(response, forKey: .response)
-        try container.encode(isOptional, forKey: .isOptional)
-        try container.encode(isAnswered, forKey: .isAnswered)
+        var responseContainer = container.nestedContainer(keyedBy: ResponseKeys.self, forKey: .response)
+        try response.encodeNested(container: &responseContainer)
     }
-}*/
+}
+
+
 
 extension ApplicationForm {
     private static var f: DateFormatter {
@@ -93,27 +153,62 @@ extension ApplicationForm {
         formatter.dateFormat = "yyyy"
         return formatter
     }
-    static let samplePersonal: [FormItem] = [
-        FormItem(prompt: "What is your legal name?", response: .shortAnswer("Mirai Nishioka")),
-        FormItem(prompt: "What is your preferred nickname?", response: .shortAnswer(""), isOptional: true),
-        FormItem(prompt: "What is your gender?", response: .menu(0, ["Male", "Female", "Other/Non-binary"])),
-        FormItem(prompt: "What is your date of birth?",
-                 response: .date(f.date(from: "1970")!, f.date(from: "1900")!...Date())),
-        FormItem(prompt: "Upload a profile photo", response: .image(nil))
+    static let videos0 = [
+        FormItem(prompt: "What position are you?", response: MenuResponse(
+            options: ["Goalkeeper", "Defender", "Midfielder", "Attacker"],
+            determinesPage: true, pages: [0: [1], 1: [2], 2: [3], 3: [4]]))
     ]
-    static let sampleVideos: [FormItem] = [
-        FormItem(prompt: "Upload a video of your dribbling", response: .video(nil)),
-        FormItem(prompt: "Upload a video of your penalty kick", response: .video(nil))
+    static let videos1 = [
+        FormItem(prompt: "Post a video of your shot-stopping", response: VideoResponse()),
+        FormItem(prompt: "Post a video of a goal kick", response: VideoResponse()),
+        FormItem(prompt: "Post a video of you catching the ball", response: VideoResponse()),
+        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
     ]
-    static let samplePreference: [FormItem] = [
-        FormItem(prompt: "About how many years have you been playing football for?", response: .number(0, 0...100)),
-        FormItem(prompt: "Why do you want to go to a football academy?", response: .longAnswer("")),
-        FormItem(prompt: "What do you look for in a football academy?", response: .longAnswer("")),
-        FormItem(prompt: "What is one of your greatest accomplishments?", response: .longAnswer(""))
+    static let videos2 = [
+        FormItem(prompt: "Post a video of your tackling", response: VideoResponse()),
+        FormItem(prompt: "Post a video of your clearing", response: VideoResponse()),
+        FormItem(prompt: "Post a video of your jockeying", response: VideoResponse()),
+        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
     ]
+    static let videos3 = [
+        FormItem(prompt: "Post a video of your dribbling", response: VideoResponse()),
+        FormItem(prompt: "Post a video of your passing", response: VideoResponse()),
+        FormItem(prompt: "Post a video of your long shooting", response: VideoResponse()),
+        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
+    ]
+    static let videos4 = [
+        FormItem(prompt: "Post a video of your shooting", response: VideoResponse()),
+        FormItem(prompt: "Post a video of your 1v1", response: VideoResponse()),
+        FormItem(prompt: "Post a video of your heading", response: VideoResponse()),
+        FormItem(prompt: "Post a video of your dribbling", response: VideoResponse()),
+        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
+    ]
+    static let motivations = [
+        FormItem(prompt: "What makes you passionate about soccer?", response: LongAnswer()),
+        FormItem(prompt: "What is the highest level you have played soccer at?", response: LongAnswer()),
+        FormItem(prompt: "What are your goals in the future for the beautiful game?", response: LongAnswer()),
+        FormItem(prompt: "Tell us a soccer story in your life (be creative!)", response: LongAnswer()),
+        FormItem(prompt: "What are you looking for in academies?", response: LongAnswer())
+    ]
+    static let personal = [
+        FormItem(prompt: "How is your family’s financial situation?", response: LongAnswer(), required: false),
+        FormItem(prompt: "How are you doing at school?", response: LongAnswer(), required: false),
+        FormItem(prompt: "Are you able to drive/Do you have access to public transport?",
+                 response: ShortAnswer(), required: false),
+        FormItem(prompt: "Add your transcript (attachment)", response: FileResponse(), required: false),
+        FormItem(prompt: "What are some of your extracurriculars?", response: LongAnswer(), required: false),
+    ]
+    static let description = "For each video section, you can upload each skill separately, or together on additional highlights"
     static let sampleData: [ApplicationForm] = [
-        ApplicationForm(title: "Personal", icon: "person", items: samplePersonal),
-        ApplicationForm(title: "Videos", icon: "play.rectangle", items: sampleVideos),
-        ApplicationForm(title: "Skill Level", icon: "soccerball", items: samplePreference)
+        ApplicationForm(title: "Videos and uploads", icon: "play.rectangle", pages: [
+            FormPage(items: videos0),
+            FormPage(description: description, items: videos1),
+            FormPage(description: description, items: videos2),
+            FormPage(description: description, items: videos3),
+            FormPage(description: description, items: videos4)
+        ]),
+        ApplicationForm(title: "Motivations and Goals", icon: "target", pages: [FormPage(items: motivations)]),
+        ApplicationForm(title: "Personal Information", icon: "person",
+                        pages: [FormPage(description: "This form is optional", items: personal)])
     ]
 }

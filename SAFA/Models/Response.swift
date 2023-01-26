@@ -6,199 +6,181 @@
 //
 
 import Foundation
+import UniformTypeIdentifiers
 
-enum Response: Codable {
-    case number(Int, ClosedRange<Int>)
-    case date(Date, ClosedRange<Date>)
-    /// Currently selected, list of options
-    case menu(Int, [String])
-    case shortAnswer(String)
-    case longAnswer(String)
-    case image(URL?)
-    case video(URL?)
-    
-    struct ArgumentError: Error {}
-    
-    /*mutating func inputHandler() -> ((inout Response) -> ()) {
-        switch self {
-        case .number(_, let range):
-            return { newValue in
-                guard case let .number(newInput, _) = newValue else { newValue = .number(0, range); return }
-                if !range.contains(newInput) {
-                    newValue.constrain()
-                }
-                if case let .number(i, _) = newValue {
-                    self = .number(i, range)
-                }
-            }
-        case .date(_, let range):
-            return { newValue in
-                guard case let .date(newInput, _) = newValue else { newValue = .date(Date(), range); return }
-                if !range.contains(newInput) {
-                    newValue.constrain()
-                }
-                if case let .date(i, _) = newValue {
-                    self = .date(i, range)
-                }
-            }
-        case .menu(_, let options):
-            return { newValue in
-                guard case let .menu(newInput, _) = newValue else { newValue = .menu(0, options); return }
-                self = .menu(newInput, options)
-            }
-        case .shortAnswer(_):
-            return { newValue in
-                guard case let .shortAnswer(newInput) = newValue else { newValue = .shortAnswer(""); return }
-                self = .shortAnswer(newInput)
-            }
-        case .longAnswer(_):
-            return { newValue in
-                guard case let .longAnswer(newInput) = newValue else { newValue = .longAnswer(""); return }
-                self = .longAnswer(newInput)
-            }
-        case .image(_):
-            return { newValue in
-                guard case let .image(newInput) = newValue else { newValue = .image(nil); return }
-                self = .image(newInput)
-            }
-        case .video(_):
-            return { newValue in
-                guard case let .video(newInput) = newValue else { newValue = .video(nil); return }
-                self = .video(newInput)
-            }
-        }
-    }
-    
-    mutating func constrain() {
-        switch self {
-        case .number(let input, let range):
-            self = .number(input.clamped(to: range), range)
-        case .date(let input, let range):
-            self = .date(input.clamped(to: range), range)
-        default:
-            return
-        }
-    }*/
-}
-
-extension Comparable {
-    func clamped(to range: ClosedRange<Self>) -> Self {
-        return min(max(self, range.lowerBound), range.upperBound)
-    }
-}
-
-/*import SwiftUI
-import Combine
-
-enum ResponseType: Codable {
-    case number
+enum ResponseKeys: String, CodingKey, Codable {
+    case int
     case date
     case menu
     case shortAnswer
     case longAnswer
     case image
     case video
-    
-    func type() -> any Response.Type {
-        switch self {
-        case .number:
-            return NumberResponse.self
-        case .date:
-            return DateResponse.self
-        case .menu:
-            return MenuResponse.self
-        case .shortAnswer:
-            return ShortAnswer.self
-        case .longAnswer:
-            return LongAnswer.self
-        case .image:
-            return ImageResponse.self
-        case .video:
-            return VideoResponse.self
-        }
-    }
+    case file
 }
 
 protocol Response: Codable {
-    associatedtype InputType
-    
-    var input: InputType { get set }
-    
-    func responseType() -> ResponseType
-    mutating func field() -> any View
+    /// encode self in the given container
+    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws
+    /// decode from the given container
+    init(from container: KeyedDecodingContainer<ResponseKeys>) throws
 }
 
-extension Response {
-    mutating func inputBinding() -> Binding<InputType> {
-        Binding(get: { self.input }, set: { self.input = $0 })
+protocol RangedResponse: Response {
+    associatedtype T: Codable & Comparable
+    associatedtype U: Codable & Comparable
+    var input: T { get set }
+    var range: ClosedRange<U> { get }
+    static var type: ResponseKeys { get }
+    init(input: T, range: ClosedRange<U>)
+}
+
+enum RangedKeys: String, CodingKey {
+    case input
+    case range
+}
+
+extension RangedResponse {
+    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
+        var nested = container.nestedContainer(keyedBy: RangedKeys.self, forKey: Self.type)
+        try nested.encode(input, forKey: .input)
+        try nested.encode(range, forKey: .range)
+    }
+    
+    init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
+        let nested = try container.nestedContainer(keyedBy: RangedKeys.self, forKey: Self.type)
+        self.init(input: try nested.decode(T.self, forKey: .input),
+                  range: try nested.decode(ClosedRange<U>.self, forKey: .range))
     }
 }
 
-struct NumberResponse: Response {
-    func responseType() -> ResponseType { .number }
+struct IntResponse: RangedResponse {
     var input: Int = 0
     let range: ClosedRange<Int>
+    static let type: ResponseKeys = .int
+}
+
+struct DateResponse: RangedResponse {
+    var input: Date
+    let range: ClosedRange<Date>
+    static let type: ResponseKeys = .date
     
-    mutating func field() -> any View {
-        TextField("", value: inputBinding(), format: .number)
+    init(input: Date = Date(), range: ClosedRange<Date> = Date(timeIntervalSince1970: -2208988800)...Date()) {
+        self.input = input
+        self.range = range
     }
 }
-struct DateResponse: Response {
-    func responseType() -> ResponseType { .date }
-    var input: Date = Date(timeIntervalSince1970: 0)
-    let range: DateInterval
-    
-    mutating func field() -> any View {
-        DatePicker("", selection: inputBinding(), displayedComponents: [.date])
-    }
-}
+
 struct MenuResponse: Response {
-    func responseType() -> ResponseType { .menu }
     /// Index of currently selected option
-    var input: Int = 0
+    var input: Int
     let options: [String]
+    /// does the choice affect the next pages?
+    let determinesPage: Bool
+    /// option selected --> next pages
+    let pages: [Int: [Int]]
     
-    mutating func field() -> any View {
-        Picker("", selection: inputBinding()) {
-            ForEach(0 ..< options.count, id: \.self) { i in
-                Text(options[i])
-            }
-        }
+    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
+        var nested = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .menu)
+        try nested.encode(input, forKey: .input)
+        try nested.encode(options, forKey: .options)
+        try nested.encode(determinesPage, forKey: .determinesPage)
+        try nested.encode(pages, forKey: .pages)
+    }
+    
+    init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
+        let nested = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .menu)
+        input = try nested.decode(Int.self, forKey: .input)
+        options = try nested.decode([String].self, forKey: .options)
+        determinesPage = try nested.decode(Bool.self, forKey: .determinesPage)
+        pages = try nested.decode([Int: [Int]].self, forKey: .pages)
+    }
+    
+    init(input: Int = 0, options: [String], determinesPage: Bool = false, pages: [Int : [Int]] = [:]) {
+        self.input = input
+        self.options = options
+        self.determinesPage = determinesPage
+        self.pages = pages
     }
 }
-struct ShortAnswer: Response {
-    func responseType() -> ResponseType { .shortAnswer }
-    var input: String = ""
+
+struct ShortAnswer: RangedResponse {
+    var input: String
+    /// range for number of characters
+    let range: ClosedRange<Int>
+    static let type: ResponseKeys = .shortAnswer
     
-    mutating func field() -> any View {
-        TextField("", text: inputBinding())
+    init(input: String = "", range: ClosedRange<Int> = 1...100) {
+        self.input = input
+        self.range = range
     }
 }
-struct LongAnswer: Response {
-    func responseType() -> ResponseType { .longAnswer }
-    var input: String = ""
+
+struct LongAnswer: RangedResponse {
+    var input: String
+    /// range for number of characters
+    let range: ClosedRange<Int>
+    static let type: ResponseKeys = .longAnswer
     
-    mutating func field() -> any View {
-        TextEditor(text: inputBinding())
+    init(input: String = "", range: ClosedRange<Int> = 1...2000) {
+        self.input = input
+        self.range = range
     }
 }
-struct ImageResponse: Response {
-    func responseType() -> ResponseType { .image }
+
+protocol BaseResponse: Response {
+    associatedtype T: Codable
+    var input: T { get set }
+    static var type: ResponseKeys { get }
+    init(input: T)
+}
+
+enum BaseKeys: String, CodingKey {
+    case input
+}
+
+extension BaseResponse {
+    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
+        var nested = container.nestedContainer(keyedBy: BaseKeys.self, forKey: Self.type)
+        try nested.encode(input, forKey: .input)
+    }
+    
+    init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
+        let nested = try container.nestedContainer(keyedBy: BaseKeys.self, forKey: Self.type)
+        self.init(input: try nested.decode(T.self, forKey: .input))
+    }
+}
+
+struct ImageResponse: BaseResponse {
     var input: URL?
+    static var type: ResponseKeys = .image
+}
+
+struct VideoResponse: BaseResponse {
+    var input: URL?
+    static var type: ResponseKeys = .video
+}
+
+struct FileResponse: Response {
+    var input: URL?
+    let type: Set<UTType>
+    static let defaultTypes: Set<UTType> = [.pdf, .plainText, .rtf, UTType(filenameExtension: "doc")!,
+                                            UTType(filenameExtension: "docx")!]
     
-    mutating func field() -> any View {
-        Button(action: {}) {
-            Image(systemName: "plus")
-        }
+    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
+        var nested = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .file)
+        try nested.encode(input, forKey: .input)
+        try nested.encode(type, forKey: .type)
+    }
+    
+    init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
+        let nested = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .file)
+        input = try nested.decode(URL?.self, forKey: .input)
+        type = try nested.decode(Set<UTType>.self, forKey: .type)
+    }
+    
+    init(input: URL? = nil, type: Set<UTType> = defaultTypes) {
+        self.input = input
+        self.type = type
     }
 }
-struct VideoResponse: Response {
-    func responseType() -> ResponseType { .video }
-    var input: URL?
-    
-    mutating func field() -> any View {
-        Button(action: {}) {
-            Image(systemName: "plus")
-        }
-    }
-}*/

@@ -12,22 +12,17 @@ struct FormView: View {
 //    var test: FormItem.Response = ApplicationForm.samplePersonal[0].response
     
     var body: some View {
+        if (form.pages.count > 1) {
+            HStack {
+                ProgressView(value: form.progress)
+                Text("\(Int(round(form.progress)))%")
+            }
+            .padding()
+        }
         Form {
-            ForEach($form.items) { $item in
+            ForEach($form.pages[form.current].items) { $item in
                 FormQuestion(item: $item)
             }
-//            Section {
-//                Text("Describe your skill level and experience in a couple of sentences")
-//                TextEditor(text: $formData.experience)
-//            }
-//            Section {
-//                Text("Describe your financial situation")
-//                TextEditor(text: $formData.financial)
-//            }
-//            Section {
-//                Text("Upload a photo of your playing")
-//                UploadButton(formData: formData)
-//            }
         }
         .navigationTitle(form.title)
     }
