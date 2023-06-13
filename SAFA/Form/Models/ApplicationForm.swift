@@ -83,11 +83,11 @@ struct FormPage: Identifiable, Codable {
 struct FormItem: Identifiable {
     let id: UUID
     let prompt: String
-    var response: Response
+    var response: any Response
     let isRequired: Bool
     var isAnswered: Bool /// Whether the question has been answered
     
-    init(id: UUID = UUID(), prompt: String, response: Response, required: Bool = true, isAnswered: Bool = false) {
+    init(id: UUID = UUID(), prompt: String, response: any Response, required: Bool = true, isAnswered: Bool = false) {
         self.id = id
         self.prompt = prompt
         self.response = response
@@ -153,6 +153,7 @@ extension ApplicationForm {
         formatter.dateFormat = "yyyy"
         return formatter
     }
+    
     static let videos0 = [
         FormItem(prompt: "What position are you?", response: MenuResponse(
             options: ["Goalkeeper", "Defender", "Midfielder", "Attacker"],
@@ -191,6 +192,8 @@ extension ApplicationForm {
         FormItem(prompt: "What are you looking for in academies?", response: LongAnswer())
     ]
     static let personal = [
+        FormItem(prompt: "How old are you?", response: IntResponse(range: 1...50)),
+        FormItem(prompt: "When is your birthday?", response: DateResponse(range: f.date(from: "1960")!...Date())),
         FormItem(prompt: "How is your family’s financial situation?", response: LongAnswer(), required: false),
         FormItem(prompt: "How are you doing at school?", response: LongAnswer(), required: false),
         FormItem(prompt: "Are you able to drive/Do you have access to public transport?",

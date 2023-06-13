@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct FormQuestion: View {
     @Binding var item: FormItem
@@ -17,16 +16,42 @@ struct FormQuestion: View {
     var body: some View {
         Section {
             Text(item.prompt)
-//            switch item.response {
-//            case .number(let res):
-//                NumberInput(response: $res)
-//            case .date(let res):
-//            case .menu(let res):
-//            case .shortAnswer(let res):
-//            case .longAnswer(let res):
-//            case .image(let res):
-//            case .video(let res):
-//            }
+            switch item.response {
+            case is IntResponse:
+                IntInput(isAnswered: $item.isAnswered,
+                         response: .init(get: { item.response as! IntResponse },
+                                         set: { item.response = $0 }))
+            case is DateResponse:
+                DateInput(isAnswered: $item.isAnswered,
+                         response: .init(get: { item.response as! DateResponse },
+                                         set: { item.response = $0 }))
+            case is MenuResponse:
+                MenuInput(isAnswered: $item.isAnswered,
+                          response: .init(get: { item.response as! MenuResponse },
+                                          set: { item.response = $0 }))
+            case is ShortAnswer:
+                ShortInput(isAnswered: $item.isAnswered,
+                          response: .init(get: { item.response as! ShortAnswer },
+                                          set: { item.response = $0 }))
+            case is LongAnswer:
+                LongInput(isAnswered: $item.isAnswered,
+                           response: .init(get: { item.response as! LongAnswer },
+                                           set: { item.response = $0 }))
+            case is ImageResponse:
+                ImageInput(isAnswered: $item.isAnswered,
+                          response: .init(get: { item.response as! ImageResponse },
+                                          set: { item.response = $0 }))
+            case is VideoResponse:
+                VideoInput(isAnswered: $item.isAnswered,
+                           response: .init(get: { item.response as! VideoResponse },
+                                           set: { item.response = $0 }))
+            case is FileResponse:
+                FileInput(isAnswered: $item.isAnswered,
+                           response: .init(get: { item.response as! FileResponse },
+                                           set: { item.response = $0 }))
+            default:
+                EmptyView()
+            }
             /*switch item.response {
             case .number(_, let range):
                 TextField("", value: $number, format: .number)
@@ -88,14 +113,6 @@ struct FormQuestion: View {
 //            break
 //        }
 //    }
-}
-
-struct NumberInput: View {
-    @Binding var response: IntResponse
-    
-    var body: some View {
-        Text("")
-    }
 }
 
 struct FormQuestion_Previews: PreviewProvider {

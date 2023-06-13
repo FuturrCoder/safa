@@ -16,6 +16,14 @@
 		633133FA2921E82A00CEBB62 /* FormQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633133F92921E82A00CEBB62 /* FormQuestion.swift */; };
 		638B5369290ED2E0005AB8FD /* AcademiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B5368290ED2E0005AB8FD /* AcademiesView.swift */; };
 		63A367612910A0DD00B7515E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A367602910A0DD00B7515E /* ProfileView.swift */; };
+		63AAABBC2A38D7100007437C /* IntInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABBB2A38D7100007437C /* IntInput.swift */; };
+		63AAABBE2A38D7290007437C /* DateInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABBD2A38D7290007437C /* DateInput.swift */; };
+		63AAABC02A38D7530007437C /* MenuInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABBF2A38D7530007437C /* MenuInput.swift */; };
+		63AAABC22A38D76D0007437C /* ShortInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC12A38D76D0007437C /* ShortInput.swift */; };
+		63AAABC42A38D7830007437C /* LongInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC32A38D7830007437C /* LongInput.swift */; };
+		63AAABC62A38D7940007437C /* ImageInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC52A38D7940007437C /* ImageInput.swift */; };
+		63AAABC82A38D7A30007437C /* VideoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC72A38D7A30007437C /* VideoInput.swift */; };
+		63AAABCA2A38D7CA0007437C /* FileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC92A38D7CA0007437C /* FileInput.swift */; };
 		63B0F534292136B600E62554 /* ApplicationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0F533292136B600E62554 /* ApplicationForm.swift */; };
 		63E16C77290C3BB900166906 /* SAFAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C76290C3BB900166906 /* SAFAApp.swift */; };
 		63E16C79290C3BB900166906 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C78290C3BB900166906 /* ContentView.swift */; };
@@ -58,6 +66,14 @@
 		633133F92921E82A00CEBB62 /* FormQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormQuestion.swift; sourceTree = "<group>"; };
 		638B5368290ED2E0005AB8FD /* AcademiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademiesView.swift; sourceTree = "<group>"; };
 		63A367602910A0DD00B7515E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		63AAABBB2A38D7100007437C /* IntInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntInput.swift; sourceTree = "<group>"; };
+		63AAABBD2A38D7290007437C /* DateInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInput.swift; sourceTree = "<group>"; };
+		63AAABBF2A38D7530007437C /* MenuInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInput.swift; sourceTree = "<group>"; };
+		63AAABC12A38D76D0007437C /* ShortInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortInput.swift; sourceTree = "<group>"; };
+		63AAABC32A38D7830007437C /* LongInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongInput.swift; path = SAFA/LongInput.swift; sourceTree = SOURCE_ROOT; };
+		63AAABC52A38D7940007437C /* ImageInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageInput.swift; path = SAFA/ImageInput.swift; sourceTree = SOURCE_ROOT; };
+		63AAABC72A38D7A30007437C /* VideoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoInput.swift; path = SAFA/VideoInput.swift; sourceTree = SOURCE_ROOT; };
+		63AAABC92A38D7CA0007437C /* FileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInput.swift; sourceTree = "<group>"; };
 		63B0F533292136B600E62554 /* ApplicationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationForm.swift; sourceTree = "<group>"; };
 		63E16C73290C3BB900166906 /* SAFA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SAFA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E16C76290C3BB900166906 /* SAFAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAFAApp.swift; sourceTree = "<group>"; };
@@ -102,15 +118,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63AAABB82A38D4960007437C /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				63AAABBA2A38D4CA0007437C /* Views */,
+				63AAABB92A38D4A30007437C /* Models */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		63AAABB92A38D4A30007437C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63B0F533292136B600E62554 /* ApplicationForm.swift */,
+				63279DE2290D825000814474 /* FormData.swift */,
+				633133F72921D93B00CEBB62 /* Response.swift */,
+				633133F32921B92200CEBB62 /* FormsStore.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		63AAABBA2A38D4CA0007437C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				63AAABC72A38D7A30007437C /* VideoInput.swift */,
+				63AAABC52A38D7940007437C /* ImageInput.swift */,
+				63AAABC32A38D7830007437C /* LongInput.swift */,
+				63AAABBB2A38D7100007437C /* IntInput.swift */,
+				63AAABBD2A38D7290007437C /* DateInput.swift */,
+				63AAABBF2A38D7530007437C /* MenuInput.swift */,
+				63AAABC12A38D76D0007437C /* ShortInput.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		63B0F5322921363700E62554 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				633133F32921B92200CEBB62 /* FormsStore.swift */,
-				63B0F533292136B600E62554 /* ApplicationForm.swift */,
-				633133F72921D93B00CEBB62 /* Response.swift */,
 				63E673EC2922AC8B0055E9C7 /* AcademiesStore.swift */,
 				63E673EA2922A25C0055E9C7 /* Academy.swift */,
-				63279DE2290D825000814474 /* FormData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -138,6 +184,7 @@
 		63E16C75290C3BB900166906 /* SAFA */ = {
 			isa = PBXGroup;
 			children = (
+				63AAABB82A38D4960007437C /* Form */,
 				63B0F5322921363700E62554 /* Models */,
 				63E16C76290C3BB900166906 /* SAFAApp.swift */,
 				63E16C78290C3BB900166906 /* ContentView.swift */,
@@ -149,6 +196,7 @@
 				633133F52921BEEC00CEBB62 /* FormCard.swift */,
 				63EC2650291D6B8400368E53 /* FormView.swift */,
 				633133F92921E82A00CEBB62 /* FormQuestion.swift */,
+				63AAABC92A38D7CA0007437C /* FileInput.swift */,
 				63279DE0290D779C00814474 /* UploadButton.swift */,
 				63E16C7A290C3BBC00166906 /* Assets.xcassets */,
 				63E16C7C290C3BBC00166906 /* SAFA.entitlements */,
@@ -313,18 +361,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				63EC2651291D6B8400368E53 /* FormView.swift in Sources */,
+				63AAABC22A38D76D0007437C /* ShortInput.swift in Sources */,
+				63AAABC82A38D7A30007437C /* VideoInput.swift in Sources */,
 				63E16C79290C3BB900166906 /* ContentView.swift in Sources */,
 				63279DDF290D697900814474 /* FormsView.swift in Sources */,
+				63AAABC42A38D7830007437C /* LongInput.swift in Sources */,
 				63B0F534292136B600E62554 /* ApplicationForm.swift in Sources */,
 				63E673EB2922A25C0055E9C7 /* Academy.swift in Sources */,
+				63AAABBE2A38D7290007437C /* DateInput.swift in Sources */,
 				633133F82921D93B00CEBB62 /* Response.swift in Sources */,
+				63AAABBC2A38D7100007437C /* IntInput.swift in Sources */,
 				633133F62921BEEC00CEBB62 /* FormCard.swift in Sources */,
 				63279DE1290D779C00814474 /* UploadButton.swift in Sources */,
 				638B5369290ED2E0005AB8FD /* AcademiesView.swift in Sources */,
 				633133FA2921E82A00CEBB62 /* FormQuestion.swift in Sources */,
 				63E673EF2922ADA90055E9C7 /* AcademyCard.swift in Sources */,
 				63E673ED2922AC8B0055E9C7 /* AcademiesStore.swift in Sources */,
+				63AAABC62A38D7940007437C /* ImageInput.swift in Sources */,
 				63279DE3290D825000814474 /* FormData.swift in Sources */,
+				63AAABCA2A38D7CA0007437C /* FileInput.swift in Sources */,
+				63AAABC02A38D7530007437C /* MenuInput.swift in Sources */,
 				63E673F12922AE5D0055E9C7 /* AcademyDetail.swift in Sources */,
 				633133F42921B92200CEBB62 /* FormsStore.swift in Sources */,
 				63A367612910A0DD00B7515E /* ProfileView.swift in Sources */,

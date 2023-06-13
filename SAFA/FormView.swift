@@ -17,7 +17,7 @@ struct FormView: View {
                 ProgressView(value: form.progress)
                 Text("\(Int(round(form.progress)))%")
             }
-            .padding()
+            .padding([.leading, .trailing])
         }
         Form {
             ForEach($form.pages[form.current].items) { $item in

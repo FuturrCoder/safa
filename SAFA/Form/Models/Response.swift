@@ -7,6 +7,7 @@
 
 import Foundation
 import UniformTypeIdentifiers
+import SwiftUI
 
 enum ResponseKeys: String, CodingKey, Codable {
     case int
@@ -153,12 +154,12 @@ extension BaseResponse {
 
 struct ImageResponse: BaseResponse {
     var input: URL?
-    static var type: ResponseKeys = .image
+    static let type: ResponseKeys = .image
 }
 
 struct VideoResponse: BaseResponse {
     var input: URL?
-    static var type: ResponseKeys = .video
+    static let type: ResponseKeys = .video
 }
 
 struct FileResponse: Response {
