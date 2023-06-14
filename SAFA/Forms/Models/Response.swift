@@ -27,8 +27,31 @@ protocol Response: Codable {
     init(from container: KeyedDecodingContainer<ResponseKeys>) throws
 }
 
+protocol BaseResponse: Response {
+    associatedtype T: Codable
+    var input: T { get set }
+    static var type: ResponseKeys { get }
+    init(input: T)
+}
+
+enum BaseKeys: String, CodingKey {
+    case input
+}
+
+extension BaseResponse {
+    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
+        var nested = container.nestedContainer(keyedBy: BaseKeys.self, forKey: Self.type)
+        try nested.encode(input, forKey: .input)
+    }
+    
+    init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
+        let nested = try container.nestedContainer(keyedBy: BaseKeys.self, forKey: Self.type)
+        self.init(input: try nested.decode(T.self, forKey: .input))
+    }
+}
+
 protocol RangedResponse: Response {
-    associatedtype T: Codable & Comparable
+    associatedtype T: Codable
     associatedtype U: Codable & Comparable
     var input: T { get set }
     var range: ClosedRange<U> { get }
@@ -81,22 +104,6 @@ struct MenuResponse: Response {
     /// option selected --> next pages
     let pages: [Int: [Int]]
     
-    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
-        var nested = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .menu)
-        try nested.encode(input, forKey: .input)
-        try nested.encode(options, forKey: .options)
-        try nested.encode(determinesPage, forKey: .determinesPage)
-        try nested.encode(pages, forKey: .pages)
-    }
-    
-    init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
-        let nested = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .menu)
-        input = try nested.decode(Int.self, forKey: .input)
-        options = try nested.decode([String].self, forKey: .options)
-        determinesPage = try nested.decode(Bool.self, forKey: .determinesPage)
-        pages = try nested.decode([Int: [Int]].self, forKey: .pages)
-    }
-    
     init(input: Int = 0, options: [String], determinesPage: Bool = false, pages: [Int : [Int]] = [:]) {
         self.input = input
         self.options = options
@@ -129,29 +136,6 @@ struct LongAnswer: RangedResponse {
     }
 }
 
-protocol BaseResponse: Response {
-    associatedtype T: Codable
-    var input: T { get set }
-    static var type: ResponseKeys { get }
-    init(input: T)
-}
-
-enum BaseKeys: String, CodingKey {
-    case input
-}
-
-extension BaseResponse {
-    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
-        var nested = container.nestedContainer(keyedBy: BaseKeys.self, forKey: Self.type)
-        try nested.encode(input, forKey: .input)
-    }
-    
-    init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
-        let nested = try container.nestedContainer(keyedBy: BaseKeys.self, forKey: Self.type)
-        self.init(input: try nested.decode(T.self, forKey: .input))
-    }
-}
-
 struct ImageResponse: BaseResponse {
     var input: URL?
     static let type: ResponseKeys = .image
@@ -165,9 +149,35 @@ struct VideoResponse: BaseResponse {
 struct FileResponse: Response {
     var input: URL?
     let type: Set<UTType>
-    static let defaultTypes: Set<UTType> = [.pdf, .plainText, .rtf, UTType(filenameExtension: "doc")!,
+    static let defaultTypes: Set<UTType> = [.pdf, .plainText, .rtf,
+                                            UTType(filenameExtension: "doc")!,
                                             UTType(filenameExtension: "docx")!]
     
+    init(input: URL? = nil, type: Set<UTType> = defaultTypes) {
+        self.input = input
+        self.type = type
+    }
+}
+
+extension MenuResponse {
+    func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
+        var nested = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .menu)
+        try nested.encode(input, forKey: .input)
+        try nested.encode(options, forKey: .options)
+        try nested.encode(determinesPage, forKey: .determinesPage)
+        try nested.encode(pages, forKey: .pages)
+    }
+    
+    init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
+        let nested = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .menu)
+        input = try nested.decode(Int.self, forKey: .input)
+        options = try nested.decode([String].self, forKey: .options)
+        determinesPage = try nested.decode(Bool.self, forKey: .determinesPage)
+        pages = try nested.decode([Int: [Int]].self, forKey: .pages)
+    }
+}
+
+extension FileResponse {
     func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
         var nested = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .file)
         try nested.encode(input, forKey: .input)
@@ -178,10 +188,5 @@ struct FileResponse: Response {
         let nested = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .file)
         input = try nested.decode(URL?.self, forKey: .input)
         type = try nested.decode(Set<UTType>.self, forKey: .type)
-    }
-    
-    init(input: URL? = nil, type: Set<UTType> = defaultTypes) {
-        self.input = input
-        self.type = type
     }
 }

@@ -10,10 +10,12 @@ import SwiftUI
 struct ContentView: View {
     @Binding var forms: [ApplicationForm]
     @Binding var academies: [Academy]
+    @Binding var profile: Profile
     
-    init(forms: Binding<[ApplicationForm]>, academies: Binding<[Academy]>) {
+    init(forms: Binding<[ApplicationForm]>, academies: Binding<[Academy]>, profile: Binding<Profile>) {
         self._forms = forms
         self._academies = academies
+        self._profile = profile
     }
     
     var body: some View {
@@ -25,7 +27,7 @@ struct ContentView: View {
                 AcademiesView(academies: $academies)
                     .tabItem { Label("Academies", systemImage: "building.2") }
                     .tag(2)
-                ProfileView(forms: forms)
+                ProfileView(profile: $profile, forms: forms)
                     .tabItem { Label("Profile", systemImage: "person") }
                     .tag(3)
             }
@@ -66,6 +68,6 @@ extension View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(forms: .constant(ApplicationForm.sampleData), academies: .constant(Academy.sampleData))
+        ContentView(forms: .constant(ApplicationForm.sampleData), academies: .constant(Academy.sampleData), profile: .constant(Profile.sample))
     }
 }

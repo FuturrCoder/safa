@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ProfileView: View {
-    // TODO: Make personal info data store
     // TODO: Make personal info fields editable
     // TODO: Link forms
     
+    @Binding var profile: Profile
     let forms: [ApplicationForm]
     
     var body: some View {
@@ -19,13 +19,13 @@ struct ProfileView: View {
             List {
                 VStack {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10)
+                        Circle()
                             .foregroundColor(Color("ThemeColor").opacity(0.5))
                             .frame(maxWidth: 70)
                         Image(systemName: "person.fill")
-                            .font(.custom("test", fixedSize: 50))
+                            .font(.custom("test", fixedSize: 40))
                     }
-                    Text("Mirai Nishioka")
+                    Text("\(profile.firstName) \(profile.lastName)")
                         .font(.headline)
                 }
                 .padding()
@@ -62,13 +62,12 @@ struct ProfileView: View {
 //                Text("mnishioka@commschool.org")
 //            }
 //        }
-        
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(forms: ApplicationForm.sampleData)
+        ProfileView(profile: .constant(Profile.sample), forms: ApplicationForm.sampleData)
     }
 }
 
