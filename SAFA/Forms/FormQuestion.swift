@@ -14,8 +14,8 @@ struct FormQuestion: View {
 //    @State var date: Date
     
     var body: some View {
-        Section {
-            Text(item.prompt)
+//        Section {
+//            Text(item.prompt)
             switch item.response {
             case is IntResponse:
                 IntInput(isAnswered: $item.isAnswered,
@@ -23,8 +23,8 @@ struct FormQuestion: View {
                                          set: { item.response = $0 }))
             case is DateResponse:
                 DateInput(isAnswered: $item.isAnswered,
-                         response: .init(get: { item.response as! DateResponse },
-                                         set: { item.response = $0 }))
+                          response: .init(get: { item.response as! DateResponse },
+                                          set: { item.response = $0 }))
             case is MenuResponse:
                 MenuInput(isAnswered: $item.isAnswered,
                           response: .init(get: { item.response as! MenuResponse },
@@ -36,7 +36,8 @@ struct FormQuestion: View {
             case is LongAnswer:
                 LongInput(isAnswered: $item.isAnswered,
                            response: .init(get: { item.response as! LongAnswer },
-                                           set: { item.response = $0 }))
+                                           set: { item.response = $0 }),
+                          prompt: item.prompt)
             case is ImageResponse:
                 ImageInput(isAnswered: $item.isAnswered,
                           response: .init(get: { item.response as! ImageResponse },
@@ -94,7 +95,7 @@ struct FormQuestion: View {
             case .video(_):
                 Image(systemName: "plus")
             }*/
-        }
+//        }
     }
     
 //    init(item: Binding<FormItem>) {

@@ -177,10 +177,10 @@
 		63AAABB92A38D4A30007437C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				633133F32921B92200CEBB62 /* FormsStore.swift */,
 				63B0F533292136B600E62554 /* ApplicationForm.swift */,
 				63279DE2290D825000814474 /* FormData.swift */,
 				633133F72921D93B00CEBB62 /* Response.swift */,
-				633133F32921B92200CEBB62 /* FormsStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

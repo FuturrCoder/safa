@@ -10,9 +10,21 @@ import SwiftUI
 struct ShortInput: View {
     @Binding var isAnswered: Bool
     @Binding var response: ShortAnswer
+    @State private var input: String
+    @FocusState private var focused: Bool
     
     var body: some View {
         TextField("", text: $response.input)
+            .focused($focused)
+            .onChange(of: focused) { _ in
+                response.input = input
+            }
+    }
+    
+    init(isAnswered: Binding<Bool>, response: Binding<ShortAnswer>) {
+        self._isAnswered = isAnswered
+        self._response = response
+        self._input = .init(wrappedValue: response.input.wrappedValue)
     }
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class AcademiesStore: ObservableObject {
     @Published var academies: [Academy] = Academy.sampleData
 }
