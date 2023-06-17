@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FormQuestion: View {
     @Binding var item: FormItem
+    @StateObject var footer: Footer = Footer()
+//    @State private var input: String
 //    @State var text: String
 //    @State var number: Int
 //    @State var date: Date
@@ -16,6 +18,7 @@ struct FormQuestion: View {
     var body: some View {
 //        Section {
 //            Text(item.prompt)
+        Group {
             switch item.response {
             case is IntResponse:
                 IntInput(isAnswered: $item.isAnswered,
@@ -31,28 +34,33 @@ struct FormQuestion: View {
                                           set: { item.response = $0 }))
             case is ShortAnswer:
                 ShortInput(isAnswered: $item.isAnswered,
-                          response: .init(get: { item.response as! ShortAnswer },
-                                          set: { item.response = $0 }))
-            case is LongAnswer:
-                LongInput(isAnswered: $item.isAnswered,
-                           response: .init(get: { item.response as! LongAnswer },
+                           response: .init(get: { item.response as! ShortAnswer },
                                            set: { item.response = $0 }),
-                          prompt: item.prompt)
+                           prompt: item.prompt)
+            case is LongAnswer:
+                SectionWrapper(prompt: item.prompt) {
+                    LongInput(isAnswered: $item.isAnswered,
+                              response: .init(get: { item.response as! LongAnswer },
+                                              set: { item.response = $0 }),
+                              prompt: item.prompt)
+                }
             case is ImageResponse:
                 ImageInput(isAnswered: $item.isAnswered,
-                          response: .init(get: { item.response as! ImageResponse },
-                                          set: { item.response = $0 }))
+                           response: .init(get: { item.response as! ImageResponse },
+                                           set: { item.response = $0 }))
             case is VideoResponse:
                 VideoInput(isAnswered: $item.isAnswered,
                            response: .init(get: { item.response as! VideoResponse },
                                            set: { item.response = $0 }))
             case is FileResponse:
                 FileInput(isAnswered: $item.isAnswered,
-                           response: .init(get: { item.response as! FileResponse },
-                                           set: { item.response = $0 }))
+                          response: .init(get: { item.response as! FileResponse },
+                                          set: { item.response = $0 }))
             default:
                 EmptyView()
             }
+        }
+        .environmentObject(footer)
             /*switch item.response {
             case .number(_, let range):
                 TextField("", value: $number, format: .number)
@@ -100,6 +108,11 @@ struct FormQuestion: View {
     
 //    init(item: Binding<FormItem>) {
 //        self._item = item
+//        self.input = ""
+//    }
+    
+//    init(item: Binding<FormItem>) {
+//        self._item = item
 //        _text = .init(initialValue: "")
 //        _number = .init(initialValue: 0)
 //        _date = .init(initialValue: Date(timeIntervalSince1970: 0))
@@ -114,6 +127,11 @@ struct FormQuestion: View {
 //            break
 //        }
 //    }
+}
+
+class Footer: ObservableObject {
+    @Published var text: String = ""
+    @Published var color: Color = .secondary
 }
 
 struct FormQuestion_Previews: PreviewProvider {

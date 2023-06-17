@@ -39,6 +39,7 @@
 		63E673EF2922ADA90055E9C7 /* AcademyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E673EE2922ADA90055E9C7 /* AcademyCard.swift */; };
 		63E673F12922AE5D0055E9C7 /* AcademyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E673F02922AE5D0055E9C7 /* AcademyDetail.swift */; };
 		63EC2651291D6B8400368E53 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC2650291D6B8400368E53 /* FormView.swift */; };
+		63F9E1D92A3D0D7C00D66655 /* SectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		63E673EE2922ADA90055E9C7 /* AcademyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyCard.swift; sourceTree = "<group>"; };
 		63E673F02922AE5D0055E9C7 /* AcademyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyDetail.swift; sourceTree = "<group>"; };
 		63EC2650291D6B8400368E53 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
+		63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 				63AAABBD2A38D7290007437C /* DateInput.swift */,
 				63AAABBF2A38D7530007437C /* MenuInput.swift */,
 				63AAABC12A38D76D0007437C /* ShortInput.swift */,
+				63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */,
 			);
 			path = "Input Views";
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				63AAABC02A38D7530007437C /* MenuInput.swift in Sources */,
 				63E673F12922AE5D0055E9C7 /* AcademyDetail.swift in Sources */,
 				6337CB312A3A1C6E00D364CA /* ProfileStore.swift in Sources */,
+				63F9E1D92A3D0D7C00D66655 /* SectionWrapper.swift in Sources */,
 				633133F42921B92200CEBB62 /* FormsStore.swift in Sources */,
 				63A367612910A0DD00B7515E /* ProfileView.swift in Sources */,
 				63E16C77290C3BB900166906 /* SAFAApp.swift in Sources */,
