@@ -18,7 +18,7 @@ struct FormQuestion: View {
     var body: some View {
 //        Section {
 //            Text(item.prompt)
-        Group {
+        SectionWrapper(prompt: item.prompt) {
             switch item.response {
             case is IntResponse:
                 IntInput(isAnswered: $item.isAnswered,
@@ -35,15 +35,11 @@ struct FormQuestion: View {
             case is ShortAnswer:
                 ShortInput(isAnswered: $item.isAnswered,
                            response: .init(get: { item.response as! ShortAnswer },
-                                           set: { item.response = $0 }),
-                           prompt: item.prompt)
+                                           set: { item.response = $0 }))
             case is LongAnswer:
-                SectionWrapper(prompt: item.prompt) {
-                    LongInput(isAnswered: $item.isAnswered,
-                              response: .init(get: { item.response as! LongAnswer },
-                                              set: { item.response = $0 }),
-                              prompt: item.prompt)
-                }
+                LongInput(isAnswered: $item.isAnswered,
+                          response: .init(get: { item.response as! LongAnswer },
+                                          set: { item.response = $0 }))
             case is ImageResponse:
                 ImageInput(isAnswered: $item.isAnswered,
                            response: .init(get: { item.response as! ImageResponse },
@@ -130,8 +126,13 @@ struct FormQuestion: View {
 }
 
 class Footer: ObservableObject {
-    @Published var text: String = ""
-    @Published var color: Color = .secondary
+    @Published var text: String
+    @Published var color: Color
+    
+    init(text: String = "", color: Color = .secondary) {
+        self.text = text
+        self.color = color
+    }
 }
 
 struct FormQuestion_Previews: PreviewProvider {
