@@ -37,7 +37,7 @@ struct LongInput: View {
     init(isAnswered: Binding<Bool>, response: Binding<LongAnswer>) {
         self._isAnswered = isAnswered
         self._response = response
-        self._input = .init(wrappedValue: response.input.wrappedValue)
+        self.input = response.input.wrappedValue
     }
 }
 
