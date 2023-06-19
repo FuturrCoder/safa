@@ -23,6 +23,7 @@ struct ShortInput: View {
             }
             .onChange(of: input) { newValue in
                 updateFooter(input: newValue)
+                isAnswered = newValue.count >= response.range.lowerBound
             }
             .onAppear {
                 updateFooter(input: input)
@@ -31,7 +32,7 @@ struct ShortInput: View {
     
     func updateFooter(input newInput: String) {
         footer.text = "\(newInput.count)/\(response.range.upperBound) characters"
-        footer.color = newInput.count > response.range.upperBound ? .red : .secondary
+        footer.color = response.range.contains(newInput.count) ? .secondary : .red
     }
     
     init(isAnswered: Binding<Bool>, response: Binding<ShortAnswer>) {

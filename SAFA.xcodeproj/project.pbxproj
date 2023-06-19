@@ -194,10 +194,10 @@
 				63AAABC72A38D7A30007437C /* VideoInput.swift */,
 				63AAABC52A38D7940007437C /* ImageInput.swift */,
 				63AAABC32A38D7830007437C /* LongInput.swift */,
+				63AAABC12A38D76D0007437C /* ShortInput.swift */,
 				63AAABBB2A38D7100007437C /* IntInput.swift */,
 				63AAABBD2A38D7290007437C /* DateInput.swift */,
 				63AAABBF2A38D7530007437C /* MenuInput.swift */,
-				63AAABC12A38D76D0007437C /* ShortInput.swift */,
 				63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */,
 			);
 			path = "Input Views";

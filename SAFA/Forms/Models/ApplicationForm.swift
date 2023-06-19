@@ -12,54 +12,69 @@ struct ApplicationForm: Identifiable, Codable {
     let title: String
     let icon: String
     var pages: [FormPage]
-    /// index of current page
-    var current: Int
-    var progress: Float {
-        let answered = pages.reduce(0) { $0 + $1.answered }
-        let unanswered = pages.reduce(0) { $0 + $1.unanswered }
-        return Float(answered) / Float(answered + unanswered)
+    /// first index is current index
+    var previousIndices: IntStack
+    var nextIndices: IntStack
+    var current: Int { previousIndices.first! }
+    var answered: Int { pages.reduce(0) { $0 + $1.answered } }
+    var unanswered: Int {
+        pages[current].unanswered + nextIndices.storage.reduce(0) { $0 + pages[$1].unanswered }
     }
-    var test: (Int, Int) {
-        (pages.reduce(0) { $0 + $1.answered }, pages.reduce(0) { $0 + $1.unanswered })
-    }
+    var progress: Float { Float(answered) / Float(answered + unanswered) }
     
-    init(id: UUID = UUID(), title: String, icon: String, pages: [FormPage], current: Int = 0) {
+    init(id: UUID = UUID(), title: String, icon: String, pages: [FormPage]) {
         self.id = id
         self.title = title
         self.icon = icon
         self.pages = pages
-        self.current = current
+        self.previousIndices = IntStack(from: [0])
+        self.nextIndices = IntStack(from: Array(1..<pages.count))
+//        self.current = current
     }
     
-    enum CodingKeys: CodingKey {
-        case title
-        case icon
-        case pages
-        case current
+    mutating func nextPage() {
+        guard let i = nextIndices.pop() else { return }
+        previousIndices.push(i)
+    }
+    mutating func prevPage() {
+        guard let i = previousIndices.pop() else { return }
+        nextIndices.push(i)
     }
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: ApplicationForm.CodingKeys.self)
-        self.id = UUID()
-        self.title = try container.decode(String.self, forKey: ApplicationForm.CodingKeys.title)
-        self.icon = try container.decode(String.self, forKey: ApplicationForm.CodingKeys.icon)
-        self.pages = try container.decode([FormPage].self, forKey: ApplicationForm.CodingKeys.pages)
-        self.current = try container.decode(Int.self, forKey: ApplicationForm.CodingKeys.current)
-        
-    }
+//    enum CodingKeys: CodingKey {
+//        case title
+//        case icon
+//        case pages
+////        case current
+//    }
+    
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: ApplicationForm.CodingKeys.self)
+//        self.id = UUID()
+//        self.title = try container.decode(String.self, forKey: ApplicationForm.CodingKeys.title)
+//        self.icon = try container.decode(String.self, forKey: ApplicationForm.CodingKeys.icon)
+//        self.pages = try container.decode([FormPage].self, forKey: ApplicationForm.CodingKeys.pages)
+////        self.current = try container.decode(Int.self, forKey: ApplicationForm.CodingKeys.current)
+//    }
+}
+
+struct IntStack: Codable {
+    var storage: [Int]
+    var isEmpty: Bool { storage.isEmpty }
+    var count: Int { storage.count }
+    var first: Int? { storage.last }
+    mutating func push(_ n: Int) { storage.append(n) }
+    mutating func pop() -> Int? { storage.popLast() }
+    init(from array: [Int] = []) { self.storage = array.reversed() }
 }
 
 struct FormPage: Identifiable, Codable {
     let id: UUID
     let description: String
     var items: [FormItem]
-    var answered: Int {
-        items.reduce(0) { $1.isAnswered ? $0 + 1 : $0 }
-    }
+    var answered: Int { items.reduce(0) { $1.isAnswered ? $0 + 1 : $0 } }
     /// required but unanswered
-    var unanswered: Int {
-        items.reduce(0) { $1.isRequired && !$1.isAnswered ? $0 + 1 : $0 }
-    }
+    var unanswered: Int { items.reduce(0) { $1.isRequired && !$1.isAnswered ? $0 + 1 : $0 } }
     
     init(id: UUID = UUID(), description: String = "", items: [FormItem]) {
         self.id = id
@@ -185,8 +200,8 @@ extension ApplicationForm {
         FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
     ]
     static let motivations = [
-        FormItem(prompt: "What makes you passionate about soccer?", response: LongAnswer()),
-        FormItem(prompt: "What is the highest level you have played soccer at?", response: LongAnswer()),
+        FormItem(prompt: "What makes you passionate about soccer?", response: LongAnswer(range: 50...2000)),
+        FormItem(prompt: "What is the highest level you have played soccer at?", response: LongAnswer(range: 1...1000)),
         FormItem(prompt: "What are your goals in the future for the beautiful game?", response: LongAnswer()),
         FormItem(prompt: "Tell us a soccer story in your life (be creative!)", response: LongAnswer()),
         FormItem(prompt: "What are you looking for in academies?", response: LongAnswer())

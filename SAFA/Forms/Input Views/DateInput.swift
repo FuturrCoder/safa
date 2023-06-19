@@ -13,6 +13,7 @@ struct DateInput: View {
     
     var body: some View {
         DatePicker("", selection: $response.input, in: response.range, displayedComponents: [.date])
+            .labelsHidden()
     }
 }
 

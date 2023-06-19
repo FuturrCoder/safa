@@ -18,7 +18,7 @@ struct FormQuestion: View {
     var body: some View {
 //        Section {
 //            Text(item.prompt)
-        SectionWrapper(prompt: item.prompt) {
+        SectionWrapper(item: item) {
             switch item.response {
             case is IntResponse:
                 IntInput(isAnswered: $item.isAnswered,
