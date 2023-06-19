@@ -34,10 +34,12 @@ struct FormQuestion: View {
                                           set: { item.response = $0 }))
             case is ShortAnswer:
                 ShortInput(isAnswered: $item.isAnswered,
+                           isRequired: item.isRequired,
                            response: .init(get: { item.response as! ShortAnswer },
                                            set: { item.response = $0 }))
             case is LongAnswer:
                 LongInput(isAnswered: $item.isAnswered,
+                          isRequired: item.isRequired,
                           response: .init(get: { item.response as! LongAnswer },
                                           set: { item.response = $0 }))
             case is ImageResponse:
