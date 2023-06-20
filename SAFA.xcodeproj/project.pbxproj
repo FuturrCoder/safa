@@ -170,6 +170,7 @@
 				63EC2650291D6B8400368E53 /* FormView.swift */,
 				633133F92921E82A00CEBB62 /* FormQuestion.swift */,
 				63279DE0290D779C00814474 /* UploadButton.swift */,
+				63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */,
 				63AAABBA2A38D4CA0007437C /* Input Views */,
 				63AAABB92A38D4A30007437C /* Models */,
 			);
@@ -198,7 +199,6 @@
 				63AAABBB2A38D7100007437C /* IntInput.swift */,
 				63AAABBD2A38D7290007437C /* DateInput.swift */,
 				63AAABBF2A38D7530007437C /* MenuInput.swift */,
-				63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */,
 			);
 			path = "Input Views";
 			sourceTree = "<group>";

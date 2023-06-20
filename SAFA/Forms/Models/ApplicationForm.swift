@@ -36,9 +36,14 @@ struct ApplicationForm: Identifiable, Codable {
         guard let i = nextIndices.pop() else { return }
         previousIndices.push(i)
     }
+    
     mutating func prevPage() {
         guard let i = previousIndices.pop() else { return }
         nextIndices.push(i)
+    }
+    
+    mutating func setNextPages(to indices: [Int]) {
+        nextIndices = IntStack(from: indices)
     }
     
 //    enum CodingKeys: CodingKey {

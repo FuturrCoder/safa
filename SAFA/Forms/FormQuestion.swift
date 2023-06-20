@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FormQuestion: View {
     @Binding var item: FormItem
+    @Binding var form: ApplicationForm
     @StateObject var footer: Footer = Footer()
 //    @State private var input: String
 //    @State var text: String
@@ -30,6 +31,7 @@ struct FormQuestion: View {
                                           set: { item.response = $0 }))
             case is MenuResponse:
                 MenuInput(isAnswered: $item.isAnswered,
+                          form: $form,
                           response: .init(get: { item.response as! MenuResponse },
                                           set: { item.response = $0 }))
             case is ShortAnswer:
@@ -139,6 +141,6 @@ class Footer: ObservableObject {
 
 struct FormQuestion_Previews: PreviewProvider {
     static var previews: some View {
-        FormQuestion(item: .constant(ApplicationForm.motivations[0]))
+        FormQuestion(item: .constant(ApplicationForm.motivations[0]), form: .constant(ApplicationForm.sampleData[0]))
     }
 }

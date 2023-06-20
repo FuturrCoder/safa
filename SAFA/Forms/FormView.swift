@@ -25,8 +25,7 @@ struct FormView: View {
 //        }
         Form {
             ForEach($form.pages[form.current].items) { $item in
-                FormQuestion(item: $item)
-//                    .environmentObject(form)
+                FormQuestion(item: $item, form: $form)
             }
         }
         .navigationTitle(form.title)

@@ -9,8 +9,10 @@ import SwiftUI
 
 struct MenuInput: View {
     @Binding var isAnswered: Bool
+    @Binding var form: ApplicationForm
     @Binding var response: MenuResponse
     @State private var input: Int
+    @State private var showingAlert: Bool = false
     
     var body: some View {
         Picker("", selection: $input) {
@@ -27,20 +29,33 @@ struct MenuInput: View {
                 isAnswered = false
             } else {
                 isAnswered = true
-                response.input = input - 1
+                response.input = newValue - 1
+                if response.determinesPage {
+                    if let pages = response.pages[response.input] {
+                        form.setNextPages(to: pages)
+                    } else {
+                        showingAlert = true
+                    }
+                }
+            }
+        }
+        .alert("Invalid Option", isPresented: $showingAlert) {
+            Button("OK", role: .cancel) {
+                input = 0
             }
         }
     }
     
-    init(isAnswered: Binding<Bool>, response: Binding<MenuResponse>) {
+    init(isAnswered: Binding<Bool>, form: Binding<ApplicationForm>, response: Binding<MenuResponse>) {
         self._isAnswered = isAnswered
+        self._form = form
         self._response = response
-        self.input = response.input.wrappedValue
+        self._input = .init(initialValue: response.input.wrappedValue)
     }
 }
 
 struct MenuInput_Previews: PreviewProvider {
     static var previews: some View {
-        MenuInput(isAnswered: .constant(true), response: .constant(MenuResponse(input: 2, options: ["Boston", "New York", "San Francisco"])))
+        MenuInput(isAnswered: .constant(true), form: .constant(ApplicationForm.sampleData[0]), response: .constant(MenuResponse(input: 2, options: ["Boston", "New York", "San Francisco"])))
     }
 }
