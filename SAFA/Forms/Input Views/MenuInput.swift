@@ -50,7 +50,7 @@ struct MenuInput: View {
         self._isAnswered = isAnswered
         self._form = form
         self._response = response
-        self._input = .init(initialValue: response.input.wrappedValue)
+        self._input = .init(initialValue: response.input.wrappedValue + 1)
     }
 }
 

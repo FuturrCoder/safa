@@ -12,7 +12,7 @@ struct ApplicationForm: Identifiable, Codable {
     let title: String
     let icon: String
     var pages: [FormPage]
-    /// first index is current index
+    /// first is current index
     var previousIndices: IntStack
     var nextIndices: IntStack
     var current: Int { previousIndices.first! }
@@ -21,6 +21,15 @@ struct ApplicationForm: Identifiable, Codable {
         pages[current].unanswered + nextIndices.storage.reduce(0) { $0 + pages[$1].unanswered }
     }
     var progress: Float { Float(answered) / Float(answered + unanswered) }
+    var canContinue: Bool { pages[current].unanswered == 0 && nextIndices.first != nil }
+    /// list of indices for pages that can be viewed, in ascending order
+    var viewable: [Int] {
+        if canContinue {
+            return previousIndices.storage + [nextIndices.first!]
+        } else {
+            return previousIndices.storage
+        }
+    }
     
     init(id: UUID = UUID(), title: String, icon: String, pages: [FormPage]) {
         self.id = id
@@ -61,16 +70,6 @@ struct ApplicationForm: Identifiable, Codable {
 //        self.pages = try container.decode([FormPage].self, forKey: ApplicationForm.CodingKeys.pages)
 ////        self.current = try container.decode(Int.self, forKey: ApplicationForm.CodingKeys.current)
 //    }
-}
-
-struct IntStack: Codable {
-    var storage: [Int]
-    var isEmpty: Bool { storage.isEmpty }
-    var count: Int { storage.count }
-    var first: Int? { storage.last }
-    mutating func push(_ n: Int) { storage.append(n) }
-    mutating func pop() -> Int? { storage.popLast() }
-    init(from array: [Int] = []) { self.storage = array.reversed() }
 }
 
 struct FormPage: Identifiable, Codable {

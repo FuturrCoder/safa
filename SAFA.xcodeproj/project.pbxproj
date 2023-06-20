@@ -27,6 +27,7 @@
 		63AAABC82A38D7A30007437C /* VideoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC72A38D7A30007437C /* VideoInput.swift */; };
 		63AAABCA2A38D7CA0007437C /* FileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC92A38D7CA0007437C /* FileInput.swift */; };
 		63B0F534292136B600E62554 /* ApplicationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0F533292136B600E62554 /* ApplicationForm.swift */; };
+		63D643F62A41496E00043A24 /* IntStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D643F52A41496E00043A24 /* IntStack.swift */; };
 		63E16C77290C3BB900166906 /* SAFAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C76290C3BB900166906 /* SAFAApp.swift */; };
 		63E16C79290C3BB900166906 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C78290C3BB900166906 /* ContentView.swift */; };
 		63E16C7B290C3BBC00166906 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E16C7A290C3BBC00166906 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		63AAABC72A38D7A30007437C /* VideoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoInput.swift; path = SAFA/VideoInput.swift; sourceTree = SOURCE_ROOT; };
 		63AAABC92A38D7CA0007437C /* FileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInput.swift; sourceTree = "<group>"; };
 		63B0F533292136B600E62554 /* ApplicationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationForm.swift; sourceTree = "<group>"; };
+		63D643F52A41496E00043A24 /* IntStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntStack.swift; sourceTree = "<group>"; };
 		63E16C73290C3BB900166906 /* SAFA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SAFA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E16C76290C3BB900166906 /* SAFAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAFAApp.swift; sourceTree = "<group>"; };
 		63E16C78290C3BB900166906 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,14 @@
 			path = "Input Views";
 			sourceTree = "<group>";
 		};
+		63D643F42A41495D00043A24 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63D643F52A41496E00043A24 /* IntStack.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		63E16C6A290C3BB900166906 = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +236,7 @@
 		63E16C75290C3BB900166906 /* SAFA */ = {
 			isa = PBXGroup;
 			children = (
+				63D643F42A41495D00043A24 /* Models */,
 				6337CB342A3A1E7D00D364CA /* Profile */,
 				6337CB322A3A1E0500D364CA /* Academies */,
 				63AAABB82A38D4960007437C /* Forms */,
@@ -400,6 +411,7 @@
 				63E16C79290C3BB900166906 /* ContentView.swift in Sources */,
 				63279DDF290D697900814474 /* FormsView.swift in Sources */,
 				63AAABC42A38D7830007437C /* LongInput.swift in Sources */,
+				63D643F62A41496E00043A24 /* IntStack.swift in Sources */,
 				63B0F534292136B600E62554 /* ApplicationForm.swift in Sources */,
 				63E673EB2922A25C0055E9C7 /* Academy.swift in Sources */,
 				63AAABBE2A38D7290007437C /* DateInput.swift in Sources */,
