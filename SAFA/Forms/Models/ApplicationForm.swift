@@ -201,27 +201,30 @@ extension ApplicationForm {
         return formatter
     }
     
+    static let videoMenu = FormPage(items: [
+        FormItem(prompt: "What position are you?",
+                 response: MenuResponse(
+                    options: ["Goalkeeper", "Defender", "Midfielder", "Attacker"],
+                    determinesPage: true,
+                    pages: [0: [1, 2, 3, 4], 1: [5, 6, 7, 8], 2: [9, 10, 11, 12], 3: [13, 14, 15, 16, 17]]))])
     static let videos = [
-        FormItem(prompt: "What position are you?", response: MenuResponse(
-            options: ["Goalkeeper", "Defender", "Midfielder", "Attacker"], determinesPage: true,
-            pages: [0: [1, 2, 3, 4], 1: [5, 6, 7, 8], 2: [9, 10, 11, 12], 3: [13, 14, 15, 16, 17]])),
-        FormItem(prompt: "Post a video of your shot-stopping", response: VideoResponse()),
-        FormItem(prompt: "Post a video of a goal kick", response: VideoResponse()),
-        FormItem(prompt: "Post a video of you catching the ball", response: VideoResponse()),
-        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false),
-        FormItem(prompt: "Post a video of your tackling", response: VideoResponse()),
-        FormItem(prompt: "Post a video of your clearing", response: VideoResponse()),
-        FormItem(prompt: "Post a video of your jockeying", response: VideoResponse()),
-        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false),
-        FormItem(prompt: "Post a video of your dribbling", response: VideoResponse()),
-        FormItem(prompt: "Post a video of your passing", response: VideoResponse()),
-        FormItem(prompt: "Post a video of your long shooting", response: VideoResponse()),
-        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false),
-        FormItem(prompt: "Post a video of your shooting", response: VideoResponse()),
-        FormItem(prompt: "Post a video of your 1v1", response: VideoResponse()),
-        FormItem(prompt: "Post a video of your heading", response: VideoResponse()),
-        FormItem(prompt: "Post a video of your dribbling", response: VideoResponse()),
-        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
+        "Post a video of your shot-stopping",
+        "Post a video of a goal kick",
+        "Post a video of you catching the ball",
+        "Any additional highlights",
+        "Post a video of your tackling",
+        "Post a video of your clearing",
+        "Post a video of your jockeying",
+        "Any additional highlights",
+        "Post a video of your dribbling",
+        "Post a video of your passing",
+        "Post a video of your long shooting",
+        "Any additional highlights",
+        "Post a video of your shooting",
+        "Post a video of your 1v1",
+        "Post a video of your heading",
+        "Post a video of your dribbling",
+        "Any additional highlights",
     ]
     static let motivations = [
         FormItem(prompt: "What makes you passionate about soccer?", response: LongAnswer(range: 50...2000)),
@@ -240,10 +243,13 @@ extension ApplicationForm {
         FormItem(prompt: "Add your transcript (attachment)", response: FileResponse(), required: false),
         FormItem(prompt: "What are some of your extracurriculars?", response: LongAnswer(), required: false),
     ]
-    static let description = "For each video section, you can upload each skill separately, or together on additional highlights"
+    static let description = "You can upload each skill separately, or together on additional highlights"
     static let sampleData: [ApplicationForm] = [
         ApplicationForm(title: "Videos and uploads", icon: "play.rectangle",
-                        pages: videos.map { FormPage(items: [$0]) }),
+                        pages: [videoMenu] + videos.map {
+                            FormPage(description: description,
+                                     items: [FormItem(prompt: $0, response: VideoResponse(), required: false)])
+                        }),
         ApplicationForm(title: "Motivations and Goals", icon: "target", pages: [FormPage(items: motivations)]),
         ApplicationForm(title: "Personal Information", icon: "person",
                         pages: [FormPage(description: "This form is optional", items: personal)])

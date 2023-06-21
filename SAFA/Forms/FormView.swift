@@ -27,6 +27,13 @@ struct FormView: View {
         TabView(selection: $current) {
             ForEach(0..<form.viewable.count, id: \.self) { i in
                 Form {
+                    if form.pages[form.viewable[i]].description != "" {
+                        Text(form.pages[form.viewable[i]].description)
+                            .italic()
+                            .foregroundColor(.secondary)
+                            .listRowBackground(Color(UIColor.systemGroupedBackground))
+                            .padding(-15)
+                    }
                     ForEach($form.pages[form.viewable[i]].items) { $item in
                         FormQuestion(item: $item, form: $form)
                     }
@@ -48,7 +55,7 @@ struct FormView: View {
 struct FormView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            FormView(form: .constant(ApplicationForm.sampleData[0]))
+            FormView(form: .constant(ApplicationForm.sampleData[2]))
         }
     }
 }
