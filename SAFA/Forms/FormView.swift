@@ -33,12 +33,7 @@ struct FormView: View {
                 }
             }
         }
-        .onChange(of: current) { newValue in
-            if newValue == form.viewable.count - 1 && form.canContinue {
-                form.nextPage()
-            }
-        }
-        .padding(30)
+        .onChange(of: current) { form.current = $0 }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .interactive))
         .navigationTitle(form.title)
@@ -46,7 +41,7 @@ struct FormView: View {
     
     init(form: Binding<ApplicationForm>) {
         self._form = form
-        self._current = .init(initialValue: form.wrappedValue.viewable.count - 1)
+        self._current = .init(initialValue: form.current.wrappedValue)
     }
 }
 

@@ -17,6 +17,7 @@ struct VideoInput: View {
             Image(systemName: "plus")
             Spacer()
         }
+//        .onAppear { isAnswered = true }
     }
 }
 

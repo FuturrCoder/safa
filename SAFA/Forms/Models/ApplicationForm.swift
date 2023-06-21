@@ -13,22 +13,39 @@ struct ApplicationForm: Identifiable, Codable {
     let icon: String
     var pages: [FormPage]
     /// first is current index
-    var previousIndices: IntStack
-    var nextIndices: IntStack
-    var current: Int { previousIndices.first! }
-    var answered: Int { pages.reduce(0) { $0 + $1.answered } }
+//    var previousIndices: IntStack
+//    var nextIndices: IntStack
+//    var current: Int { previousIndices.first! }
+    /// list of page indices
+    var indices: [Int]
+    /// index of current page in `indices`
+    var current: Int
+//    var currentPage: FormPage { pages[indices[current]] }
+    var answered: Int { indices.reduce(0) { $0 + pages[$1].answered } }
     var unanswered: Int {
-        pages[current].unanswered + nextIndices.storage.reduce(0) { $0 + pages[$1].unanswered }
+//        pages[current].unanswered + nextIndices.storage.reduce(0) { $0 + pages[$1].unanswered }
+        indices.reduce(0) { $0 + pages[$1].unanswered }
     }
     var progress: Float { Float(answered) / Float(answered + unanswered) }
-    var canContinue: Bool { pages[current].unanswered == 0 && nextIndices.first != nil }
+//    var canContinue: Bool { pages[current].unanswered == 0 && nextIndices.first != nil }
+//    var canContinue: Bool { current != indices.count - 1 && currentPage.unanswered == 0 }
     /// list of indices for pages that can be viewed, in ascending order
     var viewable: [Int] {
-        if canContinue {
-            return previousIndices.storage + [nextIndices.first!]
-        } else {
-            return previousIndices.storage
+//        if canContinue {
+//            return previousIndices.storage + [nextIndices.first!]
+//        } else {
+//            return previousIndices.storage
+//        }
+        var result: [Int] = []
+        for i in indices {
+            if pages[i].unanswered == 0 {
+                result.append(i)
+            } else {
+                result.append(i)
+                break
+            }
         }
+        return result
     }
     
     init(id: UUID = UUID(), title: String, icon: String, pages: [FormPage]) {
@@ -36,23 +53,34 @@ struct ApplicationForm: Identifiable, Codable {
         self.title = title
         self.icon = icon
         self.pages = pages
-        self.previousIndices = IntStack(from: [0])
-        self.nextIndices = IntStack(from: Array(1..<pages.count))
-//        self.current = current
+//        self.previousIndices = IntStack(from: [0])
+//        self.nextIndices = IntStack(from: Array(1..<pages.count))
+        self.current = 0
+        self.indices = Array(0..<pages.count)
     }
     
     mutating func nextPage() {
-        guard let i = nextIndices.pop() else { return }
-        previousIndices.push(i)
+//        guard let i = nextIndices.pop() else { return }
+//        previousIndices.push(i)
+        if current != indices.count - 1 {
+            current += 1
+        }
     }
     
     mutating func prevPage() {
-        guard let i = previousIndices.pop() else { return }
-        nextIndices.push(i)
+//        guard let i = previousIndices.pop() else { return }
+//        nextIndices.push(i)
+        if current != 0 {
+            current -= 1
+        }
     }
     
-    mutating func setNextPages(to indices: [Int]) {
-        nextIndices = IntStack(from: indices)
+    /// set `current` to i
+    mutating func setPage(to i: Int) { current = i }
+    
+    mutating func setNextPages(to next: [Int]) {
+//        nextIndices = IntStack(from: indices)
+        indices = indices[...current] + next
     }
     
 //    enum CodingKeys: CodingKey {
@@ -173,30 +201,22 @@ extension ApplicationForm {
         return formatter
     }
     
-    static let videos0 = [
+    static let videos = [
         FormItem(prompt: "What position are you?", response: MenuResponse(
-            options: ["Goalkeeper", "Defender", "Midfielder", "Attacker"],
-            determinesPage: true, pages: [0: [1], 1: [2], 2: [3], 3: [4]]))
-    ]
-    static let videos1 = [
+            options: ["Goalkeeper", "Defender", "Midfielder", "Attacker"], determinesPage: true,
+            pages: [0: [1, 2, 3, 4], 1: [5, 6, 7, 8], 2: [9, 10, 11, 12], 3: [13, 14, 15, 16, 17]])),
         FormItem(prompt: "Post a video of your shot-stopping", response: VideoResponse()),
         FormItem(prompt: "Post a video of a goal kick", response: VideoResponse()),
         FormItem(prompt: "Post a video of you catching the ball", response: VideoResponse()),
-        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
-    ]
-    static let videos2 = [
+        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false),
         FormItem(prompt: "Post a video of your tackling", response: VideoResponse()),
         FormItem(prompt: "Post a video of your clearing", response: VideoResponse()),
         FormItem(prompt: "Post a video of your jockeying", response: VideoResponse()),
-        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
-    ]
-    static let videos3 = [
+        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false),
         FormItem(prompt: "Post a video of your dribbling", response: VideoResponse()),
         FormItem(prompt: "Post a video of your passing", response: VideoResponse()),
         FormItem(prompt: "Post a video of your long shooting", response: VideoResponse()),
-        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false)
-    ]
-    static let videos4 = [
+        FormItem(prompt: "Any additional highlights", response: VideoResponse(), required: false),
         FormItem(prompt: "Post a video of your shooting", response: VideoResponse()),
         FormItem(prompt: "Post a video of your 1v1", response: VideoResponse()),
         FormItem(prompt: "Post a video of your heading", response: VideoResponse()),
@@ -222,13 +242,8 @@ extension ApplicationForm {
     ]
     static let description = "For each video section, you can upload each skill separately, or together on additional highlights"
     static let sampleData: [ApplicationForm] = [
-        ApplicationForm(title: "Videos and uploads", icon: "play.rectangle", pages: [
-            FormPage(items: videos0),
-            FormPage(description: description, items: videos1),
-            FormPage(description: description, items: videos2),
-            FormPage(description: description, items: videos3),
-            FormPage(description: description, items: videos4)
-        ]),
+        ApplicationForm(title: "Videos and uploads", icon: "play.rectangle",
+                        pages: videos.map { FormPage(items: [$0]) }),
         ApplicationForm(title: "Motivations and Goals", icon: "target", pages: [FormPage(items: motivations)]),
         ApplicationForm(title: "Personal Information", icon: "person",
                         pages: [FormPage(description: "This form is optional", items: personal)])
