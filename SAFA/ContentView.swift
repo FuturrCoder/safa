@@ -27,7 +27,7 @@ struct ContentView: View {
                 AcademiesView(academies: $academies)
                     .tabItem { Label("Academies", systemImage: "building.2") }
                     .tag(2)
-                ProfileView(profile: $profile, forms: forms)
+                ProfileView(profile: $profile)
                     .tabItem { Label("Profile", systemImage: "person") }
                     .tag(3)
             }

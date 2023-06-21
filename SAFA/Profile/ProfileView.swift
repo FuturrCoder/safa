@@ -12,7 +12,7 @@ struct ProfileView: View {
     // TODO: Link forms
     
     @Binding var profile: Profile
-    let forms: [ApplicationForm]
+//    let forms: [ApplicationForm]
     
     var body: some View {
         NavigationStack {
@@ -37,13 +37,13 @@ struct ProfileView: View {
                 } header: {
                     Text("Personal Info")
                 }
-                Section {
-                    ForEach(forms) { form in
-                        Text(form.title)
-                    }
-                } header: {
-                    Text("Forms")
-                }
+//                Section {
+//                    ForEach(forms) { form in
+//                        Text(form.title)
+//                    }
+//                } header: {
+//                    Text("Forms")
+//                }
             }
             .appBar(title: "Profile")
         }
@@ -67,7 +67,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(profile: .constant(Profile.sample), forms: ApplicationForm.sampleData)
+        ProfileView(profile: .constant(Profile.sample))
     }
 }
 
