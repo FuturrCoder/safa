@@ -11,11 +11,22 @@ struct FormCard: View {
     let form: ApplicationForm
     
     var body: some View {
-        HStack {
-            Label(form.title, systemImage: form.icon)
+//        HStack {
+//            Label(form.title, systemImage: form.icon)
+//                .font(.title2)
+//        }
+//        .padding()
+        HStack(spacing: 15) {
+            Image(systemName: form.icon)
                 .font(.title2)
+                .foregroundColor(.accentColor)
+            VStack(alignment: .leading, spacing: 5) {
+                Text(form.title)
+                    .font(.title2)
+                FormProgress(progress: form.progress)
+            }
         }
-        .padding()
+        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
     }
 }
 

@@ -14,15 +14,8 @@ struct FormView: View {
     
     var body: some View {
 //        if (form.pages.count > 1) {
-        HStack {
-            ProgressView(value: form.progress)
-                .animation(.easeInOut(duration: 0.7), value: form.progress)
-//                    .onChange(of: form.progress) { newValue in
-//                        print("\(form.answered),\(form.unanswered)")
-//                    }
-            Text("\(Int(floor(form.progress * 100)))%")
-        }
-        .padding([.leading, .trailing])
+        FormProgress(progress: form.progress)
+            .padding([.leading, .trailing])
 //        }
         TabView(selection: $current) {
             ForEach(0..<form.viewable.count, id: \.self) { i in

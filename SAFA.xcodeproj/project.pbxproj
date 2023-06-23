@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6311E06D2A394B320074A94E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6311E06C2A394B320074A94E /* Profile.swift */; };
+		631414C82A454374008AE84D /* FormProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631414C72A454374008AE84D /* FormProgress.swift */; };
 		63279DDF290D697900814474 /* FormsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63279DDE290D697900814474 /* FormsView.swift */; };
 		63279DE1290D779C00814474 /* UploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63279DE0290D779C00814474 /* UploadButton.swift */; };
 		63279DE3290D825000814474 /* FormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63279DE2290D825000814474 /* FormData.swift */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		6311E06C2A394B320074A94E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		631414C72A454374008AE84D /* FormProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormProgress.swift; sourceTree = "<group>"; };
 		63279DDE290D697900814474 /* FormsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsView.swift; sourceTree = "<group>"; };
 		63279DE0290D779C00814474 /* UploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadButton.swift; sourceTree = "<group>"; };
 		63279DE2290D825000814474 /* FormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormData.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */,
 				63AAABBA2A38D4CA0007437C /* Input Views */,
 				63AAABB92A38D4A30007437C /* Models */,
+				631414C72A454374008AE84D /* FormProgress.swift */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				638B5369290ED2E0005AB8FD /* AcademiesView.swift in Sources */,
 				633133FA2921E82A00CEBB62 /* FormQuestion.swift in Sources */,
 				63E673EF2922ADA90055E9C7 /* AcademyCard.swift in Sources */,
+				631414C82A454374008AE84D /* FormProgress.swift in Sources */,
 				63E673ED2922AC8B0055E9C7 /* AcademiesStore.swift in Sources */,
 				63AAABC62A38D7940007437C /* ImageInput.swift in Sources */,
 				63279DE3290D825000814474 /* FormData.swift in Sources */,
