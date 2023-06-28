@@ -45,7 +45,7 @@ struct SectionWrapper<Content>: View where Content : View {
             content
         } footer: {
             Text(footer.text)
-                .foregroundColor(footer.color)
+                .foregroundStyle(footer.color)
         }
     }
 }

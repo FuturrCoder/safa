@@ -20,6 +20,10 @@ struct ApplicationForm: Identifiable, Codable {
     var indices: [Int]
     /// index of current page in `indices`
     var current: Int
+    var completed: Bool
+    var currentPage: FormPage { pages[indices[current]]}
+    var hasNext: Bool { current != indices.count - 1 && currentPage.unanswered == 0 }
+    var hasPrev: Bool { current != 0 }
 //    var currentPage: FormPage { pages[indices[current]] }
     var answered: Int { indices.reduce(0) { $0 + pages[$1].answered } }
     var unanswered: Int {
@@ -55,25 +59,28 @@ struct ApplicationForm: Identifiable, Codable {
         self.pages = pages
 //        self.previousIndices = IntStack(from: [0])
 //        self.nextIndices = IntStack(from: Array(1..<pages.count))
-        self.current = 0
         self.indices = Array(0..<pages.count)
+        self.current = 0
+        self.completed = false
     }
     
-    mutating func nextPage() {
-//        guard let i = nextIndices.pop() else { return }
-//        previousIndices.push(i)
-        if current != indices.count - 1 {
-            current += 1
-        }
-    }
+//    mutating func nextPage() {
+////        guard let i = nextIndices.pop() else { return }
+////        previousIndices.push(i)
+//        if hasNext {
+//            current += 1
+//        }
+//    }
     
-    mutating func prevPage() {
-//        guard let i = previousIndices.pop() else { return }
-//        nextIndices.push(i)
-        if current != 0 {
-            current -= 1
-        }
-    }
+//    mutating func prevPage() {
+////        guard let i = previousIndices.pop() else { return }
+////        nextIndices.push(i)
+//        if hasPrev {
+//            current -= 1
+//        }
+//    }
+    
+    mutating func submit() { completed = true }
     
     /// set `current` to i
     mutating func setPage(to i: Int) { current = i }
@@ -83,21 +90,20 @@ struct ApplicationForm: Identifiable, Codable {
         indices = indices[...current] + next
     }
     
-//    enum CodingKeys: CodingKey {
-//        case title
-//        case icon
-//        case pages
-////        case current
-//    }
+    enum CodingKeys: CodingKey {
+        case title, icon, pages, indices, current, completed
+    }
     
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: ApplicationForm.CodingKeys.self)
-//        self.id = UUID()
-//        self.title = try container.decode(String.self, forKey: ApplicationForm.CodingKeys.title)
-//        self.icon = try container.decode(String.self, forKey: ApplicationForm.CodingKeys.icon)
-//        self.pages = try container.decode([FormPage].self, forKey: ApplicationForm.CodingKeys.pages)
-////        self.current = try container.decode(Int.self, forKey: ApplicationForm.CodingKeys.current)
-//    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = UUID()
+        title = try container.decode(String.self, forKey: .title)
+        icon = try container.decode(String.self, forKey: .icon)
+        pages = try container.decode([FormPage].self, forKey: .pages)
+        indices = try container.decode([Int].self, forKey: .indices)
+        current = try container.decode(Int.self, forKey: .current)
+        completed = try container.decode(Bool.self, forKey: .completed)
+    }
 }
 
 struct FormPage: Identifiable, Codable {
@@ -115,15 +121,14 @@ struct FormPage: Identifiable, Codable {
     }
     
     enum CodingKeys: CodingKey {
-        case description
-        case items
+        case description, items
     }
     
     init(from decoder: Decoder) throws {
-        let container: KeyedDecodingContainer = try decoder.container(keyedBy: FormPage.CodingKeys.self)
-        self.id = UUID()
-        self.description = try container.decode(String.self, forKey: FormPage.CodingKeys.description)
-        self.items = try container.decode([FormItem].self, forKey: FormPage.CodingKeys.items)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = UUID()
+        description = try container.decode(String.self, forKey: .description)
+        items = try container.decode([FormItem].self, forKey: .items)
     }
 }
 
@@ -145,10 +150,7 @@ struct FormItem: Identifiable {
 
 extension FormItem: Codable {
     enum CodingKeys: String, CodingKey {
-        case prompt
-        case required
-        case isAnswered
-        case response
+        case prompt, required, isAnswered, response
     }
     
     init(from decoder: Decoder) throws {

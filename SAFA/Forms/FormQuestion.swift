@@ -60,6 +60,7 @@ struct FormQuestion: View {
                 EmptyView()
             }
         }
+        .onChange(of: item.response.str, perform: { _ in form.completed = false })
         .environmentObject(footer)
             /*switch item.response {
             case .number(_, let range):

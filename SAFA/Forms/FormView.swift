@@ -14,21 +14,23 @@ struct FormView: View {
     
     var body: some View {
 //        if (form.pages.count > 1) {
-        FormProgress(progress: form.progress)
+        FormProgress(progress: form.progress, completed: form.completed)
             .padding([.leading, .trailing])
 //        }
         TabView(selection: $current) {
             ForEach(0..<form.viewable.count, id: \.self) { i in
-                Form {
-                    if form.pages[form.viewable[i]].description != "" {
-                        Text(form.pages[form.viewable[i]].description)
-                            .italic()
-                            .foregroundColor(.secondary)
-                            .listRowBackground(Color(UIColor.systemGroupedBackground))
-                            .padding(-15)
-                    }
-                    ForEach($form.pages[form.viewable[i]].items) { $item in
-                        FormQuestion(item: $item, form: $form)
+                VStack {
+                    Form {
+                        if form.pages[form.viewable[i]].description != "" {
+                            Text(form.pages[form.viewable[i]].description)
+                                .italic()
+                                .foregroundStyle(.secondary)
+                                .listRowBackground(Color(UIColor.systemGroupedBackground))
+                                .padding(-15)
+                        }
+                        ForEach($form.pages[form.viewable[i]].items) { $item in
+                            FormQuestion(item: $item, form: $form)
+                        }
                     }
                 }
             }
@@ -36,7 +38,11 @@ struct FormView: View {
         .onChange(of: current) { form.current = $0 }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .interactive))
+        .animation(.easeInOut, value: current)
+        .animation(.easeInOut, value: form.current)
         .navigationTitle(form.title)
+        FormButtons(form: $form, current: $current)
+            .padding(EdgeInsets(top: 0, leading: 10, bottom: 5, trailing: 10))
     }
     
     init(form: Binding<ApplicationForm>) {
@@ -48,7 +54,7 @@ struct FormView: View {
 struct FormView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            FormView(form: .constant(ApplicationForm.sampleData[2]))
+            FormView(form: .constant(ApplicationForm.sampleData[0]))
         }
     }
 }

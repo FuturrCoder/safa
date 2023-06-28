@@ -19,11 +19,11 @@ struct FormCard: View {
         HStack(spacing: 15) {
             Image(systemName: form.icon)
                 .font(.title2)
-                .foregroundColor(.accentColor)
+                .foregroundStyle(Color(.accent))
             VStack(alignment: .leading, spacing: 5) {
                 Text(form.title)
                     .font(.title2)
-                FormProgress(progress: form.progress)
+                FormProgress(progress: form.progress, completed: form.completed)
             }
         }
         .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))

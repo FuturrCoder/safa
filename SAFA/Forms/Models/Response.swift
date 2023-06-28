@@ -20,7 +20,9 @@ enum ResponseKeys: String, CodingKey, Codable {
     case file
 }
 
-protocol Response: Codable {
+protocol Response: Codable, Equatable {
+    var str: String { get }
+    
     /// encode self in the given container
     func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws
     /// decode from the given container
@@ -28,7 +30,7 @@ protocol Response: Codable {
 }
 
 protocol BaseResponse: Response {
-    associatedtype T: Codable
+    associatedtype T: Codable, CustomStringConvertible
     var input: T { get set }
     static var type: ResponseKeys { get }
     init(input: T)
@@ -39,6 +41,8 @@ enum BaseKeys: String, CodingKey {
 }
 
 extension BaseResponse {
+    var str: String { input.description }
+    
     func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
         var nested = container.nestedContainer(keyedBy: BaseKeys.self, forKey: Self.type)
         try nested.encode(input, forKey: .input)
@@ -47,11 +51,12 @@ extension BaseResponse {
     init(from container: KeyedDecodingContainer<ResponseKeys>) throws {
         let nested = try container.nestedContainer(keyedBy: BaseKeys.self, forKey: Self.type)
         self.init(input: try nested.decode(T.self, forKey: .input))
+//        self.input = try nested.decode(T.self, forKey: .input)
     }
 }
 
 protocol RangedResponse: Response {
-    associatedtype T: Codable
+    associatedtype T: Codable, CustomStringConvertible
     associatedtype U: Codable & Comparable
     var input: T { get set }
     var range: ClosedRange<U> { get }
@@ -65,6 +70,8 @@ enum RangedKeys: String, CodingKey {
 }
 
 extension RangedResponse {
+    var str: String { input.description }
+    
     func encodeNested(container: inout KeyedEncodingContainer<ResponseKeys>) throws {
         var nested = container.nestedContainer(keyedBy: RangedKeys.self, forKey: Self.type)
         try nested.encode(input, forKey: .input)
@@ -98,11 +105,13 @@ struct DateResponse: RangedResponse {
 struct MenuResponse: Response {
     /// Index of currently selected option
     var input: Int
+    var str: String { input.description }
     let options: [String]
     /// does the choice affect the next pages?
     let determinesPage: Bool
     /// option selected --> next pages
     let pages: [Int: [Int]]
+    static let type: ResponseKeys = .menu
     
     init(input: Int = 0, options: [String], determinesPage: Bool = false, pages: [Int : [Int]] = [:]) {
         self.input = input
@@ -148,6 +157,7 @@ struct VideoResponse: BaseResponse {
 
 struct FileResponse: Response {
     var input: URL?
+    var str: String { input.description }
     let type: Set<UTType>
     static let defaultTypes: Set<UTType> = [.pdf, .plainText, .rtf,
                                             UTType(filenameExtension: "doc")!,
@@ -157,6 +167,10 @@ struct FileResponse: Response {
         self.input = input
         self.type = type
     }
+}
+
+extension URL?: CustomStringConvertible {
+    public var description: String { self?.description ?? "" }
 }
 
 extension MenuResponse {

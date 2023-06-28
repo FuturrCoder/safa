@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6311E06D2A394B320074A94E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6311E06C2A394B320074A94E /* Profile.swift */; };
 		631414C82A454374008AE84D /* FormProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631414C72A454374008AE84D /* FormProgress.swift */; };
+		631414CA2A454F40008AE84D /* FormButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631414C92A454F40008AE84D /* FormButtons.swift */; };
 		63279DDF290D697900814474 /* FormsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63279DDE290D697900814474 /* FormsView.swift */; };
 		63279DE1290D779C00814474 /* UploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63279DE0290D779C00814474 /* UploadButton.swift */; };
 		63279DE3290D825000814474 /* FormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63279DE2290D825000814474 /* FormData.swift */; };
@@ -17,6 +18,7 @@
 		633133F82921D93B00CEBB62 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633133F72921D93B00CEBB62 /* Response.swift */; };
 		633133FA2921E82A00CEBB62 /* FormQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633133F92921E82A00CEBB62 /* FormQuestion.swift */; };
 		6337CB312A3A1C6E00D364CA /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337CB302A3A1C6E00D364CA /* ProfileStore.swift */; };
+		635EACBF2A4BC0770045D3F1 /* AppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635EACBE2A4BC0770045D3F1 /* AppBar.swift */; };
 		638B5369290ED2E0005AB8FD /* AcademiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B5368290ED2E0005AB8FD /* AcademiesView.swift */; };
 		63A367612910A0DD00B7515E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A367602910A0DD00B7515E /* ProfileView.swift */; };
 		63AAABBC2A38D7100007437C /* IntInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABBB2A38D7100007437C /* IntInput.swift */; };
@@ -64,6 +66,7 @@
 /* Begin PBXFileReference section */
 		6311E06C2A394B320074A94E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		631414C72A454374008AE84D /* FormProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormProgress.swift; sourceTree = "<group>"; };
+		631414C92A454F40008AE84D /* FormButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtons.swift; sourceTree = "<group>"; };
 		63279DDE290D697900814474 /* FormsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsView.swift; sourceTree = "<group>"; };
 		63279DE0290D779C00814474 /* UploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadButton.swift; sourceTree = "<group>"; };
 		63279DE2290D825000814474 /* FormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormData.swift; sourceTree = "<group>"; };
@@ -72,6 +75,7 @@
 		633133F72921D93B00CEBB62 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		633133F92921E82A00CEBB62 /* FormQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormQuestion.swift; sourceTree = "<group>"; };
 		6337CB302A3A1C6E00D364CA /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
+		635EACBE2A4BC0770045D3F1 /* AppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBar.swift; sourceTree = "<group>"; };
 		638B5368290ED2E0005AB8FD /* AcademiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademiesView.swift; sourceTree = "<group>"; };
 		63A367602910A0DD00B7515E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		63AAABBB2A38D7100007437C /* IntInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntInput.swift; sourceTree = "<group>"; };
@@ -171,13 +175,14 @@
 			children = (
 				63279DDE290D697900814474 /* FormsView.swift */,
 				633133F52921BEEC00CEBB62 /* FormCard.swift */,
+				631414C72A454374008AE84D /* FormProgress.swift */,
 				63EC2650291D6B8400368E53 /* FormView.swift */,
 				633133F92921E82A00CEBB62 /* FormQuestion.swift */,
 				63279DE0290D779C00814474 /* UploadButton.swift */,
 				63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */,
 				63AAABBA2A38D4CA0007437C /* Input Views */,
 				63AAABB92A38D4A30007437C /* Models */,
-				631414C72A454374008AE84D /* FormProgress.swift */,
+				631414C92A454F40008AE84D /* FormButtons.swift */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				63AAABB82A38D4960007437C /* Forms */,
 				63E16C76290C3BB900166906 /* SAFAApp.swift */,
 				63E16C78290C3BB900166906 /* ContentView.swift */,
+				635EACBE2A4BC0770045D3F1 /* AppBar.swift */,
 				63E16C7A290C3BBC00166906 /* Assets.xcassets */,
 				63E16C7C290C3BBC00166906 /* SAFA.entitlements */,
 				63E16C7D290C3BBC00166906 /* Preview Content */,
@@ -341,7 +347,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					63E16C72290C3BB900166906 = {
 						CreatedOnToolsVersion = 14.0.1;
@@ -426,6 +432,7 @@
 				633133FA2921E82A00CEBB62 /* FormQuestion.swift in Sources */,
 				63E673EF2922ADA90055E9C7 /* AcademyCard.swift in Sources */,
 				631414C82A454374008AE84D /* FormProgress.swift in Sources */,
+				631414CA2A454F40008AE84D /* FormButtons.swift in Sources */,
 				63E673ED2922AC8B0055E9C7 /* AcademiesStore.swift in Sources */,
 				63AAABC62A38D7940007437C /* ImageInput.swift in Sources */,
 				63279DE3290D825000814474 /* FormData.swift in Sources */,
@@ -435,6 +442,7 @@
 				6337CB312A3A1C6E00D364CA /* ProfileStore.swift in Sources */,
 				63F9E1D92A3D0D7C00D66655 /* SectionWrapper.swift in Sources */,
 				633133F42921B92200CEBB62 /* FormsStore.swift in Sources */,
+				635EACBF2A4BC0770045D3F1 /* AppBar.swift in Sources */,
 				63A367612910A0DD00B7515E /* ProfileView.swift in Sources */,
 				63E16C77290C3BB900166906 /* SAFAApp.swift in Sources */,
 			);
@@ -510,6 +518,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -524,6 +533,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -569,6 +579,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -577,6 +588,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -614,7 +626,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.safa.SAFA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -654,7 +666,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.safa.SAFA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";

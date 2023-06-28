@@ -20,7 +20,7 @@ struct ProfileView: View {
                 VStack {
                     ZStack {
                         Circle()
-                            .foregroundColor(Color("ThemeColor").opacity(0.5))
+                            .foregroundStyle(Color("ThemeColor").opacity(0.5))
                             .frame(maxWidth: 70)
                         Image(systemName: "person.fill")
                             .font(.custom("test", fixedSize: 40))
@@ -49,7 +49,7 @@ struct ProfileView: View {
         }
 //        HStack {
 //            Circle()
-//                .foregroundColor(.white)
+//                .foregroundStyle(.white)
 //                .border(.black)
 //                .frame(maxWidth: 50)
 //                .overlay() {
