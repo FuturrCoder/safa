@@ -8,6 +8,6 @@
 import Foundation
 
 @MainActor
-class ProfileStore: ObservableObject {
+final class ProfileStore: ObservableObject {
     @Published var profile = Profile.sample
 }

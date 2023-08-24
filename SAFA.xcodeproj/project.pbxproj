@@ -30,6 +30,10 @@
 		63AAABC82A38D7A30007437C /* VideoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC72A38D7A30007437C /* VideoInput.swift */; };
 		63AAABCA2A38D7CA0007437C /* FileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AAABC92A38D7CA0007437C /* FileInput.swift */; };
 		63B0F534292136B600E62554 /* ApplicationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0F533292136B600E62554 /* ApplicationForm.swift */; };
+		63B2FE122A574C7500EBBF26 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2FE112A574C7500EBBF26 /* SignUpView.swift */; };
+		63B2FE142A574F8E00EBBF26 /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2FE132A574F8E00EBBF26 /* SignUpEmailView.swift */; };
+		63CA0AF22A62098000DEA17C /* FormFieldInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA0AF12A62098000DEA17C /* FormFieldInfo.swift */; };
+		63CA0AF42A62113D00DEA17C /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA0AF32A62113D00DEA17C /* AuthenticationManager.swift */; };
 		63D643F62A41496E00043A24 /* IntStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D643F52A41496E00043A24 /* IntStack.swift */; };
 		63E16C77290C3BB900166906 /* SAFAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C76290C3BB900166906 /* SAFAApp.swift */; };
 		63E16C79290C3BB900166906 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C78290C3BB900166906 /* ContentView.swift */; };
@@ -42,7 +46,11 @@
 		63E673ED2922AC8B0055E9C7 /* AcademiesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E673EC2922AC8B0055E9C7 /* AcademiesStore.swift */; };
 		63E673EF2922ADA90055E9C7 /* AcademyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E673EE2922ADA90055E9C7 /* AcademyCard.swift */; };
 		63E673F12922AE5D0055E9C7 /* AcademyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E673F02922AE5D0055E9C7 /* AcademyDetail.swift */; };
+		63E9DFCB2A5623AA003200CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63E9DFCA2A5623AA003200CE /* GoogleService-Info.plist */; };
 		63EC2651291D6B8400368E53 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC2650291D6B8400368E53 /* FormView.swift */; };
+		63F522492A562607007403FB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 63F522482A562607007403FB /* FirebaseAnalytics */; };
+		63F5224B2A562607007403FB /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63F5224A2A562607007403FB /* FirebaseAnalyticsSwift */; };
+		63F5224D2A562607007403FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 63F5224C2A562607007403FB /* FirebaseAuth */; };
 		63F9E1D92A3D0D7C00D66655 /* SectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +95,10 @@
 		63AAABC72A38D7A30007437C /* VideoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoInput.swift; path = SAFA/VideoInput.swift; sourceTree = SOURCE_ROOT; };
 		63AAABC92A38D7CA0007437C /* FileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInput.swift; sourceTree = "<group>"; };
 		63B0F533292136B600E62554 /* ApplicationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationForm.swift; sourceTree = "<group>"; };
+		63B2FE112A574C7500EBBF26 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		63B2FE132A574F8E00EBBF26 /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
+		63CA0AF12A62098000DEA17C /* FormFieldInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldInfo.swift; sourceTree = "<group>"; };
+		63CA0AF32A62113D00DEA17C /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		63D643F52A41496E00043A24 /* IntStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntStack.swift; sourceTree = "<group>"; };
 		63E16C73290C3BB900166906 /* SAFA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SAFA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E16C76290C3BB900166906 /* SAFAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAFAApp.swift; sourceTree = "<group>"; };
@@ -103,6 +115,7 @@
 		63E673EC2922AC8B0055E9C7 /* AcademiesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademiesStore.swift; sourceTree = "<group>"; };
 		63E673EE2922ADA90055E9C7 /* AcademyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyCard.swift; sourceTree = "<group>"; };
 		63E673F02922AE5D0055E9C7 /* AcademyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyDetail.swift; sourceTree = "<group>"; };
+		63E9DFCA2A5623AA003200CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63EC2650291D6B8400368E53 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +125,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63F5224B2A562607007403FB /* FirebaseAnalyticsSwift in Frameworks */,
+				63F5224D2A562607007403FB /* FirebaseAuth in Frameworks */,
+				63F522492A562607007403FB /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +229,17 @@
 			path = "Input Views";
 			sourceTree = "<group>";
 		};
+		63B2FE102A57495800EBBF26 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				63B2FE112A574C7500EBBF26 /* SignUpView.swift */,
+				63B2FE132A574F8E00EBBF26 /* SignUpEmailView.swift */,
+				63CA0AF12A62098000DEA17C /* FormFieldInfo.swift */,
+				63CA0AF32A62113D00DEA17C /* AuthenticationManager.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		63D643F42A41495D00043A24 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +271,7 @@
 		63E16C75290C3BB900166906 /* SAFA */ = {
 			isa = PBXGroup;
 			children = (
+				63B2FE102A57495800EBBF26 /* Authentication */,
 				63D643F42A41495D00043A24 /* Models */,
 				6337CB342A3A1E7D00D364CA /* Profile */,
 				6337CB322A3A1E0500D364CA /* Academies */,
@@ -251,6 +279,7 @@
 				63E16C76290C3BB900166906 /* SAFAApp.swift */,
 				63E16C78290C3BB900166906 /* ContentView.swift */,
 				635EACBE2A4BC0770045D3F1 /* AppBar.swift */,
+				63E9DFCA2A5623AA003200CE /* GoogleService-Info.plist */,
 				63E16C7A290C3BBC00166906 /* Assets.xcassets */,
 				63E16C7C290C3BBC00166906 /* SAFA.entitlements */,
 				63E16C7D290C3BBC00166906 /* Preview Content */,
@@ -299,6 +328,11 @@
 			dependencies = (
 			);
 			name = SAFA;
+			packageProductDependencies = (
+				63F522482A562607007403FB /* FirebaseAnalytics */,
+				63F5224A2A562607007403FB /* FirebaseAnalyticsSwift */,
+				63F5224C2A562607007403FB /* FirebaseAuth */,
+			);
 			productName = SAFA;
 			productReference = 63E16C73290C3BB900166906 /* SAFA.app */;
 			productType = "com.apple.product-type.application";
@@ -371,6 +405,9 @@
 				Base,
 			);
 			mainGroup = 63E16C6A290C3BB900166906;
+			packageReferences = (
+				63F522472A562607007403FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 63E16C74290C3BB900166906 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -389,6 +426,7 @@
 			files = (
 				63E16C7F290C3BBC00166906 /* Preview Assets.xcassets in Resources */,
 				63E16C7B290C3BBC00166906 /* Assets.xcassets in Resources */,
+				63E9DFCB2A5623AA003200CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,9 +456,11 @@
 				63AAABC22A38D76D0007437C /* ShortInput.swift in Sources */,
 				63AAABC82A38D7A30007437C /* VideoInput.swift in Sources */,
 				63E16C79290C3BB900166906 /* ContentView.swift in Sources */,
+				63B2FE142A574F8E00EBBF26 /* SignUpEmailView.swift in Sources */,
 				63279DDF290D697900814474 /* FormsView.swift in Sources */,
 				63AAABC42A38D7830007437C /* LongInput.swift in Sources */,
 				63D643F62A41496E00043A24 /* IntStack.swift in Sources */,
+				63CA0AF22A62098000DEA17C /* FormFieldInfo.swift in Sources */,
 				63B0F534292136B600E62554 /* ApplicationForm.swift in Sources */,
 				63E673EB2922A25C0055E9C7 /* Academy.swift in Sources */,
 				63AAABBE2A38D7290007437C /* DateInput.swift in Sources */,
@@ -429,8 +469,10 @@
 				633133F62921BEEC00CEBB62 /* FormCard.swift in Sources */,
 				63279DE1290D779C00814474 /* UploadButton.swift in Sources */,
 				638B5369290ED2E0005AB8FD /* AcademiesView.swift in Sources */,
+				63B2FE122A574C7500EBBF26 /* SignUpView.swift in Sources */,
 				633133FA2921E82A00CEBB62 /* FormQuestion.swift in Sources */,
 				63E673EF2922ADA90055E9C7 /* AcademyCard.swift in Sources */,
+				63CA0AF42A62113D00DEA17C /* AuthenticationManager.swift in Sources */,
 				631414C82A454374008AE84D /* FormProgress.swift in Sources */,
 				631414CA2A454F40008AE84D /* FormButtons.swift in Sources */,
 				63E673ED2922AC8B0055E9C7 /* AcademiesStore.swift in Sources */,
@@ -533,7 +575,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -588,7 +630,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -626,7 +668,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.safasport.SAFA;
+				PRODUCT_BUNDLE_IDENTIFIER = net.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -666,7 +708,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.safasport.SAFA;
+				PRODUCT_BUNDLE_IDENTIFIER = net.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -806,6 +848,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		63F522472A562607007403FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		63F522482A562607007403FB /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63F522472A562607007403FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		63F5224A2A562607007403FB /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63F522472A562607007403FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		63F5224C2A562607007403FB /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63F522472A562607007403FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 63E16C6B290C3BB900166906 /* Project object */;
 }

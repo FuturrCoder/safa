@@ -8,6 +8,6 @@
 import Foundation
 
 @MainActor
-class AcademiesStore: ObservableObject {
+final class AcademiesStore: ObservableObject {
     @Published var academies: [Academy] = Academy.sampleData
 }

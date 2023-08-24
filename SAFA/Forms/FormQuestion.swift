@@ -130,7 +130,8 @@ struct FormQuestion: View {
 //    }
 }
 
-class Footer: ObservableObject {
+@MainActor
+final class Footer: ObservableObject {
     @Published var text: String
     @Published var color: Color
     

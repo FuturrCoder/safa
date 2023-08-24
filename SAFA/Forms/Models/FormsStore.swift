@@ -8,6 +8,6 @@
 import SwiftUI
 
 @MainActor
-class FormsStore: ObservableObject {
+final class FormsStore: ObservableObject {
     @Published var forms: [ApplicationForm] = ApplicationForm.sampleData
 }

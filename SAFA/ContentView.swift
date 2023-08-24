@@ -35,8 +35,6 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(forms: .constant(ApplicationForm.sampleData), academies: .constant(Academy.sampleData), profile: .constant(Profile.sample))
-    }
+#Preview("Content View") {
+    ContentView(forms: .constant(ApplicationForm.sampleData), academies: .constant(Academy.sampleData), profile: .constant(Profile.sample))
 }
