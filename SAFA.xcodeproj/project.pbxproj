@@ -36,7 +36,7 @@
 		63CA0AF42A62113D00DEA17C /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA0AF32A62113D00DEA17C /* AuthenticationManager.swift */; };
 		63D643F62A41496E00043A24 /* IntStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D643F52A41496E00043A24 /* IntStack.swift */; };
 		63E16C77290C3BB900166906 /* SAFAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C76290C3BB900166906 /* SAFAApp.swift */; };
-		63E16C79290C3BB900166906 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C78290C3BB900166906 /* ContentView.swift */; };
+		63E16C79290C3BB900166906 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C78290C3BB900166906 /* RootView.swift */; };
 		63E16C7B290C3BBC00166906 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E16C7A290C3BBC00166906 /* Assets.xcassets */; };
 		63E16C7F290C3BBC00166906 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E16C7E290C3BBC00166906 /* Preview Assets.xcassets */; };
 		63E16C89290C3BBC00166906 /* SAFATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E16C88290C3BBC00166906 /* SAFATests.swift */; };
@@ -52,6 +52,9 @@
 		63F5224B2A562607007403FB /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63F5224A2A562607007403FB /* FirebaseAnalyticsSwift */; };
 		63F5224D2A562607007403FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 63F5224C2A562607007403FB /* FirebaseAuth */; };
 		63F9E1D92A3D0D7C00D66655 /* SectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */; };
+		921D8B7C2AD213E300E81023 /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D8B7B2AD213E300E81023 /* SignInEmailView.swift */; };
+		924B84252AA26A0D00DD10B2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B84242AA26A0D00DD10B2 /* SettingsView.swift */; };
+		92C09AFF2AD2F8000053379C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +105,7 @@
 		63D643F52A41496E00043A24 /* IntStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntStack.swift; sourceTree = "<group>"; };
 		63E16C73290C3BB900166906 /* SAFA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SAFA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E16C76290C3BB900166906 /* SAFAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAFAApp.swift; sourceTree = "<group>"; };
-		63E16C78290C3BB900166906 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		63E16C78290C3BB900166906 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		63E16C7A290C3BBC00166906 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63E16C7C290C3BBC00166906 /* SAFA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SAFA.entitlements; sourceTree = "<group>"; };
 		63E16C7E290C3BBC00166906 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -118,6 +121,9 @@
 		63E9DFCA2A5623AA003200CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63EC2650291D6B8400368E53 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionWrapper.swift; sourceTree = "<group>"; };
+		921D8B7B2AD213E300E81023 /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
+		924B84242AA26A0D00DD10B2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +242,9 @@
 				63B2FE132A574F8E00EBBF26 /* SignUpEmailView.swift */,
 				63CA0AF12A62098000DEA17C /* FormFieldInfo.swift */,
 				63CA0AF32A62113D00DEA17C /* AuthenticationManager.swift */,
+				924B84242AA26A0D00DD10B2 /* SettingsView.swift */,
+				921D8B7B2AD213E300E81023 /* SignInEmailView.swift */,
+				92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -277,7 +286,7 @@
 				6337CB322A3A1E0500D364CA /* Academies */,
 				63AAABB82A38D4960007437C /* Forms */,
 				63E16C76290C3BB900166906 /* SAFAApp.swift */,
-				63E16C78290C3BB900166906 /* ContentView.swift */,
+				63E16C78290C3BB900166906 /* RootView.swift */,
 				635EACBE2A4BC0770045D3F1 /* AppBar.swift */,
 				63E9DFCA2A5623AA003200CE /* GoogleService-Info.plist */,
 				63E16C7A290C3BBC00166906 /* Assets.xcassets */,
@@ -455,8 +464,10 @@
 				6311E06D2A394B320074A94E /* Profile.swift in Sources */,
 				63AAABC22A38D76D0007437C /* ShortInput.swift in Sources */,
 				63AAABC82A38D7A30007437C /* VideoInput.swift in Sources */,
-				63E16C79290C3BB900166906 /* ContentView.swift in Sources */,
+				63E16C79290C3BB900166906 /* RootView.swift in Sources */,
 				63B2FE142A574F8E00EBBF26 /* SignUpEmailView.swift in Sources */,
+				92C09AFF2AD2F8000053379C /* ResetPasswordView.swift in Sources */,
+				924B84252AA26A0D00DD10B2 /* SettingsView.swift in Sources */,
 				63279DDF290D697900814474 /* FormsView.swift in Sources */,
 				63AAABC42A38D7830007437C /* LongInput.swift in Sources */,
 				63D643F62A41496E00043A24 /* IntStack.swift in Sources */,
@@ -473,6 +484,7 @@
 				633133FA2921E82A00CEBB62 /* FormQuestion.swift in Sources */,
 				63E673EF2922ADA90055E9C7 /* AcademyCard.swift in Sources */,
 				63CA0AF42A62113D00DEA17C /* AuthenticationManager.swift in Sources */,
+				921D8B7C2AD213E300E81023 /* SignInEmailView.swift in Sources */,
 				631414C82A454374008AE84D /* FormProgress.swift in Sources */,
 				631414CA2A454F40008AE84D /* FormButtons.swift in Sources */,
 				63E673ED2922AC8B0055E9C7 /* AcademiesStore.swift in Sources */,
@@ -576,6 +588,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -631,6 +644,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -666,7 +680,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -706,7 +720,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";

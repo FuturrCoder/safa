@@ -14,8 +14,8 @@ struct SAFAApp: App {
     @StateObject private var formsStore = FormsStore()
     @StateObject private var academiesStore = AcademiesStore()
     @StateObject private var profileStore = ProfileStore()
-    @StateObject private var authenticationManager: AuthenticationManager = AuthenticationManager()
-    
+    @StateObject private var authenticationManager = AuthenticationManager()
+        
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     init() {
@@ -25,7 +25,8 @@ struct SAFAApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(forms: $formsStore.forms, academies: $academiesStore.academies, profile: $profileStore.profile)
+            RootView(forms: $formsStore.forms, academies: $academiesStore.academies, profile: $profileStore.profile)
+                .environmentObject(authenticationManager)
         }
     }
 }

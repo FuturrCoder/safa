@@ -65,10 +65,9 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(profile: .constant(Profile.sample))
-    }
+#Preview("Profile") {
+    ProfileView(profile: .constant(Profile.sample))
+        .environmentObject(AuthenticationManager.testing)
 }
 
 struct InfoCard: View {

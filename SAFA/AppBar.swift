@@ -16,7 +16,7 @@ extension View {
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button(action: { print("clicked") }) {
+                    NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gearshape")
                     }
                     .tint(.black)
