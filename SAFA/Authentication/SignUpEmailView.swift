@@ -12,6 +12,7 @@ final class SignUpEmailViewModel: ObservableObject {
     @Published var name = ""
     @Published var email = ""
     @Published var password = ""
+    @Published var confirmPassword = ""
     @Published var birthday = Date.now
     @Published var isParent = false
     @Published var childName = ""
@@ -26,12 +27,13 @@ final class SignUpEmailViewModel: ObservableObject {
         let pred = NSPredicate(format: "SELF MATCHES %@", "(?=.*(\\W|\\d)).{6,}")
         return !pred.evaluate(with: password)
     }
+    var unconfirmedPassword: Bool { password != confirmPassword }
     var invalidBirthday: Bool {
         Calendar.current.dateComponents([.year], from: birthday, to: Date.now).year! < 13 && !isParent
     }
     var invalidChildName: Bool { childName == "" && isParent}
     var invalid: Bool {
-        invalidName || invalidPassword || invalidEmail || invalidBirthday || invalidChildName
+        invalidName || invalidPassword || unconfirmedPassword || invalidEmail || invalidBirthday || invalidChildName
     }
     
     func signUp(manager: AuthenticationManager) {
@@ -62,6 +64,10 @@ struct SignUpEmailView: View {
                 SecureField("Password", text: $viewModel.password)
                 if viewModel.invalidPassword {
                     FormFieldInfo("Must be at least 6 characters long containing a number or symbol")
+                }
+                SecureField("Confirm Password", text: $viewModel.confirmPassword)
+                if viewModel.unconfirmedPassword {
+                    FormFieldInfo("Passwords do not match", color: .red)
                 }
                 Toggle("I'm a parent/guardian", isOn: $viewModel.isParent)
                 if viewModel.isParent {

@@ -16,7 +16,7 @@ struct FormFieldInfo: View {
             .font(.caption)
             .foregroundStyle(color)
             .listRowSeparator(.hidden, edges: .top)
-            .listRowInsets(EdgeInsets(top: 0, leading: 20, bottom: 5, trailing: 20))
+            .listRowInsets(EdgeInsets(top: -5, leading: 20, bottom: 5, trailing: 20))
     }
     
     init(_ text: String, color: Color = .secondary) {

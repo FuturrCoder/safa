@@ -12,6 +12,8 @@ final class SettingsViewModel: ObservableObject {
     @Published var message: String?
     @Published var messageTitle: String = ""
     @Published var showingAlert = false
+    @Published var showingDeleteAlert = false
+    @Published var showSignInView = false
     
     func resetPassword(manager: AuthenticationManager) {
         guard let currentUser = manager.currentUser() else {
@@ -51,6 +53,28 @@ final class SettingsViewModel: ObservableObject {
             self.showingAlert = true
         }
     }
+    
+    func deleteAccount(manager: AuthenticationManager) {
+        guard let currentUser = manager.currentUserRaw() else {
+            self.messageTitle = "Unable to delete account"
+            self.message = "Not logged in"
+            self.showingAlert = true
+            return
+        }
+        
+        Task {
+            do {
+                try await manager.delete(user: currentUser)
+                self.messageTitle = "Account deleted"
+                self.message = "Your account has been deleted"
+                self.showingAlert = true
+            } catch {
+                self.messageTitle = "Error deleting account"
+                self.message = error.localizedDescription
+                self.showingAlert = true
+            }
+        }
+    }
 }
 
 struct SettingsView: View {
@@ -62,21 +86,40 @@ struct SettingsView: View {
             Button("Reset password") {
                 viewModel.resetPassword(manager: authenticationManager)
             }
-            Button("Log out") {
+            Button("Log out", role: .destructive) {
                 viewModel.logOut(manager: authenticationManager)
             }
-            .foregroundStyle(.red)
+            Button("Delete account", role: .destructive) {
+                viewModel.showingDeleteAlert = true
+            }
         }
         .alert(viewModel.messageTitle, isPresented: $viewModel.showingAlert) {
             Button("OK") {}
         } message: {
             Text(viewModel.message ?? "Try again later.")
         }
+        .alert("Are you sure?", isPresented: $viewModel.showingDeleteAlert) {
+            Button("Delete", role: .destructive) {
+                viewModel.showSignInView = true
+            }
+        } message: {
+            Text("This action cannot be undone. You will be asked to sign in again.")
+        }
+        .sheet(isPresented: $viewModel.showSignInView) {
+            NavigationStack {
+                SignInEmailView(navigationTitle: "Sign In Again") {
+                    viewModel.showSignInView = false
+                    viewModel.deleteAccount(manager: authenticationManager)
+                }
+            }
+        }
         .navigationTitle("Settings")
     }
 }
 
 #Preview("Settings View") {
-    SettingsView()
-        .environmentObject(AuthenticationManager.testing)
+    NavigationStack {
+        SettingsView()
+            .environmentObject(AuthenticationManager.testing)
+    }
 }

@@ -29,6 +29,10 @@ final class AuthenticationManager: ObservableObject {
         return Auth.auth().currentUser.map { AuthDataResult(user: $0) }
     }
     
+    func currentUserRaw() -> User? {
+        return Auth.auth().currentUser
+    }
+    
     @discardableResult
     func createUser(email: String, password: String) async throws -> AuthDataResult {
         let res = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -48,5 +52,9 @@ final class AuthenticationManager: ObservableObject {
     func logOut() throws {
         try Auth.auth().signOut()
 //        throw URLError(.badURL)
+    }
+    
+    func delete(user: User) async throws {
+        try await user.delete()
     }
 }

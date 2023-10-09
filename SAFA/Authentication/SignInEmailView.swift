@@ -28,6 +28,8 @@ final class SignInEmailViewModel: ObservableObject {
 struct SignInEmailView: View {
     @StateObject private var viewModel = SignInEmailViewModel()
     @EnvironmentObject var authenticationManager: AuthenticationManager
+    var navigationTitle = "Sign In"
+    var onSignIn: (() -> Void) = {}
     
     var body: some View {
         Form {
@@ -41,6 +43,7 @@ struct SignInEmailView: View {
                     Spacer()
                     Button("Sign In") {
                         viewModel.signIn(manager: authenticationManager)
+                        onSignIn()
                     }
                     .buttonStyle(.bordered)
                     Spacer()
@@ -57,7 +60,7 @@ struct SignInEmailView: View {
                 }
             }
         }
-        .navigationTitle("Sign In")
+        .navigationTitle(navigationTitle)
     }
 }
 

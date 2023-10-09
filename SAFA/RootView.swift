@@ -41,7 +41,8 @@ struct RootView: View {
             showSignUpView = authenticationManager.currentUser() == nil
             handle = Auth.auth().addStateDidChangeListener { auth, user in
                 showSignUpView = user == nil
-                print("auth state changed: \(user.map{String(describing: $0)} ?? "no user")")
+                print("auth state changed: \(user.map{String(describing: AuthDataResult(user: $0))} ?? "no user")")
+                print("showSignUpView: \(showSignUpView)")
             }
         }
         .onDisappear() {
