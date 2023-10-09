@@ -53,7 +53,7 @@ struct FormView: View {
 
 struct FormView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+        NavigationView {
             FormView(form: .constant(ApplicationForm.sampleData[0]))
         }
     }

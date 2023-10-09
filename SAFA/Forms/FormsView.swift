@@ -15,7 +15,7 @@ struct FormsView: View {
     @Binding var forms: [ApplicationForm]
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 Section {
                     ForEach($forms) { $form in

@@ -7,67 +7,64 @@
 
 import SwiftUI
 
+@MainActor
+final class ProfileViewModel: ObservableObject {
+    @Published private(set) var user: AuthDataResult? = nil
+    
+    func loadCurrentUser(manager: AuthenticationManager) {
+        self.user = manager.currentUser()
+    }
+}
+
 struct ProfileView: View {
     // TODO: Make personal info fields editable
     // TODO: Link forms
     
+    @StateObject private var viewModel = ProfileViewModel()
+    @EnvironmentObject private var authenticationManager: AuthenticationManager
     @Binding var profile: Profile
 //    let forms: [ApplicationForm]
     
     var body: some View {
-        NavigationStack {
-            List {
-                VStack {
-                    ZStack {
-                        Circle()
-                            .foregroundStyle(Color("ThemeColor").opacity(0.5))
-                            .frame(maxWidth: 70)
-                        Image(systemName: "person.fill")
-                            .font(.custom("test", fixedSize: 40))
+        NavigationView {
+            if let user = viewModel.user {
+                List {
+                    VStack {
+                        ZStack {
+                            Circle()
+                                .foregroundStyle(Color("ThemeColor").opacity(0.5))
+                                .frame(maxWidth: 70)
+                            Image(systemName: "person.fill")
+                                .font(.custom("test", fixedSize: 40))
+                        }
+                        Text("\(profile.firstName) \(profile.lastName)")
+                            .font(.headline)
                     }
-                    Text("\(profile.firstName) \(profile.lastName)")
-                        .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    Section {
+                        InfoCard("Name", "Mirai Nishioka")
+                        InfoCard("Email", user.email ?? "no email")
+                        InfoCard("Age", "16")
+                    } header: {
+                        Text("Personal Info")
+                    }
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                Section {
-                    InfoCard("Name", "Mirai Nishioka")
-                    InfoCard("Email", "mnishioka@commschool.org")
-                    InfoCard("Age", "16")
-                } header: {
-                    Text("Personal Info")
-                }
-//                Section {
-//                    ForEach(forms) { form in
-//                        Text(form.title)
-//                    }
-//                } header: {
-//                    Text("Forms")
-//                }
+                .appBar(title: "Profile")
+            } else {
+                Text("Error loading profile: not logged in")
+                    .appBar(title: "Profile")
             }
-            .appBar(title: "Profile")
         }
-//        HStack {
-//            Circle()
-//                .foregroundStyle(.white)
-//                .border(.black)
-//                .frame(maxWidth: 50)
-//                .overlay() {
-//                    Image(systemName: "person")
-//                        .padding()
-//                }
-//            VStack(alignment: .leading) {
-//                Text("Mirai DTN")
-//                    .font(.title2)
-//                Text("mnishioka@commschool.org")
-//            }
-//        }
+        .onAppear {
+            viewModel.loadCurrentUser(manager: authenticationManager)
+        }
     }
 }
 
 #Preview("Profile") {
     ProfileView(profile: .constant(Profile.sample))
-        .environmentObject(AuthenticationManager.testing)
+        .environmentObject(AuthenticationManager.mock)
 }
 
 struct InfoCard: View {

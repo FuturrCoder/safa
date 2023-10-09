@@ -26,6 +26,6 @@ struct SignUpView: View {
 #Preview("Sign Up") {
     NavigationView {
         SignUpView()
-            .environmentObject(AuthenticationManager.testing)
+            .environmentObject(AuthenticationManager.mock)
     }
 }

@@ -18,14 +18,36 @@ struct AuthDataResult {
         self.email = user.email
         self.photoUrl = user.photoURL?.absoluteString
     }
+    
+    /// initializer for testing
+    init(uid: String, email: String?, photoUrl: String?) {
+        self.uid = uid
+        self.email = email
+        self.photoUrl = photoUrl
+    }
 }
 
+// TODO: remove testing parts for production
 final class AuthenticationManager: ObservableObject {
-    static let testing = AuthenticationManager()
+    /// for testing
+    var mockUser: AuthDataResult? = nil
+    var mockError: Error? = nil
+    static let sampleAuthDataResult = AuthDataResult(uid: "abcd", email: "example@example.com", photoUrl: "https://lh3.googleusercontent.com/a/ACg8ocIKp-q0RaGpmSUf5YG4MmVhVxk-5hBMvP2xCGGf0-y0NQ=s192-c-mo")
+    
+    init(mockUser: AuthDataResult, mockError: Error? = nil) {
+        self.mockUser = mockUser
+        self.mockError = mockError
+    }
+    
+    static let mock = AuthenticationManager(mockUser: sampleAuthDataResult)
     
     init() {}
     
     func currentUser() -> AuthDataResult? {
+        if let user = mockUser {
+            return user
+        }
+        
         return Auth.auth().currentUser.map { AuthDataResult(user: $0) }
     }
     
@@ -35,26 +57,49 @@ final class AuthenticationManager: ObservableObject {
     
     @discardableResult
     func createUser(email: String, password: String) async throws -> AuthDataResult {
+        if let error = mockError {
+            throw error
+        } else if let user = mockUser {
+            return user
+        }
+        
         let res = try await Auth.auth().createUser(withEmail: email, password: password)
         return AuthDataResult(user: res.user)
     }
     
     @discardableResult
     func signInUser(email: String, password: String) async throws -> AuthDataResult {
+        if let error = mockError {
+            throw error
+        } else if let user = mockUser {
+            return user
+        }
+        
         let res = try await Auth.auth().signIn(withEmail: email, password: password)
         return AuthDataResult(user: res.user)
     }
     
     func resetPassword(email: String) async throws {
+        if let error = mockError {
+            throw error
+        }
+        
         try await Auth.auth().sendPasswordReset(withEmail: email)
     }
     
     func logOut() throws {
+        if let error = mockError {
+            throw error
+        }
+        
         try Auth.auth().signOut()
-//        throw URLError(.badURL)
     }
     
     func delete(user: User) async throws {
+        if let error = mockError {
+            throw error
+        }
+        
         try await user.delete()
     }
 }

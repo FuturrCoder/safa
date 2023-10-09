@@ -106,7 +106,7 @@ struct SettingsView: View {
             Text("This action cannot be undone. You will be asked to sign in again.")
         }
         .sheet(isPresented: $viewModel.showSignInView) {
-            NavigationStack {
+            NavigationView {
                 SignInEmailView(navigationTitle: "Sign In Again") {
                     viewModel.showSignInView = false
                     viewModel.deleteAccount(manager: authenticationManager)
@@ -118,8 +118,8 @@ struct SettingsView: View {
 }
 
 #Preview("Settings View") {
-    NavigationStack {
+    NavigationView {
         SettingsView()
-            .environmentObject(AuthenticationManager.testing)
+            .environmentObject(AuthenticationManager.mock)
     }
 }

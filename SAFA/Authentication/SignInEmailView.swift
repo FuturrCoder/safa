@@ -67,6 +67,6 @@ struct SignInEmailView: View {
 #Preview("Sign In With Email") {
     NavigationView {
         SignInEmailView()
-            .environmentObject(AuthenticationManager.testing)
+            .environmentObject(AuthenticationManager.mock)
     }
 }

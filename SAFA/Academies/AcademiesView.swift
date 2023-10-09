@@ -13,7 +13,7 @@ struct AcademiesView: View {
     @Binding var academies: [Academy]
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 Section {
                     ForEach($academies) { $academy in
