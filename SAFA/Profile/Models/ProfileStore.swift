@@ -7,7 +7,7 @@
 
 import Foundation
 
-@MainActor
-final class ProfileStore: ObservableObject {
-    @Published var profile = Profile.sample
-}
+//@MainActor
+//final class ProfileStore: ObservableObject {
+//    @Published var profile = Profile.sample
+//}

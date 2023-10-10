@@ -11,15 +11,15 @@ import FirebaseAuth
 struct RootView: View {
     @Binding var forms: [ApplicationForm]
     @Binding var academies: [Academy]
-    @Binding var profile: Profile
+//    @Binding var profile: Profile
     @State private var showSignUpView: Bool = false
     @State private var handle: AuthStateDidChangeListenerHandle?
     @EnvironmentObject var authenticationManager: AuthenticationManager
     
-    init(forms: Binding<[ApplicationForm]>, academies: Binding<[Academy]>, profile: Binding<Profile>) {
+    init(forms: Binding<[ApplicationForm]>, academies: Binding<[Academy]>) {
         self._forms = forms
         self._academies = academies
-        self._profile = profile
+//        self._profile = profile
     }
     
     var body: some View {
@@ -31,7 +31,7 @@ struct RootView: View {
                 AcademiesView(academies: $academies)
                     .tabItem { Label("Academies", systemImage: "building.2") }
                     .tag(2)
-                ProfileView(profile: $profile)
+                ProfileView()
                     .tabItem { Label("Profile", systemImage: "person") }
                     .tag(3)
             }
@@ -57,6 +57,6 @@ struct RootView: View {
 }
 
 #Preview("Content View") {
-    RootView(forms: .constant(ApplicationForm.sampleData), academies: .constant(Academy.sampleData), profile: .constant(Profile.sample))
+    RootView(forms: .constant(ApplicationForm.sampleData), academies: .constant(Academy.sampleData))
         .environmentObject(AuthenticationManager())
 }

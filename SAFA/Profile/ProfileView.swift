@@ -9,10 +9,12 @@ import SwiftUI
 
 @MainActor
 final class ProfileViewModel: ObservableObject {
-    @Published private(set) var user: AuthDataResult? = nil
+    @Published private(set) var user: UserData? = nil
     
-    func loadCurrentUser(manager: AuthenticationManager) {
-        self.user = manager.currentUser()
+    func loadCurrentUser(manager: AuthenticationManager) async {
+        let authDataResult = manager.currentUser()
+        guard let authData = authDataResult else { return }
+        user = try? await UserManager().getUser(userId: authData.uid)
     }
 }
 
@@ -22,7 +24,7 @@ struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
     @EnvironmentObject private var authenticationManager: AuthenticationManager
-    @Binding var profile: Profile
+//    @Binding var profile: Profile
 //    let forms: [ApplicationForm]
     
     var body: some View {
@@ -37,33 +39,44 @@ struct ProfileView: View {
                             Image(systemName: "person.fill")
                                 .font(.custom("test", fixedSize: 40))
                         }
-                        Text("\(profile.firstName) \(profile.lastName)")
+                        Text(user.fullName)
                             .font(.headline)
+                        if (user.isParent) {
+                            Text("Parent")
+                                .font(.subheadline)
+                        }
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
                     Section {
-                        InfoCard("Name", "Mirai Nishioka")
-                        InfoCard("Email", user.email ?? "no email")
-                        InfoCard("Age", "16")
+                        InfoCard("Name", user.fullName)
+                        InfoCard("Email", user.email)
+                        InfoCard("Address", user.multiLineAddress)
+                        if (user.isParent) {
+                            InfoCard("Child Name", user.childName)
+                            InfoCard("Child Birthday", user.birthdayShort)
+                        } else {
+                            InfoCard("Birthday", user.birthdayShort)
+                        }
                     } header: {
                         Text("Personal Info")
                     }
                 }
                 .appBar(title: "Profile")
             } else {
-                Text("Error loading profile: not logged in")
+//                Text("Error loading profile: not logged in")
+                ProgressView()
                     .appBar(title: "Profile")
             }
         }
-        .onAppear {
-            viewModel.loadCurrentUser(manager: authenticationManager)
+        .task {
+            await viewModel.loadCurrentUser(manager: authenticationManager)
         }
     }
 }
 
 #Preview("Profile") {
-    ProfileView(profile: .constant(Profile.sample))
+    ProfileView()
         .environmentObject(AuthenticationManager.mock)
 }
 
