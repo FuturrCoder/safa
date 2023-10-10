@@ -10,6 +10,7 @@ import SwiftUI
 struct NameAndAddressInput: View {
     @ObservedObject var viewModel: SignUpEmailViewModel
     @EnvironmentObject var authenticationManager: AuthenticationManager
+    @EnvironmentObject var userManager: UserManager
     
     var body: some View {
         Section {
@@ -30,7 +31,7 @@ struct NameAndAddressInput: View {
             HStack {
                 Spacer()
                 Button("Sign Up") {
-                    viewModel.signUp(manager: authenticationManager)
+                    viewModel.signUp(authManager: authenticationManager, userManager: userManager)
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(viewModel.invalid)

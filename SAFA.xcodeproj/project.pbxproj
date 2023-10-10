@@ -54,6 +54,8 @@
 		921D8B7C2AD213E300E81023 /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D8B7B2AD213E300E81023 /* SignInEmailView.swift */; };
 		924B84252AA26A0D00DD10B2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B84242AA26A0D00DD10B2 /* SettingsView.swift */; };
 		92553F042AD4AA140087307B /* AdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92553F032AD4AA130087307B /* AdditionalInfoView.swift */; };
+		92553F062AD4B5640087307B /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92553F052AD4B5640087307B /* UserData.swift */; };
+		92553F082AD4C34D0087307B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92553F072AD4C34D0087307B /* DatabaseManager.swift */; };
 		92C09AFF2AD2F8000053379C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */; };
 		92C09B022AD3923E0053379C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 92C09B012AD3923E0053379C /* GoogleSignIn */; };
 		92C09B042AD3923E0053379C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 92C09B032AD3923E0053379C /* GoogleSignInSwift */; };
@@ -132,6 +134,8 @@
 		921D8B7B2AD213E300E81023 /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
 		924B84242AA26A0D00DD10B2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		92553F032AD4AA130087307B /* AdditionalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
+		92553F052AD4B5640087307B /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		92553F072AD4C34D0087307B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		92C09B082AD42F3C0053379C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		92C09B142AD49A2E0053379C /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				63D643F52A41496E00043A24 /* IntStack.swift */,
+				92553F052AD4B5640087307B /* UserData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -352,6 +357,7 @@
 			children = (
 				63CA0AF32A62113D00DEA17C /* AuthenticationManager.swift */,
 				92C09B142AD49A2E0053379C /* UserManager.swift */,
+				92553F072AD4C34D0087307B /* DatabaseManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 				63EC2651291D6B8400368E53 /* FormView.swift in Sources */,
 				6311E06D2A394B320074A94E /* Profile.swift in Sources */,
 				63AAABC22A38D76D0007437C /* ShortInput.swift in Sources */,
+				92553F062AD4B5640087307B /* UserData.swift in Sources */,
 				63AAABC82A38D7A30007437C /* VideoInput.swift in Sources */,
 				63E16C79290C3BB900166906 /* RootView.swift in Sources */,
 				63B2FE142A574F8E00EBBF26 /* SignUpEmailView.swift in Sources */,
@@ -539,6 +546,7 @@
 				63E673EF2922ADA90055E9C7 /* AcademyCard.swift in Sources */,
 				92C09B182AD4A1090053379C /* SignUpEmailViewModel.swift in Sources */,
 				63CA0AF42A62113D00DEA17C /* AuthenticationManager.swift in Sources */,
+				92553F082AD4C34D0087307B /* DatabaseManager.swift in Sources */,
 				921D8B7C2AD213E300E81023 /* SignInEmailView.swift in Sources */,
 				631414C82A454374008AE84D /* FormProgress.swift in Sources */,
 				631414CA2A454F40008AE84D /* FormButtons.swift in Sources */,

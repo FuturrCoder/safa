@@ -10,6 +10,7 @@ import SwiftUI
 struct SignUpEmailView: View {
     @StateObject private var viewModel = SignUpEmailViewModel()
     @EnvironmentObject var authenticationManager: AuthenticationManager
+    @EnvironmentObject var userManager: UserManager
     
     var body: some View {
         Form {
@@ -45,5 +46,6 @@ struct SignUpEmailView: View {
     NavigationView {
         SignUpEmailView()
             .environmentObject(AuthenticationManager.mock)
+            .environmentObject(UserManager())
     }
 }
