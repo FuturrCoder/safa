@@ -7,8 +7,18 @@
 
 import SwiftUI
 
+@MainActor
+final class FormViewModel: ObservableObject {
+    func updateForm(form: ApplicationForm, manager: AuthenticationManager) async throws {
+        let authDataResult = manager.currentUser()
+        guard let authData = authDataResult else { return }
+        try await FormManager().updateForm(form: form, userId: authData.uid)
+    }
+}
+
 struct FormView: View {
     @Binding var form: ApplicationForm
+    @StateObject private var viewModel = FormViewModel()
     @State var current: Int
 //    var test: FormItem.Response = ApplicationForm.samplePersonal[0].response
     
@@ -32,6 +42,15 @@ struct FormView: View {
                             FormQuestion(item: $item, form: $form)
                         }
                     }
+                }
+            }
+        }
+        .onChange(of: form) { newValue in
+            Task {
+                do {
+                    try await viewModel.updateForm(form: newValue, manager: AuthenticationManager())
+                } catch {
+                    print(error)
                 }
             }
         }

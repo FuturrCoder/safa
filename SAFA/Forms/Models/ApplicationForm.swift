@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ApplicationForm: Identifiable, Codable {
+struct ApplicationForm: Identifiable, Codable, Equatable {
     let id: UUID
     let title: String
     let icon: String
@@ -30,7 +30,10 @@ struct ApplicationForm: Identifiable, Codable {
 //        pages[current].unanswered + nextIndices.storage.reduce(0) { $0 + pages[$1].unanswered }
         indices.reduce(0) { $0 + pages[$1].unanswered }
     }
-    var progress: Float { Float(answered) / Float(answered + unanswered) }
+    var progress: Float {
+        let result = Float(answered) / Float(answered + unanswered)
+        return (result.isInfinite || result.isNaN) ? 1 : result
+    }
 //    var canContinue: Bool { pages[current].unanswered == 0 && nextIndices.first != nil }
 //    var canContinue: Bool { current != indices.count - 1 && currentPage.unanswered == 0 }
     /// list of indices for pages that can be viewed, in ascending order
@@ -91,12 +94,12 @@ struct ApplicationForm: Identifiable, Codable {
     }
     
     enum CodingKeys: CodingKey {
-        case title, icon, pages, indices, current, completed
+        case id, title, icon, pages, indices, current, completed
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = UUID()
+        id = try container.decode(UUID.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         icon = try container.decode(String.self, forKey: .icon)
         pages = try container.decode([FormPage].self, forKey: .pages)
@@ -106,7 +109,13 @@ struct ApplicationForm: Identifiable, Codable {
     }
 }
 
-struct FormPage: Identifiable, Codable {
+//extension ApplicationForm: Equatable {
+//    static func == (lhs: ApplicationForm, rhs: ApplicationForm) -> Bool {
+//        
+//    }
+//}
+
+struct FormPage: Identifiable, Codable, Equatable {
     let id: UUID
     let description: String
     var items: [FormItem]
@@ -148,9 +157,41 @@ struct FormItem: Identifiable {
     }
 }
 
+extension FormItem: Equatable {
+    static func isEqual(_ x : any Response, _ y : any Response) -> Bool {
+        if type(of: x) == type(of: y) {
+            switch x {
+                case let x as IntResponse:
+                    return x == y as! IntResponse
+                case let x as DateResponse:
+                    return x == y as! DateResponse
+                case let x as MenuResponse:
+                    return x == y as! MenuResponse
+                case let x as ShortAnswer:
+                    return x == y as! ShortAnswer
+                case let x as LongAnswer:
+                    return x == y as! LongAnswer
+                case let x as ImageResponse:
+                    return x == y as! ImageResponse
+                case let x as VideoResponse:
+                    return x == y as! VideoResponse
+                case let x as FileResponse:
+                    return x == y as! FileResponse
+                default:
+                    return false
+            }
+        }
+        return false
+    }
+    
+    static func == (lhs: FormItem, rhs: FormItem) -> Bool {
+        lhs.prompt == rhs.prompt && isEqual(lhs.response, rhs.response) && lhs.isRequired == rhs.isRequired && lhs.isAnswered == rhs.isAnswered
+    }
+}
+
 extension FormItem: Codable {
     enum CodingKeys: String, CodingKey {
-        case prompt, required, isAnswered, response
+        case prompt, required, answered, response
     }
     
     init(from decoder: Decoder) throws {
@@ -158,7 +199,7 @@ extension FormItem: Codable {
         id = UUID()
         prompt = try container.decode(String.self, forKey: .prompt)
         isRequired = try container.decode(Bool.self, forKey: .required)
-        isAnswered = try container.decode(Bool.self, forKey: .isAnswered)
+        isAnswered = try container.decode(Bool.self, forKey: .answered)
         let responseContainer = try container.nestedContainer(keyedBy: ResponseKeys.self, forKey: .response)
         if responseContainer.allKeys.count != 1 {
             let context = DecodingError.Context(
@@ -189,12 +230,13 @@ extension FormItem: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(prompt, forKey: .prompt)
+        try container.encode(isRequired, forKey: .required)
+        try container.encode(isAnswered, forKey: .answered)
         var responseContainer = container.nestedContainer(keyedBy: ResponseKeys.self, forKey: .response)
         try response.encodeNested(container: &responseContainer)
     }
 }
-
-
 
 extension ApplicationForm {
     private static var f: DateFormatter {
@@ -236,8 +278,8 @@ extension ApplicationForm {
         FormItem(prompt: "What are you looking for in academies?", response: LongAnswer())
     ]
     static let personal = [
-        FormItem(prompt: "How old are you?", response: IntResponse(range: 1...50)),
-        FormItem(prompt: "When is your birthday?", response: DateResponse(range: f.date(from: "1960")!...Date())),
+//        FormItem(prompt: "How old are you?", response: IntResponse(range: 1...50)),
+//        FormItem(prompt: "When is your birthday?", response: DateResponse(range: f.date(from: "1960")!...Date())),
         FormItem(prompt: "How is your family’s financial situation?", response: LongAnswer(), required: false),
         FormItem(prompt: "How are you doing at school?", response: LongAnswer(), required: false),
         FormItem(prompt: "Are you able to drive/Do you have access to public transport?",

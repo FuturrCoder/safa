@@ -14,8 +14,9 @@ final class UserManager: ObservableObject {
         return Firestore.firestore().collection("users").document(userId)
     }
     
-    func createNewUser(userData: UserData) throws {
+    func createNewUser(userData: UserData) async throws {
         try userDocument(userId: userData.userId).setData(from: userData, merge: false, encoder: DatabaseManager.encoder)
+        try await FormManager().addDefaultForms(userId: userData.userId)
     }
     
     func getUser(userId: String) async throws -> UserData {

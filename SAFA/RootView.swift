@@ -9,15 +9,15 @@ import SwiftUI
 import FirebaseAuth
 
 struct RootView: View {
-    @Binding var forms: [ApplicationForm]
+//    @Binding var forms: [ApplicationForm]
     @Binding var academies: [Academy]
 //    @Binding var profile: Profile
     @State private var showSignUpView: Bool = false
     @State private var handle: AuthStateDidChangeListenerHandle?
     @EnvironmentObject var authenticationManager: AuthenticationManager
     
-    init(forms: Binding<[ApplicationForm]>, academies: Binding<[Academy]>) {
-        self._forms = forms
+    init(academies: Binding<[Academy]>) {
+//        self._forms = forms
         self._academies = academies
 //        self._profile = profile
     }
@@ -25,7 +25,7 @@ struct RootView: View {
     var body: some View {
         TabView() {
             Group {
-                FormsView(forms: $forms)
+                FormsView()
                     .tabItem { Label("Forms", systemImage: "square.and.pencil") }
                     .tag(1)
                 AcademiesView(academies: $academies)
@@ -57,6 +57,6 @@ struct RootView: View {
 }
 
 #Preview("Content View") {
-    RootView(forms: .constant(ApplicationForm.sampleData), academies: .constant(Academy.sampleData))
+    RootView(academies: .constant(Academy.sampleData))
         .environmentObject(AuthenticationManager())
 }

@@ -9,5 +9,9 @@ import SwiftUI
 
 @MainActor
 final class FormsStore: ObservableObject {
-    @Published var forms: [ApplicationForm] = ApplicationForm.sampleData
+    @Published var forms: [ApplicationForm]
+    
+    init(forms: [ApplicationForm]) {
+        self.forms = forms
+    }
 }

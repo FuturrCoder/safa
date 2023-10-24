@@ -59,13 +59,14 @@
 		92C09AFF2AD2F8000053379C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */; };
 		92C09B022AD3923E0053379C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 92C09B012AD3923E0053379C /* GoogleSignIn */; };
 		92C09B042AD3923E0053379C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 92C09B032AD3923E0053379C /* GoogleSignInSwift */; };
-		92C09B092AD42F3C0053379C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92C09B082AD42F3C0053379C /* GoogleService-Info.plist */; };
 		92C09B102AD470850053379C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 92C09B0F2AD470850053379C /* FirebaseFirestore */; };
 		92C09B122AD470850053379C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 92C09B112AD470850053379C /* FirebaseFirestoreSwift */; };
 		92C09B152AD49A2E0053379C /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09B142AD49A2E0053379C /* UserManager.swift */; };
 		92C09B182AD4A1090053379C /* SignUpEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09B172AD4A1090053379C /* SignUpEmailViewModel.swift */; };
 		92C09B1C2AD4A3820053379C /* AgeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09B1B2AD4A3820053379C /* AgeInput.swift */; };
 		92C09B1E2AD4A3FC0053379C /* NameAndAddressInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09B1D2AD4A3FC0053379C /* NameAndAddressInput.swift */; };
+		92E9B0EE2AE7D7650047B47B /* FormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9B0ED2AE7D7650047B47B /* FormManager.swift */; };
+		92F6DB6F2AE7CF9E00CC3B3F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92F6DB6E2AE7CF9E00CC3B3F /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,11 +138,12 @@
 		92553F052AD4B5640087307B /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		92553F072AD4C34D0087307B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
-		92C09B082AD42F3C0053379C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		92C09B142AD49A2E0053379C /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		92C09B172AD4A1090053379C /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
 		92C09B1B2AD4A3820053379C /* AgeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeInput.swift; sourceTree = "<group>"; };
 		92C09B1D2AD4A3FC0053379C /* NameAndAddressInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAndAddressInput.swift; sourceTree = "<group>"; };
+		92E9B0ED2AE7D7650047B47B /* FormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormManager.swift; sourceTree = "<group>"; };
+		92F6DB6E2AE7CF9E00CC3B3F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,8 +315,8 @@
 				63E16C78290C3BB900166906 /* RootView.swift */,
 				635EACBE2A4BC0770045D3F1 /* AppBar.swift */,
 				63E16C7A290C3BBC00166906 /* Assets.xcassets */,
-				92C09B082AD42F3C0053379C /* GoogleService-Info.plist */,
 				63E16C7C290C3BBC00166906 /* SAFA.entitlements */,
+				92F6DB6E2AE7CF9E00CC3B3F /* GoogleService-Info.plist */,
 				63E16C7D290C3BBC00166906 /* Preview Content */,
 			);
 			path = SAFA;
@@ -358,6 +360,7 @@
 				63CA0AF32A62113D00DEA17C /* AuthenticationManager.swift */,
 				92C09B142AD49A2E0053379C /* UserManager.swift */,
 				92553F072AD4C34D0087307B /* DatabaseManager.swift */,
+				92E9B0ED2AE7D7650047B47B /* FormManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -493,7 +496,7 @@
 			files = (
 				63E16C7F290C3BBC00166906 /* Preview Assets.xcassets in Resources */,
 				63E16C7B290C3BBC00166906 /* Assets.xcassets in Resources */,
-				92C09B092AD42F3C0053379C /* GoogleService-Info.plist in Resources */,
+				92F6DB6F2AE7CF9E00CC3B3F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +554,7 @@
 				631414C82A454374008AE84D /* FormProgress.swift in Sources */,
 				631414CA2A454F40008AE84D /* FormButtons.swift in Sources */,
 				63E673ED2922AC8B0055E9C7 /* AcademiesStore.swift in Sources */,
+				92E9B0EE2AE7D7650047B47B /* FormManager.swift in Sources */,
 				63AAABC62A38D7940007437C /* ImageInput.swift in Sources */,
 				63279DE3290D825000814474 /* FormData.swift in Sources */,
 				63AAABCA2A38D7CA0007437C /* FileInput.swift in Sources */,

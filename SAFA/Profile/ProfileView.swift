@@ -11,10 +11,10 @@ import SwiftUI
 final class ProfileViewModel: ObservableObject {
     @Published private(set) var user: UserData? = nil
     
-    func loadCurrentUser(manager: AuthenticationManager) async {
-        let authDataResult = manager.currentUser()
+    func loadCurrentUser(authMan: AuthenticationManager, userMan: UserManager) async {
+        let authDataResult = authMan.currentUser()
         guard let authData = authDataResult else { return }
-        user = try? await UserManager().getUser(userId: authData.uid)
+        user = try? await userMan.getUser(userId: authData.uid)
     }
 }
 
@@ -24,6 +24,7 @@ struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
     @EnvironmentObject private var authenticationManager: AuthenticationManager
+    @EnvironmentObject private var userManager: UserManager
 //    @Binding var profile: Profile
 //    let forms: [ApplicationForm]
     
@@ -64,13 +65,12 @@ struct ProfileView: View {
                 }
                 .appBar(title: "Profile")
             } else {
-//                Text("Error loading profile: not logged in")
                 ProgressView()
                     .appBar(title: "Profile")
             }
         }
         .task {
-            await viewModel.loadCurrentUser(manager: authenticationManager)
+            await viewModel.loadCurrentUser(authMan: authenticationManager, userMan: userManager)
         }
     }
 }

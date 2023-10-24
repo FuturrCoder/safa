@@ -11,7 +11,7 @@ import FirebaseAuth
 
 @main
 struct SAFAApp: App {
-    @StateObject private var formsStore = FormsStore()
+//    @StateObject private var formsStore = FormsStore()
     @StateObject private var academiesStore = AcademiesStore()
 //    @StateObject private var profileStore = ProfileStore()
     @StateObject private var authenticationManager = AuthenticationManager()
@@ -26,7 +26,7 @@ struct SAFAApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView(forms: $formsStore.forms, academies: $academiesStore.academies)
+            RootView(academies: $academiesStore.academies)
                 .environmentObject(authenticationManager)
                 .environmentObject(userManager)
         }
