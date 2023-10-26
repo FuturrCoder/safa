@@ -35,7 +35,7 @@ final class SignUpEmailViewModel: ObservableObject {
     }
     var unconfirmedPassword: Bool { password != confirmPassword }
     var invalidBirthday: Bool {
-        Calendar.current.dateComponents([.year], from: birthday, to: Date.now).year! < 13 && !isParent
+        Calendar.current.dateComponents([.year], from: birthday, to: Date.now).year! < 18 && !isParent
     }
     var invalidChildName: Bool { childName == "" && isParent}
     var invalidAddress: Bool { addressLine1 == "" || city == "" || state == "" || zipCode == "" }

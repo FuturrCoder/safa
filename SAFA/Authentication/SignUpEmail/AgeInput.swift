@@ -21,7 +21,7 @@ struct AgeInput: View {
                        in: Date(timeIntervalSince1970: 0)...Date.now,
                        displayedComponents: [.date])
             if viewModel.invalidBirthday {
-                FormFieldInfo("If you are under age 13, please ask a parent/guardian to create the account")
+                FormFieldInfo("If you are under age 18, please ask a parent/guardian to create the account")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .listRowSeparator(.hidden, edges: .top)

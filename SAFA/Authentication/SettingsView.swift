@@ -83,14 +83,20 @@ struct SettingsView: View {
     
     var body: some View {
         List {
-            Button("Reset password") {
-                viewModel.resetPassword(manager: authenticationManager)
+            Section {
+                Button("Reset password") {
+                    viewModel.resetPassword(manager: authenticationManager)
+                }
+                Button("Log out", role: .destructive) {
+                    viewModel.logOut(manager: authenticationManager)
+                }
+                Button("Delete account", role: .destructive) {
+                    viewModel.showingDeleteAlert = true
+                }
             }
-            Button("Log out", role: .destructive) {
-                viewModel.logOut(manager: authenticationManager)
-            }
-            Button("Delete account", role: .destructive) {
-                viewModel.showingDeleteAlert = true
+            Section {
+                Link("Privacy Policy", destination: URL(string: "https://www.safasport.org/legal")!)
+                Link("Contact Support", destination: URL(string: "mailto:info@safasport.org")!)
             }
         }
         .alert(viewModel.messageTitle, isPresented: $viewModel.showingAlert) {
