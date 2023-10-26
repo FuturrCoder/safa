@@ -32,14 +32,16 @@ final class AuthenticationManager: ObservableObject {
     /// for testing
     var mockUser: AuthDataResult? = nil
     var mockError: Error? = nil
-    static let sampleAuthDataResult = AuthDataResult(uid: "abcd", email: "example@example.com", photoUrl: "https://lh3.googleusercontent.com/a/ACg8ocIKp-q0RaGpmSUf5YG4MmVhVxk-5hBMvP2xCGGf0-y0NQ=s192-c-mo")
+    var mock = false
+    static let sampleAuthDataResult = AuthDataResult(uid: "wuoq1fujs9NV0C12rWj0ZC6mY9T2", email: "example@example.com", photoUrl: "https://lh3.googleusercontent.com/a/ACg8ocIKp-q0RaGpmSUf5YG4MmVhVxk-5hBMvP2xCGGf0-y0NQ=s192-c-mo")
     
-    init(mockUser: AuthDataResult, mockError: Error? = nil) {
+    init(mockUser: AuthDataResult, mockError: Error? = nil, mock: Bool = false) {
         self.mockUser = mockUser
         self.mockError = mockError
+        self.mock = mock
     }
     
-    static let mock = AuthenticationManager(mockUser: sampleAuthDataResult)
+    static let mock = AuthenticationManager(mockUser: sampleAuthDataResult, mock: true)
     
     init() {}
     

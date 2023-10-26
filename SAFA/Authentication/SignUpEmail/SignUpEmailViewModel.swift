@@ -49,7 +49,7 @@ final class SignUpEmailViewModel: ObservableObject {
         Task {
             do {
                 let authDataResult = try await authManager.createUser(email: email, password: password)
-                let userData = UserData(userId: authDataResult.uid, createdAt: Date(), email: email, photoUrl: authDataResult.photoUrl, firstName: firstName, lastName: lastName, birthday: birthday, isParent: isParent, childName: childName, addressLine1: addressLine1, addressLine2: addressLine2, city: city, state: state, zipCode: zipCode)
+                let userData = UserData(userId: authDataResult.uid, createdAt: Date(), email: email, photoUrl: authDataResult.photoUrl, firstName: firstName, lastName: lastName, birthday: birthday, isParent: isParent, childName: childName, addressLine1: addressLine1, addressLine2: addressLine2, city: city, state: state, zipCode: zipCode, following: [])
                 try await userManager.createNewUser(userData: userData)
             } catch {
                 self.error = error.localizedDescription

@@ -10,17 +10,17 @@ import FirebaseAuth
 
 struct RootView: View {
 //    @Binding var forms: [ApplicationForm]
-    @Binding var academies: [Academy]
+//    @Binding var academies: [Academy]
 //    @Binding var profile: Profile
     @State private var showSignUpView: Bool = false
     @State private var handle: AuthStateDidChangeListenerHandle?
     @EnvironmentObject var authenticationManager: AuthenticationManager
     
-    init(academies: Binding<[Academy]>) {
+//    init() {
 //        self._forms = forms
-        self._academies = academies
+//        self._academies = academies
 //        self._profile = profile
-    }
+//    }
     
     var body: some View {
         TabView() {
@@ -28,7 +28,7 @@ struct RootView: View {
                 FormsView()
                     .tabItem { Label("Forms", systemImage: "square.and.pencil") }
                     .tag(1)
-                AcademiesView(academies: $academies)
+                AcademiesView()
                     .tabItem { Label("Academies", systemImage: "building.2") }
                     .tag(2)
                 ProfileView()
@@ -38,15 +38,19 @@ struct RootView: View {
         }
         .onAppear() {
 //            showSignUpView = false
-            showSignUpView = authenticationManager.currentUser() == nil
-            handle = Auth.auth().addStateDidChangeListener { auth, user in
-                showSignUpView = user == nil
-                print("auth state changed: \(user.map{String(describing: AuthDataResult(user: $0))} ?? "no user")")
-                print("showSignUpView: \(showSignUpView)")
+            if !authenticationManager.mock {
+                showSignUpView = authenticationManager.currentUser() == nil
+                handle = Auth.auth().addStateDidChangeListener { auth, user in
+                    showSignUpView = user == nil
+                    print("auth state changed: \(user.map{String(describing: AuthDataResult(user: $0))} ?? "no user")")
+                    print("showSignUpView: \(showSignUpView)")
+                }
             }
         }
         .onDisappear() {
-            Auth.auth().removeStateDidChangeListener(handle!)
+            if !authenticationManager.mock {
+                Auth.auth().removeStateDidChangeListener(handle!)
+            }
         }
         .fullScreenCover(isPresented: $showSignUpView) {
             NavigationView {
@@ -56,7 +60,8 @@ struct RootView: View {
     }
 }
 
-#Preview("Content View") {
-    RootView(academies: .constant(Academy.sampleData))
-        .environmentObject(AuthenticationManager())
+#Preview("Root View") {
+    RootView()
+        .environmentObject(AuthenticationManager.mock)
+        .environmentObject(UserManager())
 }

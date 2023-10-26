@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct AcademyCard: View {
-    let academy: Academy
+    @Binding var academy: Academy
+    @EnvironmentObject private var authenticationManager: AuthenticationManager
+    @EnvironmentObject private var userManager: UserManager
     
     var body: some View {
         HStack {
@@ -16,11 +18,14 @@ struct AcademyCard: View {
             VStack(alignment: .leading) {
                 Text(academy.name)
                     .font(.title)
+                    .foregroundStyle(.foreground)
                 Text(academy.description)
                     .font(.caption)
+                    .foregroundStyle(.foreground)
+                    .multilineTextAlignment(.leading)
                     .lineLimit(3)
             }
-            .padding(.leading)
+            .padding(.leading, 10)
         }
         .padding([.bottom, .top])
     }
@@ -28,8 +33,10 @@ struct AcademyCard: View {
 
 struct AcademyCard_Previews: PreviewProvider {
     static var previews: some View {
-        AcademyCard(academy: Academy.sample1)
+        AcademyCard(academy: .constant(Academy.sample1))
             .previewLayout(.sizeThatFits)
+            .environmentObject(AuthenticationManager.mock)
+            .environmentObject(UserManager())
     }
 }
 

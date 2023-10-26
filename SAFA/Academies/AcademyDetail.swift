@@ -42,40 +42,6 @@ struct AcademyDetail: View {
     }
 }
 
-struct AcademyInfo: View {
-    @Binding var academy: Academy
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            VStack(alignment: .leading, spacing: 5) {
-                HStack {
-                    Text(academy.name)
-                        .font(.largeTitle)
-                        .bold()
-                    Spacer()
-                    Button(action: { academy.isFollowed = !academy.isFollowed }) {
-                        Text(academy.isFollowed ? "Unfollow" : "Follow")
-                    }
-                }
-                Label(academy.location, systemImage: "map")
-                IconLink(link: academy.website, title: academy.website, systemName: "safari")
-                if let email = academy.email {
-                    IconLink(link: "mailto:\(email)", title: email, systemName: "envelope")
-                }
-                if let phoneNumber = academy.phoneNumber {
-                    IconLink(link: "tel:\(phoneNumber)", title: phoneNumber, systemName: "phone")
-                }
-                if let tuition = academy.tuition {
-                    Label("Tuition: \(tuition)", systemImage: "dollarsign.circle")
-                }
-                Label("Ages \(academy.ages)", systemImage: "person")
-            }
-            Text(academy.description)
-                .font(.subheadline)
-        }
-    }
-}
-
 struct AcademyDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

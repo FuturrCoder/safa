@@ -22,4 +22,12 @@ final class UserManager: ObservableObject {
     func getUser(userId: String) async throws -> UserData {
         try await userDocument(userId: userId).getDocument(as: UserData.self, decoder: DatabaseManager.decoder)
     }
+    
+    func toggleFollow(userId: String, academyId: String, nowFollowing: Bool) async throws {
+        if nowFollowing {
+            try await userDocument(userId: userId).updateData(["following": FieldValue.arrayUnion([academyId])])
+        } else {
+            try await userDocument(userId: userId).updateData(["following": FieldValue.arrayRemove([academyId])])
+        }
+    }
 }

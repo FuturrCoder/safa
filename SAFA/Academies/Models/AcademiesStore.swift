@@ -9,5 +9,9 @@ import Foundation
 
 @MainActor
 final class AcademiesStore: ObservableObject {
-    @Published var academies: [Academy] = Academy.sampleData
+    @Published var academies: [Academy] = []
+    
+    init(academies: [Academy]) {
+        self.academies = academies
+    }
 }

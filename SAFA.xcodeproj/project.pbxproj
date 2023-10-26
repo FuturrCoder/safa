@@ -51,6 +51,11 @@
 		63F5224B2A562607007403FB /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63F5224A2A562607007403FB /* FirebaseAnalyticsSwift */; };
 		63F5224D2A562607007403FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 63F5224C2A562607007403FB /* FirebaseAuth */; };
 		63F9E1D92A3D0D7C00D66655 /* SectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */; };
+		921C59752AE9EBF9008653AC /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921C59742AE9EBF9008653AC /* FollowButton.swift */; };
+		921C597B2AEA002D008653AC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921C597A2AEA002D008653AC /* Launch Screen.storyboard */; };
+		921D3BF92AE8110F0067CACA /* AcademyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D3BF82AE8110F0067CACA /* AcademyManager.swift */; };
+		921D3BFB2AE81BCC0067CACA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 921D3BFA2AE81BCB0067CACA /* GoogleService-Info.plist */; };
+		921D3BFD2AE81CDF0067CACA /* AcademyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D3BFC2AE81CDF0067CACA /* AcademyInfo.swift */; };
 		921D8B7C2AD213E300E81023 /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D8B7B2AD213E300E81023 /* SignInEmailView.swift */; };
 		924B84252AA26A0D00DD10B2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B84242AA26A0D00DD10B2 /* SettingsView.swift */; };
 		92553F042AD4AA140087307B /* AdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92553F032AD4AA130087307B /* AdditionalInfoView.swift */; };
@@ -66,7 +71,6 @@
 		92C09B1C2AD4A3820053379C /* AgeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09B1B2AD4A3820053379C /* AgeInput.swift */; };
 		92C09B1E2AD4A3FC0053379C /* NameAndAddressInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09B1D2AD4A3FC0053379C /* NameAndAddressInput.swift */; };
 		92E9B0EE2AE7D7650047B47B /* FormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E9B0ED2AE7D7650047B47B /* FormManager.swift */; };
-		92F6DB6F2AE7CF9E00CC3B3F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92F6DB6E2AE7CF9E00CC3B3F /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +136,11 @@
 		63E673F02922AE5D0055E9C7 /* AcademyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyDetail.swift; sourceTree = "<group>"; };
 		63EC2650291D6B8400368E53 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionWrapper.swift; sourceTree = "<group>"; };
+		921C59742AE9EBF9008653AC /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
+		921C597A2AEA002D008653AC /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "SAFA/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
+		921D3BF82AE8110F0067CACA /* AcademyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyManager.swift; sourceTree = "<group>"; };
+		921D3BFA2AE81BCB0067CACA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		921D3BFC2AE81CDF0067CACA /* AcademyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyInfo.swift; sourceTree = "<group>"; };
 		921D8B7B2AD213E300E81023 /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
 		924B84242AA26A0D00DD10B2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		92553F032AD4AA130087307B /* AdditionalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
@@ -143,7 +152,6 @@
 		92C09B1B2AD4A3820053379C /* AgeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeInput.swift; sourceTree = "<group>"; };
 		92C09B1D2AD4A3FC0053379C /* NameAndAddressInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAndAddressInput.swift; sourceTree = "<group>"; };
 		92E9B0ED2AE7D7650047B47B /* FormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormManager.swift; sourceTree = "<group>"; };
-		92F6DB6E2AE7CF9E00CC3B3F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +192,8 @@
 				638B5368290ED2E0005AB8FD /* AcademiesView.swift */,
 				63E673F02922AE5D0055E9C7 /* AcademyDetail.swift */,
 				63E673EE2922ADA90055E9C7 /* AcademyCard.swift */,
+				921D3BFC2AE81CDF0067CACA /* AcademyInfo.swift */,
+				921C59742AE9EBF9008653AC /* FollowButton.swift */,
 				6337CB332A3A1E5F00D364CA /* Models */,
 			);
 			path = Academies;
@@ -316,7 +326,8 @@
 				635EACBE2A4BC0770045D3F1 /* AppBar.swift */,
 				63E16C7A290C3BBC00166906 /* Assets.xcassets */,
 				63E16C7C290C3BBC00166906 /* SAFA.entitlements */,
-				92F6DB6E2AE7CF9E00CC3B3F /* GoogleService-Info.plist */,
+				921C597A2AEA002D008653AC /* Launch Screen.storyboard */,
+				921D3BFA2AE81BCB0067CACA /* GoogleService-Info.plist */,
 				63E16C7D290C3BBC00166906 /* Preview Content */,
 			);
 			path = SAFA;
@@ -361,6 +372,7 @@
 				92C09B142AD49A2E0053379C /* UserManager.swift */,
 				92553F072AD4C34D0087307B /* DatabaseManager.swift */,
 				92E9B0ED2AE7D7650047B47B /* FormManager.swift */,
+				921D3BF82AE8110F0067CACA /* AcademyManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -496,7 +508,8 @@
 			files = (
 				63E16C7F290C3BBC00166906 /* Preview Assets.xcassets in Resources */,
 				63E16C7B290C3BBC00166906 /* Assets.xcassets in Resources */,
-				92F6DB6F2AE7CF9E00CC3B3F /* GoogleService-Info.plist in Resources */,
+				921C597B2AEA002D008653AC /* Launch Screen.storyboard in Resources */,
+				921D3BFB2AE81BCC0067CACA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +555,7 @@
 				633133F62921BEEC00CEBB62 /* FormCard.swift in Sources */,
 				63279DE1290D779C00814474 /* UploadButton.swift in Sources */,
 				92553F042AD4AA140087307B /* AdditionalInfoView.swift in Sources */,
+				921D3BFD2AE81CDF0067CACA /* AcademyInfo.swift in Sources */,
 				92C09B1C2AD4A3820053379C /* AgeInput.swift in Sources */,
 				638B5369290ED2E0005AB8FD /* AcademiesView.swift in Sources */,
 				63B2FE122A574C7500EBBF26 /* SignUpView.swift in Sources */,
@@ -566,7 +580,9 @@
 				633133F42921B92200CEBB62 /* FormsStore.swift in Sources */,
 				635EACBF2A4BC0770045D3F1 /* AppBar.swift in Sources */,
 				63A367612910A0DD00B7515E /* ProfileView.swift in Sources */,
+				921C59752AE9EBF9008653AC /* FollowButton.swift in Sources */,
 				92C09B152AD49A2E0053379C /* UserManager.swift in Sources */,
+				921D3BF92AE8110F0067CACA /* AcademyManager.swift in Sources */,
 				63E16C77290C3BB900166906 /* SAFAApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +753,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SAFA/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -745,14 +762,14 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.safasport.SAFA;
+				PRODUCT_BUNDLE_IDENTIFIER = org.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -778,6 +795,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SAFA/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -786,14 +804,14 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.safasport.SAFA;
+				PRODUCT_BUNDLE_IDENTIFIER = org.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";

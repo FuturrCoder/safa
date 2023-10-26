@@ -14,26 +14,27 @@ extension View {
             return self
                 .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(Color("ThemeColor"), for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
+//                .toolbarBackground(Color("ThemeColor"), for: .navigationBar)
+//                .toolbarBackground(.visible, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink(destination: SettingsView()) {
                             Image(systemName: "gearshape")
                         }
-                        .tint(.black)
+//                        .tint(.black)
                         .frame(width: 30)
                     }
                     ToolbarItem(placement: .principal) {
-                        Image("Logo White")
+                        Image("SAFA-mainlogo-blue")
                             .resizable()
                             .scaledToFit()
+                            .scaleEffect(0.75)
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {}) {
                             Image(systemName: "bell")
                         }
-                        .tint(.black)
+//                        .tint(.black)
                         .frame(width: 30)
                     }
                 }

@@ -22,6 +22,7 @@ struct UserData: Codable {
     let city: String
     let state: String
     let zipCode: String
+    let following: [String] /// academy IDs
     
     var fullName: String {
         "\(firstName) \(lastName)"
