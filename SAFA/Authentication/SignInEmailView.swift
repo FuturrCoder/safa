@@ -36,9 +36,11 @@ struct SignInEmailView: View {
             Section {
                 TextField("Email", text: $viewModel.email)
                     .keyboardType(.emailAddress)
+                    .textContentType(.emailAddress)
                     .autocorrectionDisabled(true)
                     .textInputAutocapitalization(.never)
                 SecureField("Password", text: $viewModel.password)
+                    .textContentType(.password)
                 HStack {
                     Spacer()
                     Button("Sign In") {

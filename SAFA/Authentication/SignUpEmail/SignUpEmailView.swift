@@ -17,10 +17,13 @@ struct SignUpEmailView: View {
             Section {
                 TextField("Email", text: $viewModel.email)
                     .keyboardType(.emailAddress)
+                    .textContentType(.emailAddress)
                     .autocorrectionDisabled(true)
                     .textInputAutocapitalization(.never)
                 SecureField("Password", text: $viewModel.password)
+                    .textContentType(.newPassword)
                 SecureField("Confirm Password", text: $viewModel.confirmPassword)
+                    .textContentType(.newPassword)
                 if viewModel.invalidPassword {
                     FormFieldInfo("Must be at least 6 characters long containing a number or symbol")
                 }

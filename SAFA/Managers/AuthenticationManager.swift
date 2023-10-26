@@ -35,6 +35,8 @@ final class AuthenticationManager: ObservableObject {
     var mock = false
     static let sampleAuthDataResult = AuthDataResult(uid: "wuoq1fujs9NV0C12rWj0ZC6mY9T2", email: "example@example.com", photoUrl: "https://lh3.googleusercontent.com/a/ACg8ocIKp-q0RaGpmSUf5YG4MmVhVxk-5hBMvP2xCGGf0-y0NQ=s192-c-mo")
     
+    @Published var reload = false
+    
     init(mockUser: AuthDataResult, mockError: Error? = nil, mock: Bool = false) {
         self.mockUser = mockUser
         self.mockError = mockError
@@ -78,6 +80,7 @@ final class AuthenticationManager: ObservableObject {
         }
         
         let res = try await Auth.auth().signIn(withEmail: email, password: password)
+        reload = true
         return AuthDataResult(user: res.user)
     }
     

@@ -16,7 +16,8 @@ struct UserData: Codable {
     let lastName: String
     let birthday: Date
     let isParent: Bool
-    let childName: String
+    let childFirst: String
+    let childLast: String
     let addressLine1: String
     let addressLine2: String
     let city: String
@@ -26,6 +27,10 @@ struct UserData: Codable {
     
     var fullName: String {
         "\(firstName) \(lastName)"
+    }
+    
+    var childFullName: String {
+        "\(childFirst) \(childLast)"
     }
     
     var multiLineAddress: String {

@@ -16,7 +16,8 @@ final class SignUpEmailViewModel: ObservableObject {
     @Published var confirmPassword = ""
     @Published var birthday = Date.now
     @Published var isParent = false
-    @Published var childName = ""
+    @Published var childFirst = ""
+    @Published var childLast = ""
     @Published var addressLine1 = ""
     @Published var addressLine2 = ""
     @Published var city = ""
@@ -37,7 +38,7 @@ final class SignUpEmailViewModel: ObservableObject {
     var invalidBirthday: Bool {
         Calendar.current.dateComponents([.year], from: birthday, to: Date.now).year! < 18 && !isParent
     }
-    var invalidChildName: Bool { childName == "" && isParent}
+    var invalidChildName: Bool { isParent && (childFirst == "" || childLast == "") }
     var invalidAddress: Bool { addressLine1 == "" || city == "" || state == "" || zipCode == "" }
     var invalid: Bool {
         invalidName || invalidPassword || unconfirmedPassword || invalidEmail || invalidBirthday || invalidChildName || invalidAddress
@@ -49,8 +50,9 @@ final class SignUpEmailViewModel: ObservableObject {
         Task {
             do {
                 let authDataResult = try await authManager.createUser(email: email, password: password)
-                let userData = UserData(userId: authDataResult.uid, createdAt: Date(), email: email, photoUrl: authDataResult.photoUrl, firstName: firstName, lastName: lastName, birthday: birthday, isParent: isParent, childName: childName, addressLine1: addressLine1, addressLine2: addressLine2, city: city, state: state, zipCode: zipCode, following: [])
+                let userData = UserData(userId: authDataResult.uid, createdAt: Date(), email: email, photoUrl: authDataResult.photoUrl, firstName: firstName, lastName: lastName, birthday: birthday, isParent: isParent, childFirst: childFirst, childLast: childLast, addressLine1: addressLine1, addressLine2: addressLine2, city: city, state: state, zipCode: zipCode, following: [])
                 try await userManager.createNewUser(userData: userData)
+                authManager.reload = true
             } catch {
                 self.error = error.localizedDescription
             }

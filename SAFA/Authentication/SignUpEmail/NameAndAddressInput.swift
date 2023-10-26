@@ -16,17 +16,24 @@ struct NameAndAddressInput: View {
         Section {
             HStack {
                 TextField("First name", text: $viewModel.firstName)
+                    .textContentType(.givenName)
                 TextField("Last Name", text: $viewModel.lastName)
+                    .textContentType(.familyName)
             }
             TextField("Address Line 1", text: $viewModel.addressLine1)
+                .textContentType(.streetAddressLine1)
             TextField("Address Line 2", text: $viewModel.addressLine2)
+                .textContentType(.streetAddressLine2)
             HStack {
                 TextField("City", text: $viewModel.city)
+                    .textContentType(.addressCity)
                 TextField("State", text: $viewModel.state)
                     .frame(maxWidth: 60)
+                    .textContentType(.addressState)
                 TextField("ZIP", text: $viewModel.zipCode)
                     .keyboardType(.numberPad)
                     .frame(maxWidth: 80)
+                    .textContentType(.postalCode)
             }
             HStack {
                 Spacer()
@@ -43,7 +50,10 @@ struct NameAndAddressInput: View {
         } header: {
             Text("Name and Address")
         } footer: {
-            Text("Currently, you must live in the U.S. to sign up.")
+            VStack(alignment: .leading) {
+                Text("Currently, you must live in the U.S. to sign up.")
+                Text("By signing up, you agree to our [Terms of Service and Privacy Policy](https://www.safasport.org/legal).")
+            }
         }
     }
 }

@@ -14,7 +14,12 @@ struct AgeInput: View {
         Section {
             Toggle("I'm a parent/guardian", isOn: $viewModel.isParent)
             if viewModel.isParent {
-                TextField("Child's Name", text: $viewModel.childName)
+                HStack {
+                    TextField("Child's First Name", text: $viewModel.childFirst)
+                        .textContentType(.givenName)
+                    TextField("Child's Last Name", text: $viewModel.childLast)
+                        .textContentType(.familyName)
+                }
             }
             DatePicker(viewModel.isParent ? "Child's Date of Birth" : "Date of Birth",
                        selection: $viewModel.birthday,
@@ -33,6 +38,6 @@ struct AgeInput: View {
     }
 }
 
-#Preview {
+#Preview("Age Input") {
     AgeInput(viewModel: SignUpEmailViewModel())
 }

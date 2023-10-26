@@ -16,8 +16,14 @@ final class FormsViewModel: ObservableObject {
     func loadForms(manager: AuthenticationManager) async {
         let authDataResult = manager.currentUser()
         guard let authData = authDataResult else { return }
-        formsStore = (try? await FormsStore(forms: FormManager()
-            .getForms(userId: authData.uid))) ?? FormsStore(forms: [])
+        do {
+            formsStore = try await FormsStore(forms: FormManager()
+                .getForms(userId: authData.uid))
+            print("forms loaded")
+        } catch {
+            print(error.localizedDescription)
+            formsStore = FormsStore(forms: [])
+        }
     }
     
 //    func uploadForms() async throws {
@@ -62,6 +68,13 @@ struct FormsView: View {
             } else {
                 ProgressView()
                     .appBar(title: "Forms")
+            }
+        }
+        .onChange(of: authenticationManager.reload) {
+            if $0 {
+                Task {
+                    await viewModel.loadForms(manager: authenticationManager)
+                }
             }
         }
         .task {

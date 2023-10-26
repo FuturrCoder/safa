@@ -54,7 +54,7 @@ struct ProfileView: View {
                         InfoCard("Email", user.email)
                         InfoCard("Address", user.multiLineAddress)
                         if (user.isParent) {
-                            InfoCard("Child Name", user.childName)
+                            InfoCard("Child Name", user.childFullName)
                             InfoCard("Child Birthday", user.birthdayShort)
                         } else {
                             InfoCard("Birthday", user.birthdayShort)
