@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+@MainActor
 final class AcademyManager: ObservableObject {
     private func academiesCollection() -> CollectionReference {
         return Firestore.firestore().collection("academies")

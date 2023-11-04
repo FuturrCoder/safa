@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>132974123698-0f781e6ld7tk48jh0bi2d9cp7dhq62vh.apps.googleusercontent.com</string>
+	<string>132974123698-5s5qp738onibe9g6ogmfvhvbt696lndo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.132974123698-0f781e6ld7tk48jh0bi2d9cp7dhq62vh</string>
+	<string>com.googleusercontent.apps.132974123698-5s5qp738onibe9g6ogmfvhvbt696lndo</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDZ5u9Zpowq5oSEjBwsgHMbxNLsljXIQz8</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.safasport.SAFA</string>
+	<string>org.safasport.SAFA</string>
 	<key>PROJECT_ID</key>
 	<string>safa-sport</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:132974123698:ios:2f6bcae0f132e78a2847ab</string>
+	<string>1:132974123698:ios:a7808b3e5f535b462847ab</string>
 </dict>
 </plist>

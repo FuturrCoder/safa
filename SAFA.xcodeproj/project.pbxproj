@@ -54,13 +54,13 @@
 		921C59752AE9EBF9008653AC /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921C59742AE9EBF9008653AC /* FollowButton.swift */; };
 		921C597B2AEA002D008653AC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921C597A2AEA002D008653AC /* Launch Screen.storyboard */; };
 		921D3BF92AE8110F0067CACA /* AcademyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D3BF82AE8110F0067CACA /* AcademyManager.swift */; };
-		921D3BFB2AE81BCC0067CACA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 921D3BFA2AE81BCB0067CACA /* GoogleService-Info.plist */; };
 		921D3BFD2AE81CDF0067CACA /* AcademyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D3BFC2AE81CDF0067CACA /* AcademyInfo.swift */; };
 		921D8B7C2AD213E300E81023 /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D8B7B2AD213E300E81023 /* SignInEmailView.swift */; };
 		924B84252AA26A0D00DD10B2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924B84242AA26A0D00DD10B2 /* SettingsView.swift */; };
 		92553F042AD4AA140087307B /* AdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92553F032AD4AA130087307B /* AdditionalInfoView.swift */; };
 		92553F062AD4B5640087307B /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92553F052AD4B5640087307B /* UserData.swift */; };
 		92553F082AD4C34D0087307B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92553F072AD4C34D0087307B /* DatabaseManager.swift */; };
+		92A54BFD2AF6F7CD0070CB0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92A54BFC2AF6F7CD0070CB0D /* GoogleService-Info.plist */; };
 		92C09AFF2AD2F8000053379C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */; };
 		92C09B022AD3923E0053379C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 92C09B012AD3923E0053379C /* GoogleSignIn */; };
 		92C09B042AD3923E0053379C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 92C09B032AD3923E0053379C /* GoogleSignInSwift */; };
@@ -139,13 +139,13 @@
 		921C59742AE9EBF9008653AC /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		921C597A2AEA002D008653AC /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "SAFA/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
 		921D3BF82AE8110F0067CACA /* AcademyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyManager.swift; sourceTree = "<group>"; };
-		921D3BFA2AE81BCB0067CACA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		921D3BFC2AE81CDF0067CACA /* AcademyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademyInfo.swift; sourceTree = "<group>"; };
 		921D8B7B2AD213E300E81023 /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
 		924B84242AA26A0D00DD10B2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		92553F032AD4AA130087307B /* AdditionalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
 		92553F052AD4B5640087307B /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		92553F072AD4C34D0087307B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		92A54BFC2AF6F7CD0070CB0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		92C09AFE2AD2F8000053379C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		92C09B142AD49A2E0053379C /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		92C09B172AD4A1090053379C /* SignUpEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewModel.swift; sourceTree = "<group>"; };
@@ -236,9 +236,9 @@
 				633133F92921E82A00CEBB62 /* FormQuestion.swift */,
 				63279DE0290D779C00814474 /* UploadButton.swift */,
 				63F9E1D82A3D0D7C00D66655 /* SectionWrapper.swift */,
+				631414C92A454F40008AE84D /* FormButtons.swift */,
 				63AAABBA2A38D4CA0007437C /* Input Views */,
 				63AAABB92A38D4A30007437C /* Models */,
-				631414C92A454F40008AE84D /* FormButtons.swift */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -327,7 +327,7 @@
 				63E16C7A290C3BBC00166906 /* Assets.xcassets */,
 				63E16C7C290C3BBC00166906 /* SAFA.entitlements */,
 				921C597A2AEA002D008653AC /* Launch Screen.storyboard */,
-				921D3BFA2AE81BCB0067CACA /* GoogleService-Info.plist */,
+				92A54BFC2AF6F7CD0070CB0D /* GoogleService-Info.plist */,
 				63E16C7D290C3BBC00166906 /* Preview Content */,
 			);
 			path = SAFA;
@@ -507,9 +507,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E16C7F290C3BBC00166906 /* Preview Assets.xcassets in Resources */,
+				92A54BFD2AF6F7CD0070CB0D /* GoogleService-Info.plist in Resources */,
 				63E16C7B290C3BBC00166906 /* Assets.xcassets in Resources */,
 				921C597B2AEA002D008653AC /* Launch Screen.storyboard in Resources */,
-				921D3BFB2AE81BCC0067CACA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,7 +769,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.safasport.SAFA;
+				PRODUCT_BUNDLE_IDENTIFIER = org.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
@@ -812,7 +812,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.safasport.SAFA;
+				PRODUCT_BUNDLE_IDENTIFIER = org.safasport.SAFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;

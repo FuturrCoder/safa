@@ -28,12 +28,13 @@ struct AuthDataResult {
 }
 
 // TODO: remove testing parts for production
+@MainActor
 final class AuthenticationManager: ObservableObject {
     /// for testing
     var mockUser: AuthDataResult? = nil
     var mockError: Error? = nil
     var mock = false
-    static let sampleAuthDataResult = AuthDataResult(uid: "wuoq1fujs9NV0C12rWj0ZC6mY9T2", email: "example@example.com", photoUrl: "https://lh3.googleusercontent.com/a/ACg8ocIKp-q0RaGpmSUf5YG4MmVhVxk-5hBMvP2xCGGf0-y0NQ=s192-c-mo")
+    static let sampleAuthDataResult = AuthDataResult(uid: "CQSyiF1xDcOLd0DmhWmNwnTqXxF2", email: "example@example.com", photoUrl: "https://lh3.googleusercontent.com/a/ACg8ocIKp-q0RaGpmSUf5YG4MmVhVxk-5hBMvP2xCGGf0-y0NQ=s192-c-mo")
     
     @Published var reload = false
     
@@ -100,11 +101,11 @@ final class AuthenticationManager: ObservableObject {
         try Auth.auth().signOut()
     }
     
-    func delete(user: User) async throws {
+    func delete(user: User, manager: UserManager) async throws {
         if let error = mockError {
             throw error
         }
-        
+        try await manager.deleteUser(userId: user.uid)
         try await user.delete()
     }
 }

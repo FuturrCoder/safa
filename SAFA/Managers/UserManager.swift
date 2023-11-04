@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+@MainActor
 final class UserManager: ObservableObject {
     private func userDocument(userId: String) -> DocumentReference {
         return Firestore.firestore().collection("users").document(userId)
@@ -29,5 +30,9 @@ final class UserManager: ObservableObject {
         } else {
             try await userDocument(userId: userId).updateData(["following": FieldValue.arrayRemove([academyId])])
         }
+    }
+    
+    func deleteUser(userId: String) async throws {
+        try await userDocument(userId: userId).delete()
     }
 }

@@ -50,10 +50,12 @@ struct FormQuestion: View {
                                            set: { item.response = $0 }))
             case is VideoResponse:
                 VideoInput(isAnswered: $item.isAnswered,
+                           isRequired: item.isRequired,
                            response: .init(get: { item.response as! VideoResponse },
                                            set: { item.response = $0 }))
             case is FileResponse:
                 FileInput(isAnswered: $item.isAnswered,
+                          isRequired: item.isRequired,
                           response: .init(get: { item.response as! FileResponse },
                                           set: { item.response = $0 }))
             default:

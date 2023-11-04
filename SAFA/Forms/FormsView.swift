@@ -17,11 +17,13 @@ final class FormsViewModel: ObservableObject {
         let authDataResult = manager.currentUser()
         guard let authData = authDataResult else { return }
         do {
+//            print("loading forms")
             formsStore = try await FormsStore(forms: FormManager()
                 .getForms(userId: authData.uid))
-            print("forms loaded")
+//            print("forms loaded")
+//            print(formsStore.forms[0].pages[5].items[0])
         } catch {
-            print(error.localizedDescription)
+            print("could not load forms" + error.localizedDescription)
             formsStore = FormsStore(forms: [])
         }
     }

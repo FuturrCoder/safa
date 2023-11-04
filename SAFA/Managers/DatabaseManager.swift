@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
+@MainActor
 final class DatabaseManager: ObservableObject {
     static let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()

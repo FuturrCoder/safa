@@ -13,15 +13,8 @@ final class SignInEmailViewModel: ObservableObject {
     @Published var password = ""
     @Published var error = ""
     
-    func signIn(manager: AuthenticationManager) {
-        Task {
-            do {
-                try await manager.signInUser(email: email, password: password)
-            } catch {
-                self.error = error.localizedDescription == "An internal error has occurred, print and inspect the error details for more information." ? "Invalid email or password" : error.localizedDescription
-                print(error)
-            }
-        }
+    func signIn(manager: AuthenticationManager) async throws {
+        try await manager.signInUser(email: email, password: password)
     }
 }
 
@@ -44,8 +37,15 @@ struct SignInEmailView: View {
                 HStack {
                     Spacer()
                     Button("Sign In") {
-                        viewModel.signIn(manager: authenticationManager)
-                        onSignIn()
+                        Task {
+                            do {
+                                try await viewModel.signIn(manager: authenticationManager)
+                                onSignIn()
+                            } catch {
+                                viewModel.error = error.localizedDescription == "An internal error has occurred, print and inspect the error details for more information." ? "Invalid email or password" : error.localizedDescription
+                                print(error)
+                            }
+                        }
                     }
                     .buttonStyle(.bordered)
                     Spacer()

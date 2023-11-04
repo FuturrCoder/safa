@@ -54,8 +54,8 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    func deleteAccount(manager: AuthenticationManager) {
-        guard let currentUser = manager.currentUserRaw() else {
+    func deleteAccount(authMan: AuthenticationManager, userMan: UserManager) {
+        guard let currentUser = authMan.currentUserRaw() else {
             self.messageTitle = "Unable to delete account"
             self.message = "Not logged in"
             self.showingAlert = true
@@ -64,7 +64,7 @@ final class SettingsViewModel: ObservableObject {
         
         Task {
             do {
-                try await manager.delete(user: currentUser)
+                try await authMan.delete(user: currentUser, manager: userMan)
                 self.messageTitle = "Account deleted"
                 self.message = "Your account has been deleted"
                 self.showingAlert = true
@@ -80,6 +80,7 @@ final class SettingsViewModel: ObservableObject {
 struct SettingsView: View {
     @StateObject private var viewModel = SettingsViewModel()
     @EnvironmentObject var authenticationManager: AuthenticationManager
+    @EnvironmentObject var userManager: UserManager
     
     var body: some View {
         List {
@@ -115,7 +116,7 @@ struct SettingsView: View {
             NavigationView {
                 SignInEmailView(navigationTitle: "Sign In Again") {
                     viewModel.showSignInView = false
-                    viewModel.deleteAccount(manager: authenticationManager)
+                    viewModel.deleteAccount(authMan: authenticationManager, userMan: userManager)
                 }
             }
         }

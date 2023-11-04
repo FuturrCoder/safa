@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+@MainActor
 final class FormManager: ObservableObject {
     private func formsCollection(userId: String) -> CollectionReference {
         return Firestore.firestore().collection("users").document(userId).collection("forms")

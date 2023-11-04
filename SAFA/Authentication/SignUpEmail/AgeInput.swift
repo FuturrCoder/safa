@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AgeInput: View {
     @ObservedObject var viewModel: SignUpEmailViewModel
+    private let minBirthday = Calendar.current.date(byAdding: .year, value: -150, to: Date.now)!
     
     var body: some View {
         Section {
@@ -23,7 +24,7 @@ struct AgeInput: View {
             }
             DatePicker(viewModel.isParent ? "Child's Date of Birth" : "Date of Birth",
                        selection: $viewModel.birthday,
-                       in: Date(timeIntervalSince1970: 0)...Date.now,
+                       in: minBirthday...Date.now,
                        displayedComponents: [.date])
             if viewModel.invalidBirthday {
                 FormFieldInfo("If you are under age 18, please ask a parent/guardian to create the account")

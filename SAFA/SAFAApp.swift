@@ -15,6 +15,7 @@ struct SAFAApp: App {
 //    @StateObject private var academiesStore = AcademiesStore()
 //    @StateObject private var profileStore = ProfileStore()
     @StateObject private var authenticationManager = AuthenticationManager()
+//    @StateObject private var authenticationManager = AuthenticationManager.mock
     @StateObject private var userManager = UserManager()
         
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
